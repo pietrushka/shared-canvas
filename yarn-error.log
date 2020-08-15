@@ -1,0 +1,36 @@
+Arguments: 
+  /home/pietrushka/.nvm/versions/node/v12.18.3/bin/node /mnt/c/Users/48601/AppData/Roaming/npm/node_modules/yarn/bin/yarn.js init
+
+PATH: 
+  /home/pietrushka/.vscode-server/bin/db40434f562994116e5b21c24015a2e40b2504e6/bin:/home/pietrushka/.nvm/versions/node/v12.18.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files/WindowsApps/CanonicalGroupLimited.UbuntuonWindows_2004.2020.424.0_x64__79rhkp1fndgsc:/mnt/c/Program Files (x86)/Python38-32/Scripts/:/mnt/c/Program Files (x86)/Python38-32/:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files (x86)/Google/Cloud SDK/google-cloud-sdk/bin:/mnt/c/Program Files/MongoDB/Server/4.2/bin:/mnt/c/Users/48601/AppData/Local/Programs/Python/Python38-32/Scripts/:/mnt/c/Users/48601/AppData/Local/Programs/Python/Python38-32/:/mnt/c/Users/48601/AppData/Local/Microsoft/WindowsApps:/mnt/c/Program Files/JetBrains/PyCharm Community Edition 2019.3.1/bin:/mnt/c/Users/48601/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/48601/AppData/Roaming/npm:/mnt/c/Program Files/heroku/bin:/snap/bin
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  12.18.3
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (/mnt/c/Users/48601/AppData/Roaming/npm/node_modules/yarn/lib/cli.js:137008:13)
+      at Interface.emit (events.js:315:20)
+      at Interface._ttyWrite (readline.js:868:16)
+      at ReadStream.onkeypress (readline.js:205:10)
+      at ReadStream.emit (events.js:315:20)
+      at emitKeys (internal/readline/utils.js:335:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1137:36)
+      at ReadStream.emit (events.js:315:20)
+      at addChunk (_stream_readable.js:295:12)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
