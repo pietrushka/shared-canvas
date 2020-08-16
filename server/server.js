@@ -1,7 +1,10 @@
 const express = require('express')
 const socketio = require('socket.io')
 const http = require('http')
+const cors = require('cors')
+
 const router = require('./router')
+
 
 const {
   addUser,
@@ -17,6 +20,7 @@ const server = http.createServer(app)
 const io = socketio(server)
 
 app.use(router)
+app.use(cors())
 
 //Run when client connects
 io.on('connection', socket => {
