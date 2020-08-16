@@ -19,11 +19,25 @@ const io = socketio(server)
 app.use(router)
 
 //Run when client connects
-io.on('connection', onConnection);
+io.on('connection', socket => {
 
-function onConnection(socket){
+  socket.on('join', ({ name, room }, callback) => {
+    const { error, user } = addUser({ id: socket.id, name, room });
+
+    if(error) return callback(error);
+
+    socket.join(user.room);
+
+    socket.emit('message', { user: 'admin', text: `${user.name}, welcome to room ${user.room}.`});
+    socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has joined!` });
+
+    io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
+
+    callback();
+  })
+
   socket.on('drawing', (data) => socket.broadcast.emit('drawing', data));
-}
+})
 
 server.listen(PORT, () => console.log(`server runnin on port 4000`))
 

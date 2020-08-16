@@ -1,13 +1,37 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import io from 'socket.io-client';
+import queryString from 'query-string';
 
 import './canvas-page.css';
 
 
-const Board = () => {
+const Board = ({location}) => {
+  const socketRef = useRef();
+  const ENDPOINT = 'http://localhost:4000'
+  socketRef.current = io.connect(ENDPOINT);
+
+  // --- DEALING WITH USERS
+  const [name, setName] = useState('')
+  const [room, setRoom] = useState('')
+
+  useEffect(() => {
+    const { name, room } = queryString.parse(location.search)
+
+    setRoom(room)
+    setName(name)
+
+    socketRef.current.emit('join', { name, room }, (error) => {
+      if(error) {
+        alert(error);
+      }
+    });
+  }, [ENDPOINT, location.search])
+
+
+
+  // --- DEALING WITH DRAWING
   const canvasRef = useRef(null);
   const colorsRef = useRef(null);
-  const socketRef = useRef();
 
   useEffect(() => {
 
@@ -127,7 +151,6 @@ const Board = () => {
       drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color);
     }
 
-    socketRef.current = io.connect('http://localhost:4000');
     socketRef.current.on('drawing', onDrawingEvent);
   }, []);
 
