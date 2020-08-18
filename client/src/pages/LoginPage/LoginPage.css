@@ -1,4 +1,12 @@
-.sign-up {
+.outerFormContainer {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
+  align-items: center;
+}
+
+.innerFormContainer {
   margin: 100px auto; 
   display: flex;
   flex-direction: column;
@@ -10,6 +18,10 @@
   margin: 10px 0; 
   padding-bottom: 10px;
   border-bottom: 2px solid #ddd;
+}
+
+.error {
+  color: red;
 }
 
 .form {
@@ -36,10 +48,27 @@ input {
   display: inline-block;
   border: none;
   width: 100%;
+  border: 5px solid #ddd;
+  transition: 0.3s;
+}
+
+.submit:hover {
+  color: #ddd;
+  background: #fff;
+  border: 5px solid #ddd;
+}
+
+.invert {
+  color: #ddd;
+  background: #fff;
+  border: 5px solid #ddd;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
-  .sign-up {
+  .outerFormContainer {
+    height: 100%;
+  }
+  .innerFormContainer {
     width: 90%;
   }
 }

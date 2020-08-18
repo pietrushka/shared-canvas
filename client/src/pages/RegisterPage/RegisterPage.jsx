@@ -1,8 +1,8 @@
-import React, { useReducer } from 'react'
+import React from 'react'
 
-import fakeRegister from './sign-up-fake'
+import registerUser from './registerUser'
 
-import './sign-up.css'
+import './RegisterPage.css'
 
 const registerReducer = (state, action) => {
   switch(action.type) {
@@ -56,7 +56,7 @@ const initialState = {
   isRegistered: false
 }
 
-const SignUp = () => {
+const SignUpPage = () => {
   const [state, dispatch] = useReducer(registerReducer, initialState)
 
   const {username, email, password, confirmPassword, isLoading, error, isRegistered} = state
@@ -72,7 +72,7 @@ const SignUp = () => {
     dispatch({ type: 'register'})
 
     try {
-      await fakeRegister({username, email, password})
+      await registerUser({username, email, password})
       dispatch({type: 'success'})
     } catch (error) {
       dispatch({type: 'error'})
@@ -80,7 +80,8 @@ const SignUp = () => {
   }
 
   return (
-    <div className='sign-up'>
+    <div className='outerFormContainer'>
+      <div className='innerFormContainer'>
       <h2 className='title'>Dołącz do shared-workspace</h2>
       <form className='form' onSubmit={onSubmit}>
         
@@ -141,7 +142,8 @@ const SignUp = () => {
         </button>
       </form>
     </div>
+    </div>
   )
 }
 
-export default SignUp
+export default SignUpPage
