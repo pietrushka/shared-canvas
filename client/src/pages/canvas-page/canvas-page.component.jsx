@@ -7,7 +7,7 @@ import './canvas-page.css';
 
 const Board = ({location}) => {
   const socketRef = useRef();
-  const ENDPOINT = 'http://localhost:4000'
+  const ENDPOINT = 'https://shared-workspace.herokuapp.com/'
   socketRef.current = io.connect(ENDPOINT);
 
   // --- DEALING WITH USERS
