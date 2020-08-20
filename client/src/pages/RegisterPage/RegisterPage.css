@@ -7,7 +7,7 @@
 }
 
 .innerFormContainer {
-  margin: 100px auto; 
+  margin: 50px auto; 
   display: flex;
   flex-direction: column;
   width: 25%;
@@ -24,7 +24,7 @@
   display: flex;
   border: 1px solid #ddd;
   flex-direction: column;
-  padding: 20px;
+  padding: 10px;
 }
 
 input {

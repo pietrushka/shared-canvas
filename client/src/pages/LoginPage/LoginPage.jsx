@@ -1,5 +1,5 @@
-import React from 'react'
-import axios from "axios";
+import React, {useReducer} from 'react'
+import Axios from "axios";
 
 import './LoginPage.css'
 
@@ -35,10 +35,10 @@ const loginReducer = (state, action) => {
       console.log('error')
       return { 
         ...state,
-        error: 'Incorrect username or password!',
+        error: 'Incorrect email or password!',
         isLoggedIn: false,
         isLoading: false,
-        username: '',
+        email: '',
         password: ''
       }
     }
@@ -50,7 +50,7 @@ const loginReducer = (state, action) => {
 }
 
 const initialState = { 
-  username: '',
+  email: '',
   password: '',
   isLoading: false,
   error: '',
@@ -61,17 +61,20 @@ const LoginPage = ({setupSocket, history}) => {
 
   const [state, dispatch] = useReducer(loginReducer, initialState)
 
-  const {username, password, isLoading, error, isLoggedIn} = state
+  const {email, password, isLoading, error, isLoggedIn} = state
 
   const loginUser = (email, password) => {
-    axios
-      .post(`${process.env.SERVER_ENDPOINT}/users/login`, {
+    Axios({
+      method: "POST",
+      data: {
         email,
-        password,
-      })
+        password
+      },
+      withCredentials: true,
+      url: "http://localhost:4000/user/login",
+    })
       .then((response) => {
         console.log("success", response.data.message);
-        localStorage.setItem("CC_Token", response.data.token);
         history.push("/dashboard");
         setupSocket();
       })
@@ -108,12 +111,12 @@ const LoginPage = ({setupSocket, history}) => {
           {error && <p className='error'>{error}</p>}
           <input
             type='text'
-            placeholder='username'
-            value={username}
+            placeholder='email'
+            value={email}
             onChange={event => 
               dispatch({
                 type: "field",
-                field: 'username',
+                field: 'email',
                 value: event.currentTarget.value
               })
             }

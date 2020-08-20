@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 const validator = require('validator');
-const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema(
   {
-    name: {
+    username: {
       type: String,
       required: [true, "Name is required!"],
     },
@@ -18,28 +17,10 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "Password is required!"],
-      minlength: 8,
-      select: false
+      minlength: 8
     },
-    active: {
-      type: Boolean,
-      default: true,
-      select: false
-    }
-})
 
-userSchema.pre(/^find/, function(next) {
-  // this points to the current query
-  this.find({ active: { $ne: false } });
-  next();
 })
-
-userSchema.methods.correctPassword = async function(
-  candidatePassword,
-  userPassword
-) {
-  return await bcrypt.compare(candidatePassword, userPassword);
-}
 
 const User = mongoose.model('User', userSchema);
 

@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {useReducer} from 'react'
+import Axios from 'axios'
 
-import registerUser from './registerUser'
 
 import './RegisterPage.css'
 
@@ -56,10 +56,34 @@ const initialState = {
   isRegistered: false
 }
 
-const SignUpPage = () => {
+const SignUpPage = ({history}) => {
   const [state, dispatch] = useReducer(registerReducer, initialState)
 
   const {username, email, password, confirmPassword, isLoading, error, isRegistered} = state
+
+  console.log(username, password, email)
+
+  const registerUser = (username, email, password) => {
+    Axios({
+      method: "POST",
+      data: email,
+      withCredentials: true,
+      url: "http://localhost:4000/user/register",
+    })
+        .then((response) => {
+          console.log("success", response.data.message);
+          history.push("/login");
+        })
+        .catch((err) => {
+          if (
+            err &&
+            err.response &&
+            err.response.data &&
+            err.response.data.message
+          )
+            console.log("error", err.response.data.message);
+        })
+  }
   
   const onSubmit = async (event) => {
     event.preventDefault()
@@ -84,7 +108,6 @@ const SignUpPage = () => {
       <div className='innerFormContainer'>
       <h2 className='title'>Dołącz do shared-workspace</h2>
       <form className='form' onSubmit={onSubmit}>
-        
         <input
           type='text'
           placeholder='username'
@@ -97,7 +120,6 @@ const SignUpPage = () => {
             })
           }
         />
-
         <input
           type='text'
           placeholder='email'
@@ -110,7 +132,6 @@ const SignUpPage = () => {
             })
           }
         />
-
         <input
           type='text'
           placeholder='password'
@@ -123,7 +144,6 @@ const SignUpPage = () => {
             })
           }
         />
-
         <input
           type='text'
           placeholder='confirmPassword'
@@ -136,7 +156,6 @@ const SignUpPage = () => {
             })
           }
         />
-
         <button className='submit' type='submit' disabled={isLoading}>
           {isLoading ? 'Loading' : 'Register'}
         </button>
