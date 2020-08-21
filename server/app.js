@@ -34,7 +34,6 @@ app.get('/', (req, res) => {
 })
 
 app.post("/user/login", (req, res, next) => {
-  console.log('login route ------------')
   passport.authenticate("local", (err, user, info) => {
     if (err) throw err;
     if (!user) res.send("No User Exists");
@@ -42,22 +41,23 @@ app.post("/user/login", (req, res, next) => {
       req.logIn(user, (err) => {
         if (err) throw err;
         res.send("Successfully Authenticated");
+        console.log(req.user);
       });
     }
   })(req, res, next);
-})
+});
 
 app.post("/user/register", (req, res) => {
-  console.log(req)
+  const {email, username, password} = req.body
   User.findOne({ email: req.body.email }, async (err, doc) => {
     if (err) throw err;
     if (doc) res.send("User Already Exists");
     if (!doc) {
-      const hashedPassword = req.body.password//await bcrypt.hash(req.body.password, 10);
-      console.log(req.body.username)
+      const hashedPassword = await bcrypt.hash(password, 10);
+      
       const newUser = new User({
-        email: req.body.email,
-        username: req.body.username,
+        email: email,
+        username: username,
         password: hashedPassword
       })
       
@@ -71,4 +71,4 @@ app.get("/user", (req, res) => {
   res.send(req.user); // The req.user stores the entire user that has been authenticated inside of it.
 })
 
-module.exports = app
+module.exports = app 

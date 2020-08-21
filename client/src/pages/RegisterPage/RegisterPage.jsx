@@ -61,12 +61,12 @@ const SignUpPage = ({history}) => {
 
   const {username, email, password, confirmPassword, isLoading, error, isRegistered} = state
 
-  console.log(username, password, email)
+  const registerData = {username, email, password}
 
   const registerUser = (username, email, password) => {
     Axios({
       method: "POST",
-      data: email,
+      data: registerData,
       withCredentials: true,
       url: "http://localhost:4000/user/register",
     })
@@ -133,7 +133,7 @@ const SignUpPage = ({history}) => {
           }
         />
         <input
-          type='text'
+          type='password'
           placeholder='password'
           value={password}
           onChange={event => 
@@ -145,7 +145,7 @@ const SignUpPage = ({history}) => {
           }
         />
         <input
-          type='text'
+          type='password'
           placeholder='confirmPassword'
           value={confirmPassword}
           onChange={event => 

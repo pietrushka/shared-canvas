@@ -35,10 +35,10 @@ const loginReducer = (state, action) => {
       console.log('error')
       return { 
         ...state,
-        error: 'Incorrect email or password!',
+        error: 'Incorrect username or password!',
         isLoggedIn: false,
         isLoading: false,
-        email: '',
+        username: '',
         password: ''
       }
     }
@@ -50,7 +50,7 @@ const loginReducer = (state, action) => {
 }
 
 const initialState = { 
-  email: '',
+  username: '',
   password: '',
   isLoading: false,
   error: '',
@@ -61,20 +61,20 @@ const LoginPage = ({setupSocket, history}) => {
 
   const [state, dispatch] = useReducer(loginReducer, initialState)
 
-  const {email, password, isLoading, error, isLoggedIn} = state
+  const {username, password, isLoading, error, isLoggedIn} = state
 
-  const loginUser = (email, password) => {
+  const loginUser = (username, password) => {
     Axios({
       method: "POST",
       data: {
-        email,
+        username,
         password
       },
       withCredentials: true,
       url: "http://localhost:4000/user/login",
     })
       .then((response) => {
-        console.log("success", response.data.message);
+        console.log("success", response.data);
         history.push("/dashboard");
         setupSocket();
       })
@@ -95,7 +95,7 @@ const LoginPage = ({setupSocket, history}) => {
     dispatch({ type: 'login'})
 
     try {
-      await loginUser(email, password)
+      await loginUser(username, password)
       dispatch({type: 'success'})
     } catch (error) {
       dispatch({type: 'error'})
@@ -111,19 +111,18 @@ const LoginPage = ({setupSocket, history}) => {
           {error && <p className='error'>{error}</p>}
           <input
             type='text'
-            placeholder='email'
-            value={email}
+            placeholder='username'
+            value={username}
             onChange={event => 
               dispatch({
                 type: "field",
-                field: 'email',
+                field: 'username',
                 value: event.currentTarget.value
               })
             }
           />
           <input
             type='password'
-            minLength="8" 
             required
             placeholder='password'
             value={password}
