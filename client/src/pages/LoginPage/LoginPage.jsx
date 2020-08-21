@@ -23,7 +23,6 @@ const loginReducer = (state, action) => {
     }
 
     case 'success': {
-      console.log('success')
       return {
         ...state,
         isLoading: false,
@@ -64,6 +63,7 @@ const LoginPage = ({setupSocket, history}) => {
   const {username, password, isLoading, error, isLoggedIn} = state
 
   const loginUser = (username, password) => {
+
     Axios({
       method: "POST",
       data: {
@@ -71,9 +71,10 @@ const LoginPage = ({setupSocket, history}) => {
         password
       },
       withCredentials: true,
-      url: "http://localhost:4000/user/login",
+      url: "http://localhost:4000/users/login",
     })
       .then((response) => {
+        if(response.data === 'No User Exists') throw new Error('No User Exists')
         console.log("success", response.data);
         history.push("/dashboard");
         setupSocket();

@@ -68,7 +68,7 @@ const SignUpPage = ({history}) => {
       method: "POST",
       data: registerData,
       withCredentials: true,
-      url: "http://localhost:4000/user/register",
+      url: "http://localhost:4000/users/register",
     })
         .then((response) => {
           console.log("success", response.data.message);
