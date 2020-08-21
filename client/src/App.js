@@ -5,6 +5,7 @@ import io from 'socket.io-client';
 import Homepage from './pages/homepage/homepage'
 import RegisterPage from './pages/RegisterPage/RegisterPage'
 import LoginPage from './pages/LoginPage/LoginPage'
+import DashboardPage from './pages/DashboardPage/DashboardPage'
 import JoinPage from './pages/join-page/join-page.component'
 import CanvasPage from './pages/canvas-page/canvas-page.component'
 
@@ -61,6 +62,11 @@ function App() {
       />
       <Route 
         path='/dashboard' 
+        component={DashboardPage} 
+        exact
+      />
+      <Route 
+        path='/join' 
         component={JoinPage} 
         socket={socket} 
         exact
