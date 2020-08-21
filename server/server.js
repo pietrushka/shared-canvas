@@ -1,47 +1,57 @@
-const express = require('express')
+const mongoose = require('mongoose')
 const socketio = require('socket.io')
-const http = require('http')
-const cors = require('cors')
-
-const router = require('./router')
-
-
-const {
-  addUser,
-  removeUser,
-  getUser,
-  getUsersInRoom
-} = require('./users.js')
+const dotenv = require('dotenv');
 
 const PORT = process.env.PORT || 4000
 
-const app = express()
-const server = http.createServer(app)
+
+dotenv.config({ path: './config.env' })
+const app = require("./app");
+
+const DB = process.env.DATABASE.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
+)
+
+mongoose.connect(DB, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true
+}).then(() => console.log('DB connection successful'))
+
+const server = app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`)
+})
+
+
 const io = socketio(server)
 
-app.use(router)
-app.use(cors())
 
-//Run when client connects
-io.on('connection', socket => {
+io.use(async (socket, next) => {
+  try {
+    const token = socket.handshake.query.token
+    const payload = await jwt.verify(token, process.env.SECRET)
+    socket.userId = payload.id
+    next()
+  } catch (err) {}
+})
 
-  socket.on('join', ({ name, room }, callback) => {
-    const { error, user } = addUser({ id: socket.id, name, room });
+io.on("connection", (socket) => {
+  // console.log("Connected: " + socket.userId)
 
-    if(error) return callback(error);
+  // socket.on("disconnect", () => {
+  //   console.log("Disconnected: " + socket.userId)
+  // });
 
-    socket.join(user.room);
+  // socket.on("joinRoom", ({ chatroomId }) => {
+  //   socket.join(chatroomId)
+  //   console.log("A user joined chatroom: " + chatroomId)
+  // });
 
-    socket.emit('message', { user: 'admin', text: `${user.name}, welcome to room ${user.room}.`});
-    socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has joined!` });
-
-    io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
-
-    callback();
-  })
+  // socket.on("leaveRoom", ({ chatroomId }) => {
+  //   socket.leave(chatroomId)
+  //   console.log("A user left chatroom: " + chatroomId)
+  // });
 
   socket.on('drawing', (data) => socket.broadcast.emit('drawing', data));
 })
-
-server.listen(PORT, () => console.log(`server runnin on port 4000`))
-
