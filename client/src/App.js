@@ -7,9 +7,11 @@ import {IconContext} from 'react-icons'
 import Homepage from './pages/homepage/homepage'
 import RegisterPage from './pages/RegisterPage/RegisterPage'
 import LoginPage from './pages/LoginPage/LoginPage'
-import DashboardPage from './pages/DashboardPage/DashboardPage'
+import RoomPage from './pages/RoomPage/RoomPage'
 import JoinPage from './pages/join-page/join-page.component'
 import CanvasPage from './pages/canvas-page/canvas-page.component'
+
+import NotDoneYet from './pages/NotDoneYet'
 
 function App() {
   const [socket, setSocket] = React.useState(null)
@@ -52,6 +54,11 @@ function App() {
           exact 
         /> 
         <Route 
+          path='/user' 
+          component={NotDoneYet} 
+          exact 
+        />
+        <Route 
           path='/login' 
           component={LoginPage} 
           setupSocket={setupSocket} 
@@ -63,8 +70,8 @@ function App() {
           exact 
         />
         <Route 
-          path='/dashboard' 
-          component={DashboardPage} 
+          path='/rooms' 
+          component={RoomPage} 
           exact
         />
         <Route 

@@ -1,11 +1,11 @@
 import React, {useReducer} from 'react'
 
-import './CreateRoom.scss'
+import './JoinRoom.scss'
 
-const createRoomReducer = (state, action) => {
+const joinRoomReducer = (state, action) => {
   switch(action.type) {
 
-    case 'create': { 
+    case 'join': { 
       return {
         ...state,
         isLoading: true,
@@ -16,8 +16,7 @@ const createRoomReducer = (state, action) => {
     case 'success': {
       return {
         ...state,
-        isLoading: false,
-        isCreated: true
+        isJoined: true
       }
     }
 
@@ -35,20 +34,19 @@ const createRoomReducer = (state, action) => {
 }
 
 const initialState = { 
-  newRoomUrl: 'einn3i39hjkwrfj',
   isLoading: false,
   error: '',
-  isCreated: false
+  isJoined: false
 }
 
-const CreateRoom = ({history}) => {
-  const [state, dispatch] = useReducer(createRoomReducer, initialState)
+const JoinRoom = ({history}) => {
+  const [state, dispatch] = useReducer(joinRoomReducer, initialState)
 
-  const {newRoomUrl, isLoading, error, isCreated} = state
+  const {isLoading, error, isJoined} = state
 
   const onSubmit = async (event) => {
     event.preventDefault()
-    dispatch({ type: 'register'})
+    dispatch({ type: 'join'})
     try {
       dispatch({type: 'success'})
     } catch (error) {
@@ -58,12 +56,15 @@ const CreateRoom = ({history}) => {
   
   return (
     <form className='form' onSubmit={onSubmit}>
-        
+      <div className="form-group">
+        <label>Room url</label>
+        <input placeholder='Room url'/>
+      </div>
       <button className='btn' type='submit' disabled={isLoading}>
-        {isLoading ? 'Loading' : 'Create'}
+          {isLoading ? 'Loading' : 'Join'}
       </button>
     </form>
   )
 }
 
-export default CreateRoom
+export default JoinRoom
