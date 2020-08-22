@@ -1,13 +1,15 @@
 import React from 'react'
 
 import Navbar from '../../components/Navbar/Navbar'
-import DashboardContent from '../../components/DashboardContent/DashboardContent'
+import CreateRoom from '../../components/CreateRoom/CreateRoom'
+
+import './DashboardPage.css'
 
 const DashboardPage = () => {
   return (
     <>
       <Navbar />  
-      <DashboardContent className='content' />
+      <CreateRoom className='content' />
     </>
   )
 }

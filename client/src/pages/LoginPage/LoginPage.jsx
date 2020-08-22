@@ -1,7 +1,7 @@
 import React, {useReducer} from 'react'
 import Axios from "axios";
 
-import './LoginPage.css'
+//import './LoginPage.css'
 
 
 const loginReducer = (state, action) => {

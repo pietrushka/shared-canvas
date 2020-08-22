@@ -2,7 +2,7 @@ import React, {useReducer} from 'react'
 import Axios from 'axios'
 
 
-import './RegisterPage.css'
+//import './RegisterPage.css'
 
 const registerReducer = (state, action) => {
   switch(action.type) {

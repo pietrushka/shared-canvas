@@ -42,23 +42,11 @@ input {
 .submit {
   text-transform: uppercase;
   text-decoration: none;
-  background: #ddd;
   padding: 10px;
   border-radius: 5px;
   display: inline-block;
   border: none;
   width: 100%;
-  border: 5px solid #ddd;
-  transition: 0.3s;
-}
-
-.submit:hover {
-  color: #ddd;
-  background: #fff;
-  border: 5px solid #ddd;
-}
-
-.invert {
   color: #ddd;
   background: #fff;
   border: 5px solid #ddd;

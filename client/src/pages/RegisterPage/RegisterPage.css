@@ -38,12 +38,14 @@ input {
 .submit {
   text-transform: uppercase;
   text-decoration: none;
-  background: #ddd;
   padding: 10px;
   border-radius: 5px;
   display: inline-block;
   border: none;
   width: 100%;
+  color: #ddd;
+  background: #fff;
+  border: 5px solid #ddd;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
