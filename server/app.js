@@ -1,32 +1,21 @@
 const express = require('express')
-const passport = require("passport")
 const cors = require('cors')
-const cookieParser = require('cookie-parser')
-const session = require("express-session")
-const passportLocal = require("passport-local").Strategy
+const bodyParser = require('body-parser')
 
-const userRouter = require('./routes/userRouter')
+const passportConfig = require('./config/passportConfig')
+const authRouter = require('./routes/authRouter')
 
+//passport config
+passportConfig()
 
 const app = express()
-app.use(cors())
 
+app.use(cors())
 app.use(express.urlencoded({ extended: false}))
 app.use(express.json({}))
-app.use(
-  session({
-    secret: "secretcode",
-    resave: true,
-    saveUninitialized: true,
-  })
-)
-app.use(cookieParser("secretcode"))
-app.use(passport.initialize());
-app.use(passport.session());
-require("./passportConfig")(passport);
 
 // Routes
-app.use('/users', userRouter)
+app.use('/api/auth', authRouter())
 
 app.get('/', (req, res) => {
   res.send('server is up and runin')

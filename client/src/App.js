@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import React, {useEffect, Component} from 'react'
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
 import io from 'socket.io-client';
 import {IconContext} from 'react-icons'
 
+import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 
 import Homepage from './pages/homepage/homepage'
 import RegisterPage from './pages/RegisterPage/RegisterPage'
@@ -10,8 +11,9 @@ import LoginPage from './pages/LoginPage/LoginPage'
 import RoomPage from './pages/RoomPage/RoomPage'
 import JoinPage from './pages/join-page/join-page.component'
 import CanvasPage from './pages/canvas-page/canvas-page.component'
-
 import NotDoneYet from './pages/NotDoneYet'
+
+
 
 function App() {
   const [socket, setSocket] = React.useState(null)
@@ -53,6 +55,7 @@ function App() {
           component={Homepage} 
           exact 
         /> 
+        
         <Route 
           path='/user' 
           component={NotDoneYet} 
@@ -69,7 +72,7 @@ function App() {
           component={RegisterPage} 
           exact 
         />
-        <Route 
+        <PrivateRoute
           path='/rooms' 
           component={RoomPage} 
           exact
@@ -90,5 +93,6 @@ function App() {
     </IconContext.Provider>
   )
 }
+
 
 export default App;
