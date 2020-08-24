@@ -5,7 +5,6 @@ import registerImg from "../../assets/register_icon.svg";
 
 import './RegisterPage.scss'
 
-
 const registerReducer = (state, action) => {
   switch(action.type) {
 
@@ -71,10 +70,10 @@ const SignUpPage = ({history}) => {
       method: "POST",
       data: registerData,
       withCredentials: true,
-      url: "http://localhost:4000/users/register",
+      url: `http://localhost:4000/api/auth/register`
     })
         .then((response) => {
-          console.log("success", response.data.message);
+          console.log("success", response.data);
           history.push("/login");
         })
         .catch((err) => {
