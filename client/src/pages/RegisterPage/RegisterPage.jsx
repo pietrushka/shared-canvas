@@ -1,11 +1,10 @@
 import React, {useReducer} from 'react'
 import Axios from 'axios'
 
-import joinImg from "../../assets/join.svg";
-
+import registerImg from "../../assets/register_icon.svg";
 
 import './RegisterPage.scss'
-import JoinPage from '../join-page/join-page.component';
+
 
 const registerReducer = (state, action) => {
   switch(action.type) {
@@ -67,7 +66,7 @@ const SignUpPage = ({history}) => {
   
   const registerUser = () => {
     const registerData = {username, email, password}
-    
+
     Axios({
       method: "POST",
       data: registerData,
@@ -113,7 +112,7 @@ const SignUpPage = ({history}) => {
           <p>Register</p>
 
           <div className="image">
-            <img src={joinImg} />
+            <img src={registerImg} />
           </div>
 
         <form className='form--register' onSubmit={onSubmit}>
