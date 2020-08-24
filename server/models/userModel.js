@@ -1,24 +1,49 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 const validator = require('validator')
-const passportLocalMongoose = require('passport-local-mongoose')
 
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: [true, "Name is required!"],
+    required: true,
+    trim: true
   },
   email: {
     type: String,
-    required: [true, "Email is required!"],
+    required: true,
     unique: true,
     lowercase: true,
     validate: [validator.isEmail, 'Provide a valid email'],
     trim: true
+  },
+  password: {
+    type: String,
+    required: [true, 'Please provide a password'],
+    minlength: 8,
+    select: false
   }
 }, {
   timestamps: true // created_at / updated_at
 })
 
-userSchema.plugin(passportLocalMongoose, { usernameField: 'username' });
 
-module.exports = mongoose.model('User', userSchema)
+// hash password
+userSchema.pre('save', async function(next) {
+  // Only run this function if password was actually modified
+  if (!this.isModified('password')) return next()
+
+  // Hash the password with cost of 12
+  this.password = await bcrypt.hash(this.password, 12)
+
+  next()
+})
+
+userSchema.methods.correctPassword = async function(
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword)
+}
+
+const User = mongoose.model('User', userSchema)
+
+module.exports = User
