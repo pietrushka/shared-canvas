@@ -1,5 +1,5 @@
-import React, {useState, useReducer} from 'react'
-import callImg from "../../assets/programmer.svg";
+import React, {useState} from 'react'
+import pressPlayImg from "../../assets/press_play_icon.svg";
 
 import Navbar from '../../components/Navbar/Navbar'
 import JoinRoom from '../../components/JoinRoom/JoinRoom'
@@ -30,7 +30,7 @@ const RoomPage = () => {
           </button>
 
           <div className="image">
-            <img src={callImg} />
+            <img src={pressPlayImg} />
           </div>
 
           {currentTab === 'Join' ? <JoinRoom/> : <CreateRoom/>}
