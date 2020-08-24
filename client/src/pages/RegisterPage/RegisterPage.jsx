@@ -1,8 +1,11 @@
 import React, {useReducer} from 'react'
 import Axios from 'axios'
 
+import joinImg from "../../assets/join.svg";
 
-//import './RegisterPage.css'
+
+import './RegisterPage.scss'
+import JoinPage from '../join-page/join-page.component';
 
 const registerReducer = (state, action) => {
   switch(action.type) {
@@ -61,9 +64,10 @@ const SignUpPage = ({history}) => {
 
   const {username, email, password, confirmPassword, isLoading, error, isRegistered} = state
 
-  const registerData = {username, email, password}
-
-  const registerUser = (username, email, password) => {
+  
+  const registerUser = () => {
+    const registerData = {username, email, password}
+    
     Axios({
       method: "POST",
       data: registerData,
@@ -104,64 +108,91 @@ const SignUpPage = ({history}) => {
   }
 
   return (
-    <div className='outerFormContainer'>
-      <div className='innerFormContainer'>
-      <h2 className='title'>Dołącz do shared-workspace</h2>
-      <form className='form' onSubmit={onSubmit}>
-        <input
-          type='text'
-          placeholder='username'
-          value={username}
-          onChange={event => 
-            dispatch({
-              type: "field",
-              field: 'username',
-              value: event.currentTarget.value
-            })
-          }
-        />
-        <input
-          type='text'
-          placeholder='email'
-          value={email}
-          onChange={event => 
-            dispatch({
-              type: "field",
-              field: 'email',
-              value: event.currentTarget.value
-            })
-          }
-        />
-        <input
-          type='password'
-          placeholder='password'
-          value={password}
-          onChange={event => 
-            dispatch({
-              type: "field",
-              field: 'password',
-              value: event.currentTarget.value
-            })
-          }
-        />
-        <input
-          type='password'
-          placeholder='confirmPassword'
-          value={confirmPassword}
-          onChange={event => 
-            dispatch({
-              type: "field",
-              field: 'confirmPassword',
-              value: event.currentTarget.value
-            })
-          }
-        />
-        <button className='submit' type='submit' disabled={isLoading}>
-          {isLoading ? 'Loading' : 'Register'}
-        </button>
-      </form>
+    <div className='base-container--register'>
+        <div className='form__container--register'>
+          <p>Register</p>
+
+          <div className="image">
+            <img src={joinImg} />
+          </div>
+
+        <form className='form--register' onSubmit={onSubmit}>
+
+          <div className="form-group">
+            <label>Username</label>
+            <input
+              type='text'
+              placeholder='Username'
+              value={username}
+              onChange={event => 
+                dispatch({
+                  type: "field",
+                  field: 'username',
+                  value: event.currentTarget.value
+                })
+              }
+            />
+          </div>
+          
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type='text'
+              placeholder='Email'
+              value={email}
+              onChange={event => 
+                dispatch({
+                  type: "field",
+                  field: 'email',
+                  value: event.currentTarget.value
+                })
+              }
+            />
+          </div>
+          
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type='password'
+              placeholder='Password'
+              value={password}
+              onChange={event => 
+                dispatch({
+                  type: "field",
+                  field: 'password',
+                  value: event.currentTarget.value
+                })
+              }
+            />
+          </div>
+          
+          <div className="form-group">
+            <label>Confirm Password</label>
+            <input
+              type='password'
+              placeholder='Confirm Password'
+              value={confirmPassword}
+              onChange={event => 
+                dispatch({
+                  type: "field",
+                  field: 'confirmPassword',
+                  value: event.currentTarget.value
+                })
+              }
+            />
+          </div>
+
+          <button className='btn' style={isLoading ? {background: 'gray'} : null} type='submit' disabled={isLoading}>
+            {isLoading ? 'Loading' : 'Register'}
+          </button>
+        
+        </form>
+      </div>
     </div>
-    </div>
+
+
+
+
   )
 }
 
