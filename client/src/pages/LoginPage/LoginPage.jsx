@@ -1,5 +1,7 @@
-import React, {useReducer} from 'react'
+import React, {useReducer, useContext} from 'react'
 import Axios from "axios";
+
+import {login} from '../../services/auth.service'
 
 import loginImg from "../../assets/login_icon.svg";
 
@@ -33,13 +35,12 @@ const loginReducer = (state, action) => {
     }
 
     case 'error': { 
-      console.log('error')
       return { 
         ...state,
-        error: 'Incorrect username or password!',
+        error: 'Incorrect email or password!',
         isLoggedIn: false,
         isLoading: false,
-        username: '',
+        email: '',
         password: ''
       }
     }
@@ -51,7 +52,7 @@ const loginReducer = (state, action) => {
 }
 
 const initialState = { 
-  username: '',
+  email: '',
   password: '',
   isLoading: false,
   error: '',
@@ -59,35 +60,9 @@ const initialState = {
 }
 
 const LoginPage = ({setupSocket, history}) => {
-
   const [state, dispatch] = useReducer(loginReducer, initialState)
 
-  const {username, password, isLoading, error, isLoggedIn} = state
-
-  const loginUser = (username, password) => {
-    const loginData = {username, password}
-    Axios({
-      method: "POST",
-      data: loginData,
-      withCredentials: true,
-      url: "http://localhost:4000/users/login",
-    })
-      .then((response) => {
-        if(response.data === 'No User Exists') throw new Error('No User Exists')
-        console.log("success", response.data);
-        history.push("/dashboard");
-        setupSocket();
-      })
-      .catch((err) => {
-        if (
-          err &&
-          err.response &&
-          err.response.data &&
-          err.response.data.message
-        )
-        console.log("error", err.response.data.message);
-    })
-  }
+  const {email, password, isLoading, error, isLoggedIn} = state
 
   const onSubmit = async (event) => {
     event.preventDefault()
@@ -95,7 +70,7 @@ const LoginPage = ({setupSocket, history}) => {
     dispatch({ type: 'login'})
 
     try {
-      await loginUser(username, password)
+      await login(email, password)
       dispatch({type: 'success'})
     } catch (error) {
       dispatch({type: 'error'})
@@ -112,15 +87,15 @@ const LoginPage = ({setupSocket, history}) => {
           <form className='form--login' onSubmit={onSubmit}>
 
           <div className="form-group">
-            <label>Username</label>
+            <label>Email</label>
             <input
               type='text'
-              placeholder='Username'
-              value={username}
+              placeholder='Email'
+              value={email}
               onChange={event => 
                 dispatch({
                   type: "field",
-                  field: 'username',
+                  field: 'email',
                   value: event.currentTarget.value
                 })
               }

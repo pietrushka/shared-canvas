@@ -13,21 +13,7 @@ const signToken = id => {
   })
 }
 
-const createSendToken = (user, statusCode, req, res) => {
-  const token = signToken(user._id)
-
-  // Remove password from output
-  user.password = undefined
-
-  res.status(statusCode).send({
-    user,
-    token
-  })
-}
-
 exports.login = catchAsync( async (req, res, next) => {
-  console.log(req.body)
-
   const { email, password } = req.body
 
   // 1) Check if email and password exist
@@ -37,14 +23,19 @@ exports.login = catchAsync( async (req, res, next) => {
   // 2) Check if user exists && password is correct
   const user = await User.findOne({ email }).select('+password')
 
-  if (!user || !(await user.correctPassword(password, user.password))) {
+  if (!user || !(await user.correctPassword(password))) {
     return next(new AppError('Incorrect email or password', 401))
   }
 
-  console.log(user)
+  const token = signToken(user._id)
+
 
   //3 If everything is ok, send user data and token
-  createSendToken(user, 200, req, res)
+  res.status(200).send({
+    id: user._id,
+    username: user.username,
+    token,
+  })
 })
 
 exports.register = catchAsync( async (req, res, next) => {
@@ -53,7 +44,9 @@ exports.register = catchAsync( async (req, res, next) => {
       username, email, password 
     })
 
-    createSendToken(newUser, 201, req, res)
+    res.status(201).send({
+      newUser
+    })
 })
 
 exports.isLoggedIn = catchAsync(async() => {
