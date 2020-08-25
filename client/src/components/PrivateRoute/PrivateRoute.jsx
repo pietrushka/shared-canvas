@@ -16,17 +16,20 @@ const PrivateRoute = ({component: Component, ...rest}) => {
       }
     }
   
-    axios({
+    const apiReq = axios({
       method: "POST",
       url: `${API_URL}/isLoggedIn`,
       headers: authHeader()
     }).then(response => {
+      console.log(response)
       setUser({username: response.data.username, id: response.data.id})
       return true
     }).catch(err => {
       console.log(err)
       return false
     })
+
+    return apiReq
   }
 
   return (

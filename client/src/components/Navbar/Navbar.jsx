@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {Link} from 'react-router-dom'
 import {IconContext} from 'react-icons'
 import {FaUser, FaBookmark} from 'react-icons/fa'
@@ -6,12 +6,22 @@ import {BiPlusCircle} from 'react-icons/bi'
 import {RiContactsBookFill} from 'react-icons/ri'
 import {ImCross} from 'react-icons/im'
  
+import {UserContext} from '../../UserContext'
+
 import LogoContainer from '../Logo/Logo'
 
 import './Navbar.css'
 
 
-const Navbar = () => (
+const Navbar = ({history}) => {
+  const {user, setUser} = useContext(UserContext)  
+
+  const logout = () => {
+    setUser(null)
+    localStorage.removeItem('token')
+  }
+
+  return (
   <IconContext.Provider value={{ size: '2rem'}}>
     <div className='navbar'>
       <ul className='navbar-nav'>
@@ -52,7 +62,7 @@ const Navbar = () => (
         </li>
 
         <li className="nav-item">
-          <Link to="/" className="nav-link">
+          <Link to='/' onClick={logout} className="nav-link">
             <ImCross className='nav-icon' />
             <span className="link-text">Logout</span>
           </Link>
@@ -61,6 +71,7 @@ const Navbar = () => (
      </ul>
    </div>
   </IconContext.Provider>
-   )
+  )
+}
 
 export default Navbar

@@ -1,5 +1,5 @@
-import React, {useEffect, useMemo, useState} from 'react'
-import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
+import React, {useMemo, useState} from 'react'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {IconContext} from 'react-icons'
 
 import {UserContext} from './UserContext'

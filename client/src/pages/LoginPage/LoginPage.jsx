@@ -6,7 +6,6 @@ import {login} from '../../services/auth.service'
 import loginImg from "../../assets/login_icon.svg";
 import './LoginPage.scss'
 
-
 const loginReducer = (state, action) => {
   switch(action.type) {
 
@@ -73,7 +72,7 @@ const LoginPage = ({setupSocket, history}) => {
       const {id, username} = loginData
       setUser({id, username})
       dispatch({type: 'success'})
-      history.push('/')
+      history.push('/console')
     } catch (error) {
       dispatch({type: 'error'})
     }
