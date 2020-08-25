@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:4000/api/auth";
+import authHeader from './auth-header'
+
+import API_URL from './api-route'
 
 export const register = (registerData) => {
   return axios({
@@ -36,7 +38,20 @@ export const logout = () => {
   localStorage.removeItem("user");
 };
 
-export const isUserLoggedIn = () => {
-  return JSON.parse(localStorage.getItem("user"));
-};
+// export const isUserLoggedIn = (user) => {
+//   if(user) return true
+
+//   axios({
+//     method: "POST",
+//     data: registerData,
+//     url: `${API_URL}/isLoggedIn`,
+//     headers: authHeader()
+//   }).then(response => {
+
+//   }).catch(err => {
+//     if (err.response.status === 401) {
+//       return false
+//     }
+//   })
+  
 

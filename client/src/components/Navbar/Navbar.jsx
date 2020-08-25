@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {IconContext} from 'react-icons'
 import {FaUser, FaBookmark} from 'react-icons/fa'
 import {BiPlusCircle} from 'react-icons/bi'
@@ -16,45 +17,45 @@ const Navbar = () => (
       <ul className='navbar-nav'>
 
         <li className="logo">
-        <a href="#" className="nav-link">
+          <Link to="#" className="nav-link">
           <span className="link-text logo-text">SPLITER</span>
           <LogoContainer />
-        </a>
-      </li>
-
-        <li className="nav-item">
-          <a href='/user' className="nav-link">
-            <FaUser className='nav-icon' />
-            <span className="link-text">User</span>
-          </a>
+          </Link>
         </li>
 
         <li className="nav-item">
-          <a href='/rooms' className="nav-link">
+          <Link to='/console/call' className="nav-link">
             <BiPlusCircle className='nav-icon' />
             <span className="link-text">Call</span>
-          </a>
+          </Link>
         </li>
 
         <li className="nav-item">
-          <a href="/contacts" className="nav-link">
+          <Link to='/console/user' className="nav-link">
+            <FaUser className='nav-icon' />
+            <span className="link-text">User</span>
+          </Link>
+        </li>
+
+        <li className="nav-item">
+          <Link to="/console/contacts" className="nav-link">
             <RiContactsBookFill className='nav-icon' />
             <span className="link-text">Contacts</span>
-          </a>
+          </Link>
         </li>
 
         <li className="nav-item">
-          <a href="/saved" className="nav-link">
+          <Link to="/console/saved" className="nav-link">
             <FaBookmark className='nav-icon' />
             <span className="link-text">Saved</span>
-          </a>
+          </Link>
         </li>
 
         <li className="nav-item">
-          <a href="/" className="nav-link">
+          <Link to="/" className="nav-link">
             <ImCross className='nav-icon' />
             <span className="link-text">Logout</span>
-          </a>
+          </Link>
         </li>
         
      </ul>

@@ -4,11 +4,12 @@ import {IconContext} from 'react-icons'
 
 import {UserContext} from './UserContext'
 
+import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 import Homepage from './pages/homepage/homepage'
 import RegisterPage from './pages/RegisterPage/RegisterPage'
 import LoginPage from './pages/LoginPage/LoginPage'
-import RoomPage from './pages/RoomPage/RoomPage'
-import NotDoneYet from './pages/NotDoneYet'
+import ConsoleRouter from './ConsoleRouter'
+
 
 
 
@@ -27,11 +28,6 @@ function App() {
               exact 
             /> 
             <Route 
-              path='/user' 
-              component={NotDoneYet} 
-              exact 
-            />
-            <Route 
               path='/login' 
               component={LoginPage} 
               exact 
@@ -41,10 +37,9 @@ function App() {
               component={RegisterPage} 
               exact 
             />
-            <Route
-              path='/rooms' 
-              component={RoomPage} 
-              exact
+            <PrivateRoute 
+              path='/console' 
+              component={ConsoleRouter} 
             />
           </Router>
         </UserContext.Provider>
