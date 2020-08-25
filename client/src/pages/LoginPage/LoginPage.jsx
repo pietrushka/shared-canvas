@@ -1,10 +1,9 @@
 import React, {useReducer, useContext} from 'react'
-import Axios from "axios";
 
+import {UserContext} from '../../UserContext'
 import {login} from '../../services/auth.service'
 
 import loginImg from "../../assets/login_icon.svg";
-
 import './LoginPage.scss'
 
 
@@ -61,7 +60,7 @@ const initialState = {
 
 const LoginPage = ({setupSocket, history}) => {
   const [state, dispatch] = useReducer(loginReducer, initialState)
-
+  const {user, setUser} = useContext(UserContext)
   const {email, password, isLoading, error, isLoggedIn} = state
 
   const onSubmit = async (event) => {
@@ -70,8 +69,11 @@ const LoginPage = ({setupSocket, history}) => {
     dispatch({ type: 'login'})
 
     try {
-      await login(email, password)
+      const loginData = await login(email, password)
+      const {id, username} = loginData
+      setUser({id, username})
       dispatch({type: 'success'})
+      history.push('/')
     } catch (error) {
       dispatch({type: 'error'})
     }
@@ -85,28 +87,30 @@ const LoginPage = ({setupSocket, history}) => {
             <img src={loginImg} />
           </div>
           <form className='form--login' onSubmit={onSubmit}>
+            {error && <p className='error-message'>{error}</p>}
 
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type='text'
-              placeholder='Email'
-              value={email}
-              onChange={event => 
-                dispatch({
-                  type: "field",
-                  field: 'email',
-                  value: event.currentTarget.value
-                })
-              }
-            />
-          </div>
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                required
+                type='email'
+                placeholder='Email'
+                value={email}
+                onChange={event => 
+                  dispatch({
+                    type: "field",
+                    field: 'email',
+                    value: event.currentTarget.value
+                  })
+                }
+              />
+            </div>
 
           <div className="form-group">
             <label>Username</label>
             <input
-              type='password'
               required
+              type='password'
               placeholder='Password'
               value={password}
               onChange={event => 

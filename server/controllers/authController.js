@@ -39,7 +39,21 @@ exports.login = catchAsync( async (req, res, next) => {
 })
 
 exports.register = catchAsync( async (req, res, next) => {
-    const {username, email, password} = req.body
+  const {username, email, password} = req.body
+  console.log({username, email, password})
+
+  const isUsernameTaken = await User.findOne({ username })
+  if (isUsernameTaken) {
+    return next(new AppError('Username is taken', 409))
+  }
+  console.log(isUsernameTaken)
+
+  const isEmailTaken = await User.findOne({ email })
+  if (isEmailTaken) {
+    return next(new AppError('Email is taken', 409))
+  }
+  console.log(isEmailTaken)
+
     const newUser = await User.create({
       username, email, password 
     })
@@ -73,8 +87,8 @@ exports.isLoggedIn = catchAsync(async() => {
   }
 
   res.status(200).send({
-    user,
-    token
+    id: currentUser._id,
+    username: currentUser.username,
   })
 
   next()
