@@ -5,7 +5,7 @@ import {IconContext} from 'react-icons'
 import {UserContext} from './UserContext'
 
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
-import Homepage from './pages/homepage/homepage'
+import LandingPage from './pages/LandingPage/LandingPage'
 import RegisterPage from './pages/RegisterPage/RegisterPage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import ConsoleRouter from './ConsoleRouter'
@@ -24,7 +24,7 @@ function App() {
           <Router>
             <Route 
               path='/' 
-              component={Homepage} 
+              component={LandingPage} 
               exact 
             /> 
             <Route 
