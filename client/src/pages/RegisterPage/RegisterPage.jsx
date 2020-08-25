@@ -1,8 +1,9 @@
 import React, {useReducer} from 'react'
 import Axios from 'axios'
 
-import registerImg from "../../assets/register_icon.svg";
+import {register} from '../../services/auth.service'
 
+import registerImg from "../../assets/register_icon.svg";
 import './RegisterPage.scss'
 
 const registerReducer = (state, action) => {
@@ -26,13 +27,15 @@ const registerReducer = (state, action) => {
     case 'success': {
       return {
         ...state,
-        isRegistered: true
+        isLoading: false,
+        isRegistered: true,
       }
     }
 
     case 'error': { 
       return { 
         ...state,
+        error: action.payload,
         isLoading: false,
         username: '',
         email: '',
@@ -57,51 +60,29 @@ const initialState = {
   isRegistered: false
 }
 
-const SignUpPage = ({history}) => {
+const RegisterPage = ({history}) => {
   const [state, dispatch] = useReducer(registerReducer, initialState)
 
   const {username, email, password, confirmPassword, isLoading, error, isRegistered} = state
 
-  
-  const registerUser = () => {
-    const registerData = {username, email, password}
-
-    Axios({
-      method: "POST",
-      data: registerData,
-      withCredentials: true,
-      url: `http://localhost:4000/api/auth/register`
-    })
-        .then((response) => {
-          console.log("success", response.data);
-          history.push("/login");
-        })
-        .catch((err) => {
-          if (
-            err &&
-            err.response &&
-            err.response.data &&
-            err.response.data.message
-          )
-            console.log("error", err.response.data.message);
-        })
-  }
-  
   const onSubmit = async (event) => {
     event.preventDefault()
 
     if (password !== confirmPassword) {
-      alert("passwords don't match");
+      dispatch({type: 'error', payload: 'Passwords do not match'})
       return;
     }
 
     dispatch({ type: 'register'})
 
     try {
-      await registerUser({username, email, password})
+      const registerData = {username, email, password}
+      await register(registerData)
       dispatch({type: 'success'})
+      history.push("/login");
     } catch (error) {
-      dispatch({type: 'error'})
+      console.log(error)
+      dispatch({type: 'error', payload: error.toString().slice(6)})
     }
   }
 
@@ -115,6 +96,7 @@ const SignUpPage = ({history}) => {
           </div>
 
         <form className='form--register' onSubmit={onSubmit}>
+          {error && <p className='error-message'>{error}</p>}
 
           <div className="form-group">
             <label>Username</label>
@@ -122,6 +104,7 @@ const SignUpPage = ({history}) => {
               type='text'
               placeholder='Username'
               value={username}
+              required
               onChange={event => 
                 dispatch({
                   type: "field",
@@ -135,9 +118,10 @@ const SignUpPage = ({history}) => {
           <div className="form-group">
             <label>Email</label>
             <input
-              type='text'
+              type='email'
               placeholder='Email'
               value={email}
+              required
               onChange={event => 
                 dispatch({
                   type: "field",
@@ -154,6 +138,7 @@ const SignUpPage = ({history}) => {
               type='password'
               placeholder='Password'
               value={password}
+              required
               onChange={event => 
                 dispatch({
                   type: "field",
@@ -170,6 +155,7 @@ const SignUpPage = ({history}) => {
               type='password'
               placeholder='Confirm Password'
               value={confirmPassword}
+              required
               onChange={event => 
                 dispatch({
                   type: "field",
@@ -187,11 +173,9 @@ const SignUpPage = ({history}) => {
         </form>
       </div>
     </div>
-
-
-
-
   )
 }
 
-export default SignUpPage
+
+
+export default RegisterPage

@@ -5,7 +5,7 @@ import Navbar from '../../components/Navbar/Navbar'
 import JoinRoom from '../../components/JoinRoom/JoinRoom'
 import CreateRoom from '../../components/CreateRoom/CreateRoom'
 
-import './RoomPage.scss'
+import './CallPage.scss'
 
 
 const RoomPage = () => {  
@@ -21,7 +21,6 @@ const RoomPage = () => {
 
   return (
     <>
-      <Navbar />  
       <div className='base-container'>
         <div className='form-container'>
           <p>Click to switch</p>
