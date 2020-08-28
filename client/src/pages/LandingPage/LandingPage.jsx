@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-import LogoContainer from '../../components/Logo/Logo'
+import logoSvg from '../../assets/header_logo.svg'
 
 import './LandingPage.scss'
 
@@ -15,7 +15,10 @@ const LandingPage = () => {
     <div className='page-container'>
       <header className='header'>
         <div className="logo__container"> 
-          <Link to="/" className="logo__link">SPLITER</Link>
+          <Link to="/" className="logo__link">
+            <span>SPLITER</span>
+            <img className='logo_icon' src={logoSvg} />
+          </Link>
 
         </div>
 

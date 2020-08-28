@@ -4,6 +4,7 @@ import {IconContext} from 'react-icons'
 
 import {UserContext} from './UserContext'
 
+import PublicRoute from './components/PublicRoute/PublicRoute'
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 import LandingPage from './pages/LandingPage/LandingPage'
 import RegisterPage from './pages/RegisterPage/RegisterPage'
@@ -21,18 +22,19 @@ function App() {
   return (
       <IconContext.Provider value ={{color: '#61dafb', size: '3rem'}}>
         <UserContext.Provider value={providerValue}>
+
           <Router>
             <Route 
               path='/' 
               component={LandingPage} 
               exact 
             /> 
-            <Route 
+            <PublicRoute 
               path='/login' 
               component={LoginPage} 
               exact 
             />
-            <Route 
+            <PublicRoute
               path='/register' 
               component={RegisterPage} 
               exact 

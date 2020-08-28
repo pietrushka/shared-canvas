@@ -24,7 +24,7 @@ export const login = (email, password) => {
       password,
     })
     .then((response) => {
-      localStorage.setItem("token", JSON.stringify(response.data.token))
+      localStorage.setItem("token", response.data.token)
       return response.data
     }).catch((err) => {
       if (err.response.status === 401) {
@@ -38,20 +38,5 @@ export const logout = () => {
   localStorage.removeItem("user");
 };
 
-// export const isUserLoggedIn = (user) => {
-//   if(user) return true
-
-//   axios({
-//     method: "POST",
-//     data: registerData,
-//     url: `${API_URL}/isLoggedIn`,
-//     headers: authHeader()
-//   }).then(response => {
-
-//   }).catch(err => {
-//     if (err.response.status === 401) {
-//       return false
-//     }
-//   })
   
 

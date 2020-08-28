@@ -8,9 +8,7 @@ const AppError = require('./../utils/appError')
 
 
 const signToken = id => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN
-  })
+  return jwt.sign({ id }, process.env.JWT_SECRET)
 }
 
 exports.login = catchAsync( async (req, res, next) => {
@@ -63,27 +61,29 @@ exports.register = catchAsync( async (req, res, next) => {
     })
 })
 
-exports.isLoggedIn = catchAsync(async() => {
+exports.isLoggedIn = catchAsync (async(req, res, next) => {
+  console.log(req.headers)
   const token = req.headers.authorization.split(' ')[1] // starts with 'Bearer'
 
   if (!token) {
-    return next(
-      new AppError('You are not logged in! Please log in to get access.', 401)
-    )
+    return next(new AppError('No token provided!', 403))
   }
 
-  // 2) Verification token
-  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET)
+  let decodedId
 
-  // 3) Check if user still exists
-  const currentUser = await User.findById(decoded.id)
+  await jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      console.log(err)
+      return next(new AppError('Unauthorizerd', 401))
+    }
+    decodedId = decoded.id
+  }) 
+
+  //3) Check if user still exists
+  const currentUser = await User.findById(decodedId)
+
   if (!currentUser) {
-    return next(
-      new AppError(
-        'The user belonging to this token does not exist.',
-        401
-      )
-    )
+    return next(new AppError('The user belonging to this token does not exists', 401))
   }
 
   res.status(200).send({

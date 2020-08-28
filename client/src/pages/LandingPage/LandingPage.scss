@@ -18,6 +18,9 @@
     
 
     .logo__link {
+      display: flex;
+      align-items: center;
+      justify-items: center;
       color: var(--text-secondary);
       font-size: 1.5rem;
       letter-spacing: 0.3ch;
@@ -26,7 +29,18 @@
       text-decoration: none;
       background-color: var(--bg-color);
       border-radius: 4px;
-      padding: 0.5em;
+      padding-left: 0.2em;
+      transition: var(--transition-speed);
+
+
+      .logo_icon {
+        height: 50px;
+        width: 50px;
+        color: white;
+      }
+      &:hover .logo_icon{
+        transform: rotate(-180deg);
+      }
     }
   }
 

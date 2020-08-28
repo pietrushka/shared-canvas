@@ -3,7 +3,7 @@ import {IoIosHammer, IoMdBuild} from 'react-icons/io'
 
 const NotDoneYet = () => (
   <>
-    <IoIosHammer />
+    <IoIosHammer /> 
     <h1>Not done yet</h1>
     <IoMdBuild />
   </>

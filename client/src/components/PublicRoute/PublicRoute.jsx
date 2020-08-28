@@ -5,7 +5,7 @@ import axios from "axios";
 import { UserContext } from '../../UserContext'
 import API_URL from '../../services/api-route'
 
-const PrivateRoute = ({component: Component, ...rest}) => {
+const PublicRoute = ({component: Component, ...rest}) => {
   const {user, setUser} = useContext(UserContext)  
 
   const isLoggedIn = () => {
@@ -42,11 +42,11 @@ const PrivateRoute = ({component: Component, ...rest}) => {
 
   return (
     <Route {...rest} render={props => (
-        isLoggedIn() ?
-            <Component {...props} />
-        : <Redirect to="/login" />
+        !isLoggedIn() 
+          ? <Component {...props} />
+          : <Redirect to="/console" />
     )} />
   )
 }
 
-export default PrivateRoute
+export default PublicRoute
