@@ -23,15 +23,18 @@
     display: flex;
     flex-direction: column;
 
-    .video {
-      background-color: orange;
-      height: 50vh;
-    }
+      &__nav {
+        background-color: blue;
+      }
 
-     .text {
-      background-color: blue;
-      height: 50vh;
-     }
+      &__messages {
+        background-color: green;
+        height: 90vh;
+      }
+
+      &__input {
+        background-color: yellow;
+      }
   }
 }
 

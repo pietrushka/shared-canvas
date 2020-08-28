@@ -21,20 +21,16 @@ const CallPage = () => {
         </div>
 
         <div className='chat'>
-          <div className='video'>
-            <p>video</p>
-            <div className='video__others'>
+            <div className='chat__nav' >
+              <p>chat nav</p>
             </div>
-            <div className='video__client'></div>
-          </div>
-
-          <div className='text'>
-            <p>text</p>
-            <div className='text__messages' ></div>
-            <div className='text__input'></div>
-          </div>
-        </div> 
-
+            <div className='chat__messages' >
+              <p>chat messages</p>
+            </div>
+            <div className='chat__input'>
+              <p>chat input</p>
+            </div>
+        </div>
       </div>
     </>
   )
