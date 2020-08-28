@@ -1,42 +1,43 @@
-import React, {useState} from 'react'
-import pressPlayImg from "../../assets/press_play_icon.svg";
+import React from 'react'
 
 import Navbar from '../../components/Navbar/Navbar'
-import JoinRoom from '../../components/JoinRoom/JoinRoom'
-import CreateRoom from '../../components/CreateRoom/CreateRoom'
 
 import './CallPage.scss'
 
-
-const RoomPage = () => {  
-  const [currentTab, setCurrentTab] = useState('Join')
-
-  const handleToggle = () => {
-    if (currentTab === 'Join') {
-      setCurrentTab('Create')
-    } else {
-      setCurrentTab('Join')
-    }
-  } 
-
+const CallPage = () => {
+  console.log('call Page')
   return (
     <>
-      <div className='base-container'>
-        <div className='form-container'>
-          <p>Click to switch</p>
-          <button onClick={handleToggle} className='form-container__toggle'>
-            {currentTab}
-          </button>
+      <Navbar />
+      <div className='console__content'>
 
-          <div className="image">
-            <img src={pressPlayImg} />
+        <div className='canvas'>
+          <div className='canvas__whiteboar'>
+            <p>whiteboard</p>
+          </div>
+          <div className='canvas__tools'>
+            <p>tools</p>
+          </div>
+        </div>
+
+        <div className='chat'>
+          <div className='video'>
+            <p>video</p>
+            <div className='video__others'>
+            </div>
+            <div className='video__client'></div>
           </div>
 
-          {currentTab === 'Join' ? <JoinRoom/> : <CreateRoom/>}
-        </div>
+          <div className='text'>
+            <p>text</p>
+            <div className='text__messages' ></div>
+            <div className='text__input'></div>
+          </div>
+        </div> 
+
       </div>
     </>
   )
 }
 
-export default RoomPage
+export default CallPage

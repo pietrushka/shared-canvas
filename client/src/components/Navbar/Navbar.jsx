@@ -34,9 +34,9 @@ const Navbar = ({history}) => {
         </li>
 
         <li className="nav-item">
-          <Link to='/console/call' className="nav-link">
+          <Link to='/console/rooms' className="nav-link">
             <BiPlusCircle className='nav-icon' />
-            <span className="link-text">Call</span>
+            <span className="link-text">Rooms</span>
           </Link>
         </li>
 
