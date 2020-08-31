@@ -1,14 +1,13 @@
 import React, {useState} from 'react'
 import pressPlayImg from "../../assets/press_play_icon.svg";
 
-import Navbar from '../../components/Navbar/Navbar'
 import JoinRoom from '../../components/JoinRoom/JoinRoom'
 import CreateRoom from '../../components/CreateRoom/CreateRoom'
 
-import './RoomsPage.scss'
+import './JoinMakeRoomPage.scss'
 
 
-const RoomPage = () => {  
+const JoinMakeRoomPage = () => {  
   const [currentTab, setCurrentTab] = useState('Join')
 
   const handleToggle = () => {
@@ -39,4 +38,4 @@ const RoomPage = () => {
   )
 }
 
-export default RoomPage
+export default JoinMakeRoomPage

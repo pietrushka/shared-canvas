@@ -13,7 +13,7 @@ import LogoContainer from '../Logo/Logo'
 import './Navbar.css'
 
 
-const Navbar = ({history}) => {
+const Navbar = () => {
   const {user, setUser} = useContext(UserContext)  
 
   const logout = () => {
@@ -34,7 +34,7 @@ const Navbar = ({history}) => {
         </li>
 
         <li className="nav-item">
-          <Link to='/console/rooms' className="nav-link">
+          <Link to='/console/join-make-room' className="nav-link">
             <BiPlusCircle className='nav-icon' />
             <span className="link-text">Rooms</span>
           </Link>

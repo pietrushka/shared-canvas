@@ -10,7 +10,7 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 import LandingPage from './pages/LandingPage/LandingPage'
 import RegisterPage from './pages/RegisterPage/RegisterPage'
 import LoginPage from './pages/LoginPage/LoginPage'
-import CallPage from './pages/CallPage/CallPage'
+import RoomPage from './pages/RoomPage/RoomPage'
 
 function App() {
   const [user, setUser] = useState(null)
@@ -42,9 +42,9 @@ function App() {
               component={ConsoleRouter} 
             />
 
-            <Route 
-              path='/call' 
-              component={CallPage} 
+            <PrivateRoute 
+              path='/room/:roomId' 
+              component={RoomPage} 
               exact 
             /> 
           </Router>

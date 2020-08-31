@@ -1,4 +1,6 @@
 import React, {useReducer} from 'react'
+import { withRouter } from "react-router"
+import { v4 as uuidv4 } from 'uuid'
 
 import './CreateRoom.scss'
 
@@ -35,7 +37,7 @@ const createRoomReducer = (state, action) => {
 }
 
 const initialState = { 
-  newRoomUrl: 'einn3i39hjkwrfj',
+  newRoomUrl: '',
   isLoading: false,
   error: '',
   isCreated: false
@@ -48,8 +50,10 @@ const CreateRoom = ({history}) => {
 
   const onSubmit = async (event) => {
     event.preventDefault()
-    dispatch({ type: 'register'})
+    dispatch({ type: 'create'})
+    const roomId = uuidv4()
     try {
+      history.push(`/room/${roomId}`)
       dispatch({type: 'success'})
     } catch (error) {
       dispatch({type: 'error'})
@@ -66,4 +70,4 @@ const CreateRoom = ({history}) => {
   )
 }
 
-export default CreateRoom
+export default withRouter(CreateRoom)
