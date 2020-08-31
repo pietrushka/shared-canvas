@@ -1,8 +1,10 @@
 .header {
-  top: 0;
   position: fixed;
+  top: 0;
+  z-index: 10000;
+  
   width: 100vw;
-  background-color: var(--bg-primary);
+  background: transparent;
   transition: width 600ms ease;
   height: 5em;
   display: flex;
@@ -17,7 +19,7 @@
     align-items: center; 
     
 
-    .logo__link {
+    .logo__div {
       display: flex;
       align-items: center;
       justify-items: center;
@@ -27,10 +29,8 @@
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
-      background-color: var(--bg-color);
       border-radius: 4px;
       padding-left: 0.2em;
-      transition: var(--transition-speed);
 
 
       .logo_icon {
@@ -68,3 +68,10 @@
     }
   }
 }
+
+.pos--sticky {
+  position: sticky;
+  background: var(--bg-primary);
+  width: 100vw;
+}
+

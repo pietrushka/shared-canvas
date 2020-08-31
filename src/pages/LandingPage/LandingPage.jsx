@@ -1,24 +1,37 @@
-import React from 'react'
+import React, {useState, useCallback} from 'react'
 import {Link} from 'react-router-dom'
 
+import useEventListener from '../../hooks/useEventListener'
+
 import logoSvg from '../../assets/header_logo.svg'
+import backgroundVideo from "../../assets/landing_page_video.mp4"
 
 import './LandingPage.scss'
 
 const LandingPage = () => {
+  const [isHeaderSticky, setIsHeaderSticky] = useState(false)
+
   const isLogged = localStorage.getItem('token') ? true : false
+
+  const headerHandler = () => {
+    if(window.scrollY > 0) {
+      setIsHeaderSticky(true)
+    }else {
+      setIsHeaderSticky(false)
+    }
+  }
   
-  console.log(isLogged) 
+  useEventListener('scroll', headerHandler)
 
   return(
     <>
-    <div className='page-container'>
-      <header className='header'>
+
+      <header className={`header ${isHeaderSticky ? 'pos--sticky' : null}`}>
         <div className="logo__container"> 
-          <Link to="/" className="logo__link">
+          <div className="logo__div">
             <span>SPLITER</span>
             <img className='logo_icon' src={logoSvg} />
-          </Link>
+          </div>
 
         </div>
 
@@ -38,18 +51,12 @@ const LandingPage = () => {
           }
       </header>
 
-    </div>
-    {/* <p>LandingPage</p>
-      {
-        isLogged 
-          ? <Link to='/console'>Console</Link> 
-          : (
-              <div>
-                <Link to='/login'>Login</Link>
-                <Link to='/register'>Register</Link>
-              </div>
-            )
-      }   */}
+      <div className='section'>
+        <video autoPlay loop muted style={{height: '100vh',width: '100vw'}}>
+          <source src={backgroundVideo} type='video/mp4' />
+        </video>
+      </div>
+
     </>
   )
 }
