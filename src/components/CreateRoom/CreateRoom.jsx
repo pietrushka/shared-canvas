@@ -46,7 +46,7 @@ const initialState = {
 const CreateRoom = ({history}) => {
   const [state, dispatch] = useReducer(createRoomReducer, initialState)
 
-  const {newRoomUrl, isLoading, error, isCreated} = state
+  const {isLoading} = state
 
   const onSubmit = async (event) => {
     event.preventDefault()

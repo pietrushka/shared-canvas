@@ -57,10 +57,10 @@ const initialState = {
   isRegistered: false
 }
 
-const LoginPage = ({setupSocket, history}) => {
+const LoginPage = ({history}) => {
   const [state, dispatch] = useReducer(loginReducer, initialState)
-  const {user, setUser} = useContext(UserContext)
-  const {email, password, isLoading, error, isLoggedIn} = state
+  const {setUser} = useContext(UserContext)
+  const {email, password, isLoading, error} = state
 
   const onSubmit = async (event) => {
     event.preventDefault()
@@ -83,7 +83,7 @@ const LoginPage = ({setupSocket, history}) => {
         <div className='form__container--login'>
           <p>Login</p>
           <div className="image">
-            <img src={loginImg} />
+            <img alt='login image' src={loginImg} />
           </div>
           <form className='form--login' onSubmit={onSubmit}>
             {error && <p className='error-message'>{error}</p>}

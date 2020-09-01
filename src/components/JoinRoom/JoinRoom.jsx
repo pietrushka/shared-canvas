@@ -51,7 +51,7 @@ const initialState = {
 const JoinRoom = ({history}) => {
   const [state, dispatch] = useReducer(joinRoomReducer, initialState)
 
-  const {roomId, isLoading, error, isJoined} = state
+  const {roomId, isLoading} = state
 
   const onSubmit = async (event) => {
     event.preventDefault()
