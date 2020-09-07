@@ -1,34 +1,40 @@
-import React, {useRef} from 'react'
+import React, {useEffect, useState} from 'react'
 import Vara from 'vara'
-
+import {Link} from 'react-router-dom'
 
 import './LandingPage2.scss'
 
 const LandingPage2 = () => {
-  setTimeout(function(){
-    const laptopVara = new Vara(".top-element","https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json",[{
-      text:"f(x) = ax + b",
-    }], {
-      textAlign:"left",
-      fontSize: 24,
-    });
+  const isLogged = localStorage.getItem('token') ? true : false
 
-    setTimeout(function(){
-      const phoneVara = new Vara(".phone__screen","https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json",[{
+  //handwriting using vara.js
+  useEffect(() => {
+    setTimeout(function() {
+
+      const laptopVara = new Vara(".top-element", "https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json",[{
         text:"f(x) = ax + b",
-    }], {
-      textAlign:"center"
-    });
-
-    const tabletVara = new Vara(".tablet__screen","https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json",[{
-      text:"f(x) = ax + b",
-    }], {
-      textAlign:"center",
-      fontSize: 36,
-    });
+      }], {
+        textAlign:"left",
+        fontSize: 24,
+      });
+  
+      setTimeout(function(){
+        const phoneVara = new Vara(".phone__screen", "https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json",[{
+          text:"f(x) = ax + b",
+      }], {
+        textAlign:"left",
+        fontSize: 16
+      });
+  
+      const tabletVara = new Vara(".tablet__screen", "https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json",[{
+        text:"f(x) = ax + b",
+      }], {
+        textAlign:"left",
+        fontSize: 26,
+      });
+      }, 500)
     }, 500)
-  }, 500);
-
+  }, [])
 
   return (
     <>
@@ -41,8 +47,22 @@ const LandingPage2 = () => {
           <div className="nav__menu">
             <a href="#" className="option--regular">O nas</a>
             <a href="#" className="option--regular">Kontakt</a>
-            <a href="#" className="option--register">Rejestracja</a>
-            <a href="#" className="option--login">Logowanie</a>
+
+            {
+              isLogged 
+                ? (
+                  <>
+                    <Link to="/login" className="option--bold">Rejestracja</Link>
+                    <Link to="/register" className="option--btn">Logowanie</Link>
+                  </>
+                )
+                : (
+                <>
+                  <Link to="/logout" className="option--bold">Wyloguj się</Link>
+                  <Link to="/console" className="option--btn">Otwórz konsole</Link>
+                </> 
+              )
+            }
           </div>
         </div>     
       </header>
@@ -58,7 +78,7 @@ const LandingPage2 = () => {
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur aliquam voluptates ipsum iusto consequuntur quae odit eaque molestias maxime quis assumenda tempore placeat in, quas ea quod eos, earum fugit.</p>
 
             <div className="btn-container">
-              <button className="join-button">Dołącz teraz</button>
+              <button className="join-button">Dowiedz się więcej</button>
             </div>
           </div>
 
