@@ -10818,6 +10818,11 @@ value-equal@^1.0.1:
   resolved "https://registry.yarnpkg.com/value-equal/-/value-equal-1.0.1.tgz#1e0b794c734c5c0cade179c437d356d931a34d6c"
   integrity sha512-NOJ6JZCAWr0zlxZt+xqCHNTEKOsrks2HQd4MqhP1qy4z1SkbEP467eNx6TgDKXMvUOb+OENfJCZwM+16n7fRfw==
 
+vara@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/vara/-/vara-1.2.0.tgz#5c99dae053ccf11196693736554f801e89412cbc"
+  integrity sha512-2U+r/y3HvQf2SR7jJE0KKHT2MV74XVfoz5XaG/ei3uCDh8TzBEZiHHF3UJ/qD8v8W39XpdfGtDYN7Yyxr3u1fQ==
+
 vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
