@@ -12,6 +12,8 @@ import RegisterPage from './pages/RegisterPage/RegisterPage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import RoomPage from './pages/RoomPage/RoomPage'
 
+import './media-queries.scss'
+
 function App() {
   const [user, setUser] = useState(null)
 

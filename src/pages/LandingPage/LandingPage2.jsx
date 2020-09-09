@@ -7,14 +7,17 @@ import './LandingPage2.scss'
 const LandingPage2 = () => {  
   const [open, setOpen] = useState(false)
   const isLogged = localStorage.getItem('token') ? true : false
+  console.log(window.screen.width)
 
-  const hamburgerHandler = () => setOpen(!open)
- 
-  //handwriting using vara.js
+  const hamburgerHandler = () => {
+    setOpen(!open)
+  }
+
+  //handwriting using vara.js. To get responsive size reload the page
   useEffect(() => {
     const setFontSizes = () => {
-      if (window.screen.width < 320) return {laptop: 7, tablet: 5, phone: 2}
-      if (window.screen.width < 575) return {laptop: 9, tablet: 7, phone: 3}
+      if (window.screen.width < 390) return {laptop: 7, tablet: 5, phone: 2}
+      if (window.screen.width < 630) return {laptop: 9, tablet: 7, phone: 3}
       if (window.screen.width < 691) return {laptop: 15, tablet: 12, phone: 6}
       if (window.screen.width < 768) return {laptop: 11, tablet: 9, phone: 4}
       if (window.screen.width < 972) return {laptop: 13, tablet: 10, phone: 5}
@@ -51,7 +54,7 @@ const LandingPage2 = () => {
       strokeWidth: 2,
       delay: 1000
     }])
-  })
+  }, [])
 
   return (
     <>
@@ -60,36 +63,59 @@ const LandingPage2 = () => {
           <div className="nav__logo">
             <a href="#" className="nav__brand">Nazwa.</a>
           </div>
-
-          <button onClick={hamburgerHandler} className={`hamburger ${open && 'open'}`} id='hamburger'>
+          
+          <button onClick={hamburgerHandler} className={`hamburger ${open && 'open'}`}>
             <div className="hamburger__inner"></div>
           </button>
-           
-          <ul className={`nav__menu ${open ? 'open' : 'close'}`} id="nav__menu">
-            <li><Link to="/about" className="option--regular">O nas</Link></li>
-            <li><Link to="/contact" className="option--regular">Kontakt</Link></li>
+
+          <ul className='nav__menu' id='nav__menu'>
+            <li><Link className='option--regular' to='/about'>O nas</Link></li>
+            <li><Link className='option--regular' to='/contact'>Kontakt</Link></li>
             {
               isLogged 
                 ? (
                   <>
-                    <li><Link to="/login" className="option--bold">Rejestracja</Link></li>
-                    <li><Link to="/register" className="option--btn">Logowanie</Link></li>
-                  </>
+                    <li><Link to="/logout" className="option--bold">Wyloguj się</Link></li>
+                    <li><Link to="/console" className="option--btn">Otwórz konsole</Link></li>
+                  </> 
                 )
                 : (
-                <>
-                  <li><Link to="/logout" className="option--bold">Wyloguj się</Link></li>
-                  <li><Link to="/console" className="option--btn">Otwórz konsole</Link></li>
-                </> 
-              )
+                  <>
+                    <li><Link  to="/login" className="option--bold">Rejestracja</Link></li>
+                    <li><Link  to="/register" className="option--btn">Logowanie</Link></li>
+                  </>
+                )
             }
           </ul>
+
         </div>     
       </header>
 
+      <div id="menu-overlay" className={open && 'open'}>
+        <ul>
+          <li><Link className='option--regular' to='/about'>O nas</Link></li>
+          <li><Link className='option--regular' to='/contact'>Kontakt</Link></li>
+            {
+              isLogged 
+                ? (
+                  <>
+                    <li><Link to="/logout" className="option--bold">Wyloguj się</Link></li>
+                    <li><Link to="/console" className="option--btn">Otwórz konsole</Link></li>
+                  </> 
+                )
+                : (
+                  <>
+                    <li><Link  to="/login" className="option--bold">Rejestracja</Link></li>
+                    <li><Link  to="/register" className="option--btn">Logowanie</Link></li>
+                  </>
+                )
+            }
+          </ul>
+      </div>
+
       <main className="hero">
         <div className="hero__container">
-          <div className="text-content">
+          <div className="text__column">
             <h1>
               <div className="text-content__line">Pomagamy</div>
               <div className="text-content__line">przekazywać wiedzę</div>
@@ -102,21 +128,25 @@ const LandingPage2 = () => {
             </div>
           </div>
 
-          <div className="graphics-container">
+          <div className="graphics__column">
+
             <div className="graphics__wrapper">
-              <div className="hero-image tablet">
-                <div className="tablet__screen"></div>
-              </div>
-              <div className="hero-image phone">
-                <div className="phone__screen"></div>
-              </div>
-              <div className="hero-image laptop">
-                <div className="top-element">
-                  <div className="laptop__screen"></div>
+              <div className="graphics__container">
+                <div className="hero-image tablet">
+                  <div className="tablet__screen"></div>
                 </div>
+                <div className="hero-image phone">
+                  <div className="phone__screen"></div>
+                </div>
+                <div className="hero-image laptop">
+                  <div className="top-element">
+                    <div className="laptop__screen"></div>
+                  </div>
                 <div className="bottom-element"></div>
               </div>
             </div>
+            </div>
+    
           </div>
         </div>
       </main>

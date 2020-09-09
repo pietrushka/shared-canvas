@@ -10,7 +10,7 @@ import {UserContext} from '../../UserContext'
 
 import LogoContainer from '../Logo/Logo'
 
-import './Navbar.css'
+import './Navbar.scss'
 
 
 const Navbar = () => {
@@ -22,7 +22,6 @@ const Navbar = () => {
   }
 
   return (
-  <IconContext.Provider value={{ size: '2rem'}}>
     <div className='navbar'>
       <ul className='navbar-nav'>
 
@@ -70,7 +69,6 @@ const Navbar = () => {
         
      </ul>
    </div>
-  </IconContext.Provider>
   )
 }
 

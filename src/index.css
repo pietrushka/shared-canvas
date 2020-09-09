@@ -1,5 +1,5 @@
 :root {
-  font-size: 16px;
+  font-size: 62.5%;
   font-family: 'Montserrat', 'Open Sans';
   --text-primary: #b6b6b6;
   --text-secondary: #ececec;
@@ -11,12 +11,15 @@
 }
 
 body {
-  color: black;
-  background-color: white;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Ubuntu', sans-serif;
+  background: var(--bg-grey); 
 }
 
 body::-webkit-scrollbar {
@@ -29,8 +32,4 @@ body::-webkit-scrollbar-track {
 
 body::-webkit-scrollbar-thumb {
   background: #6649b8;
-}
-
-* {
-  box-sizing: border-box;
 }
