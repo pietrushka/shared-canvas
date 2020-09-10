@@ -72,7 +72,7 @@ const LoginPage = ({history}) => {
       const {id, username} = loginData
       setUser({id, username})
       dispatch({type: 'success'})
-      history.push('/console')
+      history.push('/console/join-make-room')
     } catch (error) {
       dispatch({type: 'error'})
     }
@@ -81,7 +81,7 @@ const LoginPage = ({history}) => {
   return (
     <div className='base-container--login'>
         <div className='form__container--login'>
-          <h1>Login</h1>
+          <p>Login</p>
           <div className="image">
             <img alt='login image' src={loginImg} />
           </div>

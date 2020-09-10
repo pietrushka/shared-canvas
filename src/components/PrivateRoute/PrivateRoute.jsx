@@ -8,7 +8,7 @@ import API_URL from '../../services/api-route'
 const PrivateRoute = ({component: Component, ...rest}) => {
   const {user, setUser} = useContext(UserContext)  
 
-  const isLoggedIn = () => {
+  const isLoggedIn = async () => {
     if(user) {
       if(user.username && user.id) {
         return true
@@ -25,7 +25,7 @@ const PrivateRoute = ({component: Component, ...rest}) => {
 
     console.log(`${API_URL}/isLoggedIn`)
 
-    axios({
+    await axios({
       method: "GET",
       url: `${API_URL}/isLoggedIn`,
       headers: authHeader

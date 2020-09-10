@@ -1,0 +1,147 @@
+//base-container styles from JoinMakeRoomPage.scss
+
+.options {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  height: 90vh;
+  background-color: var(--bg-primary);
+  border-radius: 2rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75em;
+
+  
+  &__user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40%;
+    width: 90%;
+    background-color: var(--bg-color);
+    border-radius: 2rem;
+    margin: 1em;
+
+    .avatar {
+      width: 25%;
+      background: white;
+      border: 2px solid black;
+      border-radius: 50%;
+      margin-right: 2em;
+    } 
+
+    .user__data {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 60%;
+      border-radius: 2rem;
+      background-color: var(--bg-primary);
+      height: 90%;
+
+      .data-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 65%;
+        margin-left: 1em;
+        margin-top: 1em;
+
+        label {
+          color: var(--text-primary);
+          font-size: 1.5rem;
+        }
+
+        input {
+          margin-top: .5em;
+          height: 1.5em;
+          padding: 0px .5em;
+          font-size: 1.1rem;
+          background-color: #f3f3f3;
+          border: 0;
+          border-radius: 4px;
+          transition: all 250ms ease-in-out;
+          &:focus {
+            outline: none;
+            box-shadow: 0px 0px 12px 0.8px var(--icon-color);
+          }
+        }
+      }
+
+      .data__save {
+        position: absolute;
+        border-radius: 2rem;
+        border: none;
+        outline: none;
+        width: 6em;
+        height: 3em;
+        right: .7rem;
+        top: .7rem;
+
+        background: var(--icon-color);
+
+      }
+    }
+
+  }
+  
+  &__change-password {
+    height: 30%;
+    width: 90%;
+    background-color: var(--bg-color);
+    border-radius: 2rem;
+    margin: 1em;
+  }
+
+  &__theme {
+    width: 20%;
+    height: 10%;
+    margin: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .set-theme {
+      opacity: 0;
+      position: absolute;
+      
+      &:checked + .label__theme .ball {
+        transform: translateX(30px) translateY(-50%);
+      }
+    }
+    
+    .label__theme {
+      position: relative;
+      background-color: #111;
+      border-radius: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px;
+      height: 26px;
+      width: 50px;
+      transform: scale(1.5);
+
+      svg.moon-icon {
+        fill: #f1c40f;
+      }
+
+      svg.sun-icon {
+        fill: #f39c12;
+      }
+
+      .ball {
+        background-color: #fff;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 2px;
+        height: 22px;
+        width: 22px;
+        transform: translateX(0px) translateY(-50%);
+        transition: transform 0.2s linear;
+      }
+    }
+  }
+}
+
