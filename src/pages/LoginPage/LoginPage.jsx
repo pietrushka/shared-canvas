@@ -81,7 +81,7 @@ const LoginPage = ({history}) => {
   return (
     <div className='base-container--login'>
         <div className='form__container--login'>
-          <p>Login</p>
+          <h1>Login</h1>
           <div className="image">
             <img alt='login image' src={loginImg} />
           </div>

@@ -23,52 +23,54 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
-      <ul className='navbar-nav'>
+      <IconContext.Provider value={{ size: '2rem'}}>
+        <ul className='navbar-nav'>
+          <li className="logo">
+            <Link to="#" className="nav-link">
+            <span className="link-text logo-text">SPLITER</span>
+            <LogoContainer />
+            </Link>
+          </li>
 
-        <li className="logo">
-          <Link to="#" className="nav-link">
-          <span className="link-text logo-text">SPLITER</span>
-          <LogoContainer />
-          </Link>
-        </li>
+          <li className="nav-item">
+            <Link to='/console/join-make-room' className="nav-link">
+              <BiPlusCircle className='nav-icon' />
+              <span className="link-text">Rooms</span>
+            </Link>
+          </li>
 
-        <li className="nav-item">
-          <Link to='/console/join-make-room' className="nav-link">
-            <BiPlusCircle className='nav-icon' />
-            <span className="link-text">Rooms</span>
-          </Link>
-        </li>
+          <li className="nav-item">
+            <Link to='/console/user' className="nav-link">
+              <FaUser className='nav-icon' />
+              <span className="link-text">User</span>
+            </Link>
+          </li>
 
-        <li className="nav-item">
-          <Link to='/console/user' className="nav-link">
-            <FaUser className='nav-icon' />
-            <span className="link-text">User</span>
-          </Link>
-        </li>
+          <li className="nav-item">
+            <Link to="/console/contacts" className="nav-link">
+              <RiContactsBookFill className='nav-icon' />
+              <span className="link-text">Contacts</span>
+            </Link>
+          </li>
 
-        <li className="nav-item">
-          <Link to="/console/contacts" className="nav-link">
-            <RiContactsBookFill className='nav-icon' />
-            <span className="link-text">Contacts</span>
-          </Link>
-        </li>
+          <li className="nav-item">
+            <Link to="/console/saved" className="nav-link">
+              <FaBookmark className='nav-icon' />
+              <span className="link-text">Saved</span>
+            </Link>
+          </li>
 
-        <li className="nav-item">
-          <Link to="/console/saved" className="nav-link">
-            <FaBookmark className='nav-icon' />
-            <span className="link-text">Saved</span>
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link to='/' onClick={logout} className="nav-link">
-            <ImCross className='nav-icon' />
-            <span className="link-text">Logout</span>
-          </Link>
-        </li>
-        
-     </ul>
-   </div>
+          <li className="nav-item">
+            <Link to='/' onClick={logout} className="nav-link">
+              <ImCross className='nav-icon' />
+              <span className="link-text">Logout</span>
+            </Link>
+          </li>
+          
+        </ul>
+   
+      </IconContext.Provider>
+    </div>
   )
 }
 

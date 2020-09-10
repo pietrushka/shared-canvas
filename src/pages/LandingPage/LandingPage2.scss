@@ -1,12 +1,3 @@
-:root {
-  --bg-grey: #f5f5f5;
-  --grey: #9e9e9e; 
-  --black: #242424;
-  --violet-light: #6c63ff;
-  --violet-dark: #1f1d49;
-}
-
-
 body {
   font-family: 'Ubuntu', sans-serif;
   background: var(--bg-grey); 
@@ -22,7 +13,7 @@ header {
   left: 0;
   position: fixed;
   width: 100vw;
-  height: 6rem;
+  height: calc(6 * var(--landing-fs));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,14 +26,14 @@ header {
     width: 90%;
 
     .nav__brand {
-      font-size: 4rem;
+      font-size: calc(4 * var(--landing-fs));
       font-weight: 700;
       letter-spacing: 1px;
       color: var(--black);
     }
 
     .nav__menu {
-      font-size: 1.7rem;
+      font-size:  calc(1.7 * var(--landing-fs));
       list-style: none;
       display: flex;
       justify-content: center;
@@ -76,9 +67,9 @@ header {
 }
 
 .hero {
-  top: 6rem;
+  top: calc(6 * var(--landing-fs));
   position: absolute;
-  height: calc(100vh - 6rem);
+  height: calc(100vh - calc(6 * var(--landing-fs)));
 
   &__container {
     display: flex;
@@ -93,7 +84,7 @@ header {
 
       h1 {
         font-weight: 700;
-        font-size: 4rem;
+        font-size: calc(4 * var(--landing-fs));
         margin-bottom: .5em;
         color: #323232;
       }
@@ -101,7 +92,7 @@ header {
       p {
         width: 95%;
         margin: 3em 0;
-        font-size: 1.5rem;
+        font-size: calc(1.5 * var(--landing-fs));
         line-height: 1.3em;
       }
 
@@ -112,9 +103,9 @@ header {
           padding: .5em .8em;
           background: var(--violet-light);
           color: var(--bg-grey);
-          border-radius: 1rem;
+          border-radius: var(--landing-fs);
           border: none;
-          font-size: 1.7rem;
+          font-size: calc(1.7 * var(--landing-fs));
           font-weight: 700;
           outline: none;
         }
@@ -152,8 +143,8 @@ header {
             width: 27%;
             height: 22%;
             transform: skew(15deg);
-            border-radius: .8rem;
-            border: .3rem solid #6c63ff;
+            border-radius: calc(0.8 * var(--landing-fs));
+            border: calc(0.3 * var(--landing-fs)) solid #6c63ff;
 
             .tablet__screen {
               width: 100%;
@@ -180,7 +171,7 @@ header {
             width: 13.5%;
             height: 24%;
             border-radius: 5%;
-            border: .3rem solid #6c63ff;
+            border: calc(0.3 * var(--landing-fs)) solid #6c63ff;
 
             .phone__screen {
               width: 100%;
@@ -210,9 +201,9 @@ header {
               height: 90%;
               transform: skew(20deg);
               background: white;
-              border-top-left-radius: 1rem;
-              border-top-right-radius: 1rem;
-              border: .3rem solid var(--violet-light);
+              border-top-left-radius: var(--landing-fs);
+              border-top-right-radius: var(--landing-fs);
+              border: calc(0.3 * var(--landing-fs)) solid var(--violet-light);
               
 
               .laptop__screen {
@@ -253,6 +244,219 @@ header {
   }
 }
 
+/* up to 768px*/
+@media only screen and (max-width: 768px) {
+  .hamburger {
+    padding: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    width: 3em;
+    height: 2.5em;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+
+    &__inner {
+      width: 100%;
+      height: .3em;
+      background: black;
+      border-radius: 5px;
+      transition: all .5s ease-in-out;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: .3em;
+        background: black;
+        border-radius: 5px;
+        transition: all .5s ease-in-out;
+      }
+
+      &::before {
+        transform: translateX(-20px) translateY(-11px);
+      }
+
+      &::after {
+        transform: translateX(-20px) translateY(11px);
+      }
+    }
+    
+    /* ANIMATION */
+    &.open .hamburger__inner {
+      transform: translateX(50px);
+      background: transparent;
+      box-shadow: none;
+
+      &::before {
+        transform: translate(-70px, 0px) rotate(-45deg);
+      }
+
+      &::after {
+        transform: translate(-70px, 0px) rotate(45deg);
+      }
+    }
+  }
+
+  #nav__menu  {
+    display: none;
+  }
+
+  header {
+    height: 8vh;
+    border-bottom-left-radius: calc(2 * var(--landing-fs));
+    border-bottom-right-radius: calc(2 * var(--landing-fs));
+  }
+
+  #menu-overlay {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    height: 100vh;
+
+    z-index: 50;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ececec;
+    transform: translateY(100%);
+    transform-origin: bottom;
+    transition: .5s transform;
+
+    &.open {
+      transform: translateY(0); 
+    }
+
+    ul {
+      font-size: calc(4.5 * var(--landing-fs));
+      list-style: none;
+      padding: 0;
+
+      li {
+        position: relative;
+        list-style: none;
+        text-align: center;
+        display: block;
+        padding: 1em;
+      }
+        
+      .option--regular {
+        cursor: pointer;
+        color: var(--black);
+      }
+
+      .option--bold {
+        cursor: pointer;
+        color: var(--violet-light);
+        font-weight: 700;
+      }
+
+      .option--btn {
+        cursor: pointer;
+        border-radius: .7em;
+        padding: .5em .8em;
+        background: var(--violet-light);
+        color: var(--bg-grey);
+        font-weight: 700;
+      }
+    }
+  }
+
+
+  .hero__container {
+    flex-wrap: wrap;
+    align-items: start;
+
+    .text__column {
+      width: 100%;
+      
+
+      h1 {
+        margin: 1em 0;
+        div {
+          text-align: center;
+        }
+      }
+
+      p {
+        margin: 0 auto;
+        width: 80%;
+        text-align: center;
+      }
+
+      .btn-container {
+        display: flex;
+        padding: 2em;
+        justify-content: center;
+      }
+
+    
+    }
+
+    .graphics__column {
+      width: 100%;
+      &__wrapper {
+        max-width: 100%;
+      }
+    }
+
+
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 769px) {
+  .hamburger {
+    display: none;
+  }
+  #menu-overlay {
+    display: none;
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) { 
+  :root {
+    --landing-fs: 7px;
+  }
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 769px) {
+  :root {
+    --landing-fs:  7px;
+  }
+
+  .hamburger {
+    display: none;
+  }
+  #menu-overlay {
+    display: none;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  :root {
+    --landing-fs: 9px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1400px) {
+  :root {
+    --landing-fs: 12px;
+  }
+}
 
 
 

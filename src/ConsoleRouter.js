@@ -10,7 +10,7 @@ const ConsoleRouter = ({match}) => {
   return (
     <>
       <Navbar />
-        <div className='console__content' style={{marginLeft: '5rem' }}>
+        <div className='console__content' style={{marginLeft: '7rem' }}>
           <Switch>
             <Route path={match.path + '/join-make-room'} component={JoinMakeRoomPage} />
             <Route exact path={match.path + '/user'} component={NotDoneYet} />
