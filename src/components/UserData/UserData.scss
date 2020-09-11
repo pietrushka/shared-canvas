@@ -6,7 +6,7 @@
   width: 90%;
   background-color:  var(--bg-primary);
   border-radius: 2rem;
-  margin: 1em;
+  margin: 1em 0 0 0;
 
   .avatar {
     width: 25%;
@@ -62,9 +62,7 @@
       height: 3em;
       right: .7rem;
       top: .7rem;
-
       background: var(--icon-color);
-
     }
   }
 

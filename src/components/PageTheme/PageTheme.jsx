@@ -8,7 +8,7 @@ const PageTheme = () => {
   return (
     <div className="options__theme">
       <input type='checkbox' className="set-theme" id="set-theme" />
-      <label class='label__theme' for='set-theme'>
+      <label className='label__theme' htmlFor='set-theme' >
         <RiSunFill className='sun-icon' />
         <BsMoon className='moon-icon' />
         <div className="ball"></div>
