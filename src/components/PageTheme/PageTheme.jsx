@@ -1,0 +1,20 @@
+import React from 'react'
+import {BsMoon} from 'react-icons/bs'
+import {RiSunFill} from 'react-icons/ri'
+
+import './PageTheme.scss'
+
+const PageTheme = () => {
+  return (
+    <div className="options__theme">
+      <input type='checkbox' className="set-theme" id="set-theme" />
+      <label class='label__theme' for='set-theme'>
+        <RiSunFill className='sun-icon' />
+        <BsMoon className='moon-icon' />
+        <div className="ball"></div>
+      </label>
+    </div>
+  )
+}
+
+export default PageTheme
