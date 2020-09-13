@@ -1,6 +1,6 @@
 .base-container--login {
+  font-size: var(--login-register-fs);
   background-color: var(--bg-color);
-  padding: 1rem;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -9,7 +9,7 @@
   .form__container--login {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 50%;
     background-color: var(--bg-primary);
     border-radius: 4px;
     align-items: center;
@@ -17,7 +17,7 @@
 
     p {
       color: var(--text-primary);
-      font-size: 2em;
+      font-size: 3em;
       margin: 0;
     }
 
@@ -37,6 +37,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 80%;
     
       .error-message {
         margin-top: 0.5em;
@@ -49,18 +50,19 @@
         flex-direction: column;
         align-items: flex-start;
         width: fit-content;
-        padding-top: 0.5em;
+        padding-top: 1em;
+        width: 70%;
     
         label {
           color: var(--text-primary);
-          font-size: 20px;
+          font-size: 2em;
         }
         input {
           margin-top: 6px;
-          min-width: 18em;
-          height: 37px;
+          width: 100%;
+          height: 1.8em;
           padding: 0px 10px;
-          font-size: 16px;
+          font-size: 2em;
           font-family: "Open Sans", sans-serif;
           background-color: #f3f3f3;
           border: 0;
@@ -95,5 +97,71 @@
     &:focus {
       outline: none;
     }
+  }
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  .base-container--login {
+    --login-register-fs: 12px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .base-container--login {
+    width: 100vw;
+    min-height: 100vh;
+
+    .form__container--login {
+      width: 90vw;
+      padding: 0;
+
+      p {
+        margin-top: .5em;
+      }
+
+      .image {
+        width: 70%;
+      }
+
+      .form--login {
+        margin-top: 1.5em;
+        
+        .form-group {
+          margin-top: 1em;
+          width: 100%;
+
+          input {
+            height: 2.2em;
+          }
+        }
+
+        button {
+          margin-top: 1em;
+          margin-bottom: 1em;
+        }
+      }
+    }
+  }
+  
+}
+
+@media only screen and (max-width: 768px) {
+  .base-container--login {
+    --login-register-fs: 10px;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .base-container--login {
+    --login-register-fs: 11px;
+  }
+}
+
+
+@media only screen and (max-width: 350px) {
+  .base-container--login {
+    --login-register-fs: 10px;
   }
 }
