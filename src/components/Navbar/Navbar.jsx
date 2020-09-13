@@ -41,7 +41,7 @@ const Navbar = ({currentPage}) => {
           </li>
 
 
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link to="/console/contact" className={`nav-link ${currentPage === 'contacts' && 'currentPage'}`}>
               <RiContactsBookFill className='nav-icon' />
               <span className="link-text">Contacts</span>
@@ -53,7 +53,7 @@ const Navbar = ({currentPage}) => {
               <FaBookmark className='nav-icon' />
               <span className="link-text">Saved</span>
             </Link>
-          </li>
+          </li> */}
           
           <li className="nav-item">
             <Link to='/console/settings' className={`nav-link ${currentPage === 'settings' && 'currentPage'}`}>

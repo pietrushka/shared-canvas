@@ -68,8 +68,8 @@ header {
 
 .hero {
   top: calc(6 * var(--landing-fs));
-  position: absolute;
   height: calc(100vh - calc(6 * var(--landing-fs)));
+  font-size: var(--landing-fs);
 
   &__container {
     display: flex;
@@ -114,7 +114,7 @@ header {
 
     .graphics__column {
       width: 60%;
-      max-height: 100%;
+      height: 100%;
       
       .graphics__wrapper {
         height: 0;
@@ -242,10 +242,217 @@ header {
       }
     }
   }
+
+}
+
+.wave-container {
+  .curved-svg--up {
+    path {
+      fill: var(--icon-color);
+    }
+    display: block;
+  }
+}
+
+.newsletter {
+  font-size: var(--landing-fs);
+  background: var(--icon-color);
+  padding-top: 1px;
+  padding-bottom: 1px;
+  margin: 0;
+
+  &-wrapper {
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .newsletter__heading {
+      color: var(--bg-grey);
+      font-size: 5em;
+      margin-bottom: 1em;
+      text-align: center;
+    }
+
+    p {
+      color: var(--bg-grey);
+      margin: 0 0 1em 0;
+      font-size: 2em;
+
+      span {
+        color: var(--black);
+        font-weight: 700;
+      }
+    }
+
+    .newsletter__form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .form__input {
+        display: block;
+        width: 100%;
+        margin: 1em 0;
+        height: 2.5em;
+        padding: 0px 10px;
+        font-size: 2em;
+        font-family: "Open Sans", sans-serif;
+        background-color: #f3f3f3;
+        border: 0;
+        border-radius: .3em;
+        transition: all 250ms ease-in-out;
+  
+        &:focus {
+          outline: none;
+          box-shadow: 0px 0px 12px 0.8px var(--icon-color);
+        }
+      }
+
+
+      .form-group-permision {
+        width: 60%;
+        
+        .permission-label {
+          text-align: right;
+          color: var(--bg-grey);
+          margin: 0 0 1em 0;
+          font-size: 1.2em;
+  
+          .wideboard__inline {
+            color: var(--black);
+            font-weight: 400;
+          }
+        }
+      }
+
+
+
+  
+      .form__btn {
+        margin-top: 2em; 
+        display: block;
+        font-size: 2.5em;
+        cursor: pointer;
+        border-radius: .7em;
+        padding: .6em 1.2em;
+        border: none;
+        background:  var(--bg-grey);
+        color: var(--violet-light);
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+footer{
+  font-size: var(--landing-fs);
+
+  .curved-svg--down {
+    path {
+      fill: var(--icon-color);
+    }
+    display: block;
+  }
+
+  position: relative;
+  background: #f1f1f1;
+  padding-bottom: 6em;
+  display: block;
+  width: 100%;
+
+  .links {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    h3 {
+      font-size: 2em;
+      font-weight: 700;
+      color: var(--black);
+      margin: 0 0 .3em 0;
+    }
+
+    &__group {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      justify-content: center;
+      margin-right: 5em;
+      
+      a {
+        font-size: 2em;
+        display: block;
+        margin-bottom: .2em;
+        color: var(--icon-color);
+      }
+    }
+
+    &__media {
+      .icons__container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        a {
+          position: relative;
+          width: 2.5em;
+          height: 2.5em;
+          margin-right: 1em;
+          border-radius: 50%;
+          background: var(#f5f5f5);
+          transition: all .3s;
+
+          &:hover {
+            background: var(--icon-color);
+            svg {
+              color: #f5f5f5;
+            }
+          }
+
+          svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            max-height: 100%;
+            color: var(--icon-color);
+          }
+        }
+      }
+    }
+  }
+
+  .copyrights {
+    position: absolute;
+    font-size: .8rem;
+    color: var(--grey);
+    bottom: 0;
+    width: 100%;
+    height: 1.2em;
+    background-color: var(--violet-dark);
+
+    &__text {
+      text-align: center;
+      margin: auto;
+    }
+  }
 }
 
 /* up to 768px*/
 @media only screen and (max-width: 768px) {
+
+  .hero {
+    position: relative;
+    top: 8vh;
+  }
+
   .hamburger {
     padding: 0;
     position: relative;
@@ -370,7 +577,6 @@ header {
     }
   }
 
-
   .hero__container {
     flex-wrap: wrap;
     align-items: start;
@@ -412,8 +618,77 @@ header {
   }
 }
 
+@media only screen and (max-width: 400px) { 
+  :root {
+    --landing-fs: 7px
+  }
+  .hero {
+    margin-bottom: 1em;
+  }
+
+  .newsletter {
+    &-wrapper {
+
+      .newsletter__heading{
+        margin-top: 1.5em;
+        font-size: 3em;
+      }
+
+      p {
+        font-size: 1.5em;
+      }
+
+      .newsletter__form {
+        .form-group-permision {
+          width: 90%;
+        }
+      }
+    }
+  }
+
+  footer {
+    .links {
+      &__group {
+        align-items: center;
+        width: 100%;
+        margin: 2em 0 0 0;
+
+      }
+      &__media {
+        width: 100%;
+        margin-top: 2em;
+        
+        h3 {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+}
+
+@media only screen and (min-width: 400px) { 
+  :root {
+    --landing-fs: 7px;
+  }
+}
+
+@media only screen and (min-width: 600px) { 
+  :root {
+    --landing-fs: 9px;
+  }
+
+  .newsletter-wrapper {
+    width: 90%;
+  }
+}
+
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 769px) {
+  .hero {
+    height: 50vh;
+  }
+
   .hamburger {
     display: none;
   }
@@ -423,11 +698,9 @@ header {
 }
 
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) { 
-  :root {
-    --landing-fs: 7px;
-  }
-}
+
+
+
 
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -442,10 +715,18 @@ header {
   #menu-overlay {
     display: none;
   }
+
+  .newsletter-wrapper {
+    width: 70%;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+
+  .hero {
+    height: calc(100vh - calc(6 * var(--landing-fs)));
+  }
   :root {
     --landing-fs: 9px;
   }

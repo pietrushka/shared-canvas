@@ -23,8 +23,8 @@ const ConsoleRouter = ({location}) => {
         <div className='console__content' style={{marginLeft: '5rem', background: 'var(--bg-color)' }}>
 
           <Route path='/console/join-make-room' exact component={JoinMakeRoomPage} />
-          <Route path='/console/contact' exact component={ContactPage} />
-          <Route path='/console/saved' exact component={NotDoneYet} />
+          {/* <Route path='/console/contact' exact component={ContactPage} />
+          <Route path='/console/saved' exact component={NotDoneYet} /> */}
           <Route path='/console/settings' exact component={SettingsPage} />
 
         </div>
