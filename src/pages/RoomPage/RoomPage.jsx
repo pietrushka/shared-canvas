@@ -2,12 +2,12 @@ import React, { useRef, useEffect, useContext } from 'react';
 import io from 'socket.io-client';
 import {Link} from 'react-router-dom'
 
-import {UserContext} from '../../UserContext'
+import {UserContext} from '../../App'
 
 import './RoomPage.scss' 
 
 const RoomPage = ({match}) => {
-  const {user, setUser} = useContext(UserContext)  
+  const {user} = useContext(UserContext)  
   const {roomId} = match.params
   console.log(match)
 

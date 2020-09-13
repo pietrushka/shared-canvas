@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 
-import {UserContext} from '../../UserContext'
+import {UserContext} from '../../App'
 
 import UserData from '../../components/UserData/UserData'
 import ChangePassword from '../../components/ChangePassword/ChangePassword'

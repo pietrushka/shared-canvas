@@ -1,6 +1,6 @@
 import React, {useReducer, useContext} from 'react'
 
-import {UserContext} from '../../UserContext'
+import {UserContext} from '../../App'
 import {login} from '../../services/auth.service'
 
 import loginImg from "../../assets/login_icon.svg";

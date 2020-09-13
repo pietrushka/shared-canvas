@@ -1,8 +1,5 @@
-import React, {useMemo, useState} from 'react'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import {IconContext} from 'react-icons'
-
-import {UserContext} from './UserContext'
+import React, {createContext, useMemo, useState} from 'react'
+import {Route, Switch} from 'react-router-dom'
 
 import ConsoleRouter from './ConsoleRouter'
 import PublicRoute from './components/PublicRoute/PublicRoute'
@@ -12,6 +9,8 @@ import RegisterPage from './pages/RegisterPage/RegisterPage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import RoomPage from './pages/RoomPage/RoomPage'
 
+
+export const UserContext = createContext()
 
 function App() {
   const [user, setUser] = useState(null)

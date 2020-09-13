@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
 import {Link} from 'react-router-dom'
 import {IconContext} from 'react-icons'
-import {FaBookmark} from 'react-icons/fa'
+//import {FaBookmark} from 'react-icons/fa'
 import {BiPlusCircle} from 'react-icons/bi'
-import {RiContactsBookFill} from 'react-icons/ri'
+//import {RiContactsBookFill} from 'react-icons/ri'
 import {ImCross} from 'react-icons/im'
 import {BsFillGearFill} from 'react-icons/bs'
  
-import {UserContext} from '../../UserContext'
+import {UserContext} from '../../App'
 
 import LogoContainer from '../Logo/Logo'
 
@@ -15,7 +15,7 @@ import './Navbar.scss'
 
 
 const Navbar = ({currentPage}) => {
-  const {user, setUser} = useContext(UserContext)
+  const {setUser} = useContext(UserContext)
 
   const logout = () => {
     setUser(null)

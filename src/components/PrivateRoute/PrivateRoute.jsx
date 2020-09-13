@@ -2,13 +2,13 @@ import React, { useContext } from 'react'
 import {Route, Redirect} from 'react-router-dom'
 import axios from "axios";
 
-import { UserContext } from '../../UserContext'
+import { UserContext } from '../../App'
 import API_URL from '../../services/api-route'
 
 const PrivateRoute = ({component: Component, ...rest}) => {
-  const {user, setUser} = useContext(UserContext)  
+  const {user, setUser} = useContext(UserContext)
+  const isLoggedIn = () => {
 
-  const isLoggedIn = async () => {
     if(user) {
       if(user.username && user.id) {
         return true
@@ -16,28 +16,24 @@ const PrivateRoute = ({component: Component, ...rest}) => {
     }
 
     const token = localStorage.getItem('token')
-    console.log('token', token)
     
     if (token === null) return false
 
     const authHeader = { Authorization: 'Bearer ' + token }
-    console.log(authHeader)
 
-    console.log(`${API_URL}/isLoggedIn`)
-
-    await axios({
+     const isAuth = axios({
       method: "GET",
       url: `${API_URL}/isLoggedIn`,
       headers: authHeader
     }).then(response => {
-      console.log(response)
       setUser({username: response.data.username, id: response.data.id})
-      console.log(user)
+    }).then(() => {
       return true
     }).catch(err => {
       console.log(err)
       return false
     })
+    return isAuth
   }
 
   return (

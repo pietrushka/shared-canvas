@@ -1,5 +1,4 @@
 import React, {useReducer} from 'react'
-import Axios from 'axios'
 
 import {register} from '../../services/auth.service'
 

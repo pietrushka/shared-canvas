@@ -3,6 +3,11 @@ body {
   background: var(--bg-grey); 
 }
 
+button {
+  outline: none;
+  border: none;
+  background: none;
+}
 a {
   text-decoration: none !important;
 }
