@@ -1,66 +1,112 @@
-.call__content {
+.room__content {
   height: 100vh;
+  width: 100vw;
   display: flex;
+  background: white;
 
-  .toolbox-container {
-    position: fixed;
-    background-color: var(--bg-primary);
-    height: 100vh;
-    width: 3rem;
+    .exit {
+      position: absolute;
+      
+      top: 0;
+      left: 0;
+      padding: .2em;
+      border-bottom-right-radius: .5rem;
+      box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 5px 0px;
+
+      .exit-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 .5em;
+        color: black;
+        font-size: .8rem;
+        background: rgb(233, 236, 239);
+        height: 2.5rem;
+        border-radius: .5rem;
+      }
+    }
 
     .toolbox {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+      position: absolute;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      height: 100%;
+      top: 0;
+      left: 50%;
+      padding: .2em;
+      transform: translateX(-50%);
+      box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 5px 0px;
+    }
 
-      .color {
-        height: 48px;
-        width: 48px;
+    .tool {
+      font-size: .8rem;
+      background: rgb(233, 236, 239);
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: .5rem;
+      cursor: pointer;
+    }
 
-        .exit-link {
-          height: 3rem;
+    .tool__eraser {
+      margin: 0 .5em;
+      outline: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .tool__pen {
+      margin: 0 .5em;
+      outline: none;
+
+      &[open] {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      
+      summary {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        outline: none;
+
+        
+        &::-webkit-details-marker {
+          display: none;
         }
       }
 
-      .black { background-color: black; }
-      .red { background-color: red; }
-      .green { background-color: green; }
-      .blue { background-color: blue; }
-      .yellow { background-color: yellow; }
-    }
-  }
-  
+      .colors {
+        background: rgb(216, 216, 216);
+        list-style: none;
+        padding: .5rem 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        border-bottom-left-radius: .5rem;
+        border-bottom-right-radius: .5rem;
+
+        .color {
+          height: 2rem;
+          width: 2rem;
+        }
+
+        .black { background-color: black; }
+        .red { background-color: red; }
+        .green { background-color: green; }
+        .blue { background-color: blue; }
+        .yellow { background-color: yellow; }
+      }
+    }  
 
   .canvas-container {
-
     .whiteboard {
       height: 100%;
       width: 100%;
     }
   }
-  
-  .chat {
-    width: 15%;
-    display: flex;
-    flex-direction: column;
-
-      &__nav {
-        background-color: blue;
-      }
-
-      &__messages {
-        background-color: green;
-        height: 90vh;
-      }
-
-      &__input {
-        background-color: yellow;
-      }
-  }
 }
-
-

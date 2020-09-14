@@ -18,7 +18,7 @@ header {
   left: 0;
   position: fixed;
   width: 100vw;
-  height: calc(6 * var(--landing-fs));
+  height: calc(7 * var(--landing-fs));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -72,8 +72,8 @@ header {
 }
 
 .hero {
-  top: calc(6 * var(--landing-fs));
-  height: calc(100vh - calc(6 * var(--landing-fs)));
+  top: calc(7 * var(--landing-fs));
+  height: calc(100vh - calc(7 * var(--landing-fs)));
   font-size: var(--landing-fs);
 
   &__container {

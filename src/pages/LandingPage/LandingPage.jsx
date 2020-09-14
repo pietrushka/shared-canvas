@@ -85,20 +85,20 @@ const LandingPage2 = () => {
           </button>
 
           <ul className='nav__menu' id='nav__menu'>
-            <li><Link className='option--regular' to='/about'>O nas</Link></li>
-            <li><Link className='option--regular' to='/contact'>Kontakt</Link></li>
+            <li><Link className='option--regular' to='/about'>About</Link></li>
+            <li><Link className='option--regular' to='/contact'>Contact</Link></li>
             {
               isLogged 
                 ? (
                   <>
-                    <li><button onClick={logout} to="/logout" className="option--bold">Wyloguj się</button></li>
+                    <li><button onClick={logout} to="/logout" className="option--bold">Logout</button></li>
                     <li><Link to="/console/join-make-room" className="option--btn">Otwórz konsole</Link></li>
                   </> 
                 )
                 : (
                   <>
-                    <li><Link  to="/register" className="option--bold">Rejestracja</Link></li>
-                    <li><Link  to="/login" className="option--btn">Logowanie</Link></li>
+                    <li><Link  to="/register" className="option--bold">Register</Link></li>
+                    <li><Link  to="/login" className="option--btn">Login</Link></li>
                   </>
                 )
             }
@@ -109,14 +109,14 @@ const LandingPage2 = () => {
 
       <div id="menu-overlay" className={open ? 'open' : null}>
         <ul>
-          <li><Link className='option--regular' to='/about'>O nas</Link></li>
-          <li><Link className='option--regular' to='/contact'>Kontakt</Link></li>
+          <li><Link className='option--regular' to='/about'>About</Link></li>
+          <li><Link className='option--regular' to='/contact'>Contact</Link></li>
             {
               isLogged 
                 ? (
                   <>
-                    <li><Link to="/logout" className="option--bold">Wyloguj się</Link></li>
-                    <li><Link to="/console/join-make-room" className="option--btn">Otwórz konsole</Link></li>
+                    <li><Link to="/logout" className="option--bold">Logout</Link></li>
+                    <li><Link to="/console/join-make-room" className="option--btn">Open console</Link></li>
                   </> 
                 )
                 : (
@@ -133,14 +133,14 @@ const LandingPage2 = () => {
         <div className="hero__container">
           <div className="text__column">
             <h1>
-              <div className="text-content__line">Pomagamy</div>
-              <div className="text-content__line">przekazywać wiedzę</div>
+              <div className="text-content__line">We help</div>
+              <div className="text-content__line">transfer knowledge</div>
             </h1>
 
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur aliquam voluptates ipsum iusto consequuntur quae odit eaque molestias maxime quis assumenda tempore placeat in, quas ea quod eos, earum fugit.</p>
 
             <div className="btn-container">
-              <button className="join-button">Dowiedz się więcej</button>
+              <button className="join-button">Learn more</button>
             </div>
           </div>
 
@@ -176,22 +176,22 @@ const LandingPage2 = () => {
 
       <section className="newsletter">
         <div className="newsletter-wrapper">
-          <h2 className='newsletter__heading'>Zapisz się do newslettera</h2>
-          <p>Nie przegap informacji o nowych funkcjach <span>wideboard.</span></p>
+          <h2 className='newsletter__heading'>Sign up to newsletter</h2>
+          <p>Don't miss new <span>wideboard.</span> features</p>
           <form action="" className="newsletter__form">
             <div className="form-group">
               <input type="text" className="form__input" placeholder="Twoje imię"/>
               <input type="email" className="form__input" placeholder="Twój adress e-mail"/>
             </div>
 
-            <div className="form-group-permision">
+            {/* <div className="form-group-permision">
               <input type="checkbox" id='permission-checkbox' />
               <label className='permission-label' htmlFor="permission-checkbox">
                 Wyrażam zgodę na przetwarzanie przez <span className='wideboard__inline'>wideboard.</span> moich danych osobowych w postaci imienia, adresu e-mail w celu przesyłania mi informacji marketingowych dotyczących produktów i usług oferowanych przez <span className='wideboard__inline'>wideboard.</span> za pomocą wiadomości elektronicznych.
               </label>
-            </div>
+            </div> */}
             
-            <button type="submit" className="form__btn" value="submit">Prześlij</button>
+            <button type="submit" className="form__btn" value="submit">Join Now !</button>
           </form>
         </div>
       </section>
@@ -206,17 +206,17 @@ const LandingPage2 = () => {
 
           <div className="links__group">
             <h3 className="footer__brand">wideboard.</h3>
-            <Link to='/about'>O nas</Link>
-            <Link to='/contact'>Kontakt</Link>
+            <Link to='/about'>About</Link>
+            <Link to='/contact'>Contact</Link>
           </div>
           <div className="links__group">
             <h3>Informacje</h3>
-            <Link to='/conditions'>Warunki</Link>
-            <Link to='/privacy'>Polityka prywatności</Link>
+            <Link to='/conditions'>Terms & Conditions</Link>
+            <Link to='/privacy'>Privacy Policy</Link>
           </div>
 
           <div className="links__media">
-              <h3>Dołącz do nas</h3>
+              <h3>Join us!</h3>
               <div className="icons__container">
                 <a href="#">
                   <FaFacebook size={'2em'}/>

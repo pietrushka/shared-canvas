@@ -9,13 +9,14 @@ import './RoomPage.scss'
 const RoomPage = ({match}) => {
   const {user} = useContext(UserContext)  
   const {roomId} = match.params
-  console.log(match)
 
   const socketRef = useRef()
   const ENDPOINT = 'http://localhost:4000/'
   socketRef.current = io.connect(ENDPOINT)
 
   useEffect(() => {
+    // emits 2 join with user: null and user: id
+    // without first join live drawing doesnt work
     socketRef.current.emit('join', { user, roomId }, (error) => {
       if(error) {
         alert(error);
@@ -26,24 +27,31 @@ const RoomPage = ({match}) => {
   // --- DEALING WITH DRAWING
   const canvasRef = useRef(null);
   const colorsRef = useRef(null);
+  const eraserRef = useRef(null);
 
   useEffect(() => {
 
     // --------------- getContext() method returns a drawing context on the canvas-----
 
     const canvas = canvasRef.current;
-    const test = colorsRef.current;
     const context = canvas.getContext('2d');
 
     // ----------------------- Colors --------------------------------------------------
 
-    const colors = document.getElementsByClassName('color');
-    console.log(colors, 'the colors');
-    console.log(test);
+    const eraser = document.getElementById('eraser')
+    const colors = document.getElementsByClassName('color')
+
     // set the current color
     const current = {
       color: 'black',
-    };
+    }
+
+    const getEraser = () => {
+      current.color = 'eraser'
+    } 
+
+    eraser.addEventListener('click', getEraser, false);
+    
 
     // helper that will update the current color
     const onColorUpdate = (e) => {
@@ -59,15 +67,23 @@ const RoomPage = ({match}) => {
     // ------------------------------- create the drawline ----------------------------
 
     const drawLine = (x0, y0, x1, y1, color, emit) => {
-      context.beginPath();
-      context.moveTo(x0, y0);
-      context.lineTo(x1, y1);
-      context.strokeStyle = color;
-      context.lineWidth = 2;
-      context.stroke();
-      context.closePath();
+      if (color === 'eraser') {
+        console.log('erasering')
+        context.clearRect(x0, y0, 10, 10)
+      } else {
+        context.beginPath();
+        context.moveTo(x0, y0);
+        context.lineTo(x1, y1);
+        context.strokeStyle = color;
+        context.lineWidth = 2;
+        context.stroke();
+        context.closePath();
+      }
+
+      
 
       if (!emit) { return; }
+
       const w = canvas.width;
       const h = canvas.height;
 
@@ -147,43 +163,42 @@ const RoomPage = ({match}) => {
 
     socketRef.current.on('drawing', onDrawingEvent);
   }, []);
-
+ 
 
   return (
     <>
-      <div className='call__content'>
+      <div className='room__content'>
 
-        <div  className='toolbox-container'>
-          <ul ref={colorsRef} className="toolbox">
-            <li className="color black" />
-            <li className="color red" />
-            <li className="color green" />
-            <li className="color blue" />
-            <li className="color yellow" />
-
-            <li className="color black" >
-              <Link className='exit-link' to='/console'>
-                exit
-              </Link>
-            </li>
-          </ul>
+        <div className="exit">
+          <Link className='exit-link' to='/console/join-room'>
+            Exit
+          </Link>
         </div>
+
+
+        <div className="toolbox">
+
+          <details  className='tool__pen tool'>
+            <summary>Pen</summary>
+            <ul ref={colorsRef} className="colors">
+              <li className="color black" />
+              <li className="color red" />
+              <li className="color green" />
+              <li className="color blue" />
+              <li className="color yellow" />
+            </ul>
+          </details>
+
+          <button ref={eraserRef} id='eraser' className="tool__eraser tool">
+            Eraser
+          </button>
+
+        </div>
+
 
         <div className='canvas-container'>
           <canvas ref={canvasRef} className="whiteboard" />
         </div>
-
-        {/* <div className='chat'>
-            <div className='chat__nav' >
-              <p>chat nav</p>
-            </div>
-            <div className='chat__messages' >
-              <p>chat messages</p>
-            </div>
-            <div className='chat__input'>
-              <p>chat input</p>
-            </div>
-        </div> */}
       </div>
     </>
   )

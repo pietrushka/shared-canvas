@@ -72,7 +72,7 @@ const LoginPage = ({history}) => {
       const {id, username} = loginData
       setUser({id, username})
       dispatch({type: 'success'})
-      history.push('/console/join-make-room')
+      history.push('/console/join-room')
     } catch (error) {
       dispatch({type: 'error'})
     }
@@ -106,7 +106,7 @@ const LoginPage = ({history}) => {
             </div>
 
           <div className="form-group">
-            <label>Username</label>
+            <label>Password</label>
             <input
               required
               type='password'
