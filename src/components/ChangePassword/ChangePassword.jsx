@@ -1,5 +1,7 @@
 import React, {useReducer} from 'react'
 
+import {changePassReq} from '../../services/auth.service'
+
 import './ChangePassword.scss'
 
 const changePassReducer = (state, action) => {
@@ -23,19 +25,18 @@ const changePassReducer = (state, action) => {
     case 'success': {
       return {
         ...state,
+        newPassword: '',
+        newPasswordConfirm: '',
+        currentPassword: '',
         isLoading: false,
-        isLoggedIn: true
       }
     }
 
     case 'error': { 
       return { 
         ...state,
-        error: 'Incorrect email or password!',
-        isLoggedIn: false,
+        error: 'Wrong password',
         isLoading: false,
-        email: '',
-        password: ''
       }
     }
 
@@ -55,20 +56,24 @@ const initialState = {
 
 const ChangePassword = () => {
   const [state, dispatch] = useReducer(changePassReducer, initialState)
-  const {newPassword, newPasswordConfirm, currentPassword} = state
+  const {newPassword, newPasswordConfirm, currentPassword, isLoading, error} = state
+  
 
   const onPassChange = async (event) => {
     event.preventDefault()
+    console.log('pass change start')
 
     dispatch({ type: 'save'})
+    
+    const changePassData = { newPassword, currentPassword }
 
     try {
-      // const loginData = await login(email, password)
-      // const {username} = loginData
-      // setUser({username})
+      const res = await changePassReq(changePassData)
+      console.log(res)
       dispatch({type: 'success'})
-    } catch (error) {
+    } catch (err) {
       dispatch({type: 'error'})
+      console.log(error)
     }
   }
 
@@ -132,7 +137,15 @@ const ChangePassword = () => {
           />
         </div>
         
-        <button className='data__save'>Zmień hasło</button>
+        <button
+          className='btn' 
+          style={isLoading ? {background: 'gray'} : null}
+          type='submit' 
+          disabled={isLoading} 
+          className='data__save'
+        >
+          {isLoading ? 'Loading' : 'Change password'}
+        </button>
       </div>
 
     </form>

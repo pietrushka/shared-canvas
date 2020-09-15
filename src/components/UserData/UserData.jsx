@@ -1,5 +1,7 @@
 import React, {useReducer} from 'react'
 
+import {changeUserDataReq} from '../../services/auth.service'
+
 import './UserData.scss'
 import userImg from '../../assets/user.png'
 
@@ -25,19 +27,19 @@ const userDataReducer = (state, action) => {
     case 'success': {
       return {
         ...state,
+        username: '',
+        email: '',
         isLoading: false,
-        isLoggedIn: true
       }
     }
 
     case 'error': { 
       return { 
         ...state,
-        error: 'Incorrect email or password!',
-        isLoggedIn: false,
+        error: 'Incorrect data!',
         isLoading: false,
+        username: '',
         email: '',
-        password: ''
       }
     }
 
@@ -60,16 +62,19 @@ const UserData = () => {
 
   const onDataChange = async (event) => {
     event.preventDefault()
+    console.log('data change start')
 
     dispatch({ type: 'save'})
+    
+    const changeData = { username, email }
 
     try {
-      // const loginData = await login(email, password)
-      // const {username} = loginData
-      // setUser({username})
+      const res = await changeUserDataReq(changeData)
+      console.log(res)
       dispatch({type: 'success'})
-    } catch (error) {
+    } catch (err) {
       dispatch({type: 'error'})
+      console.log(error)
     }
   }
 
@@ -111,8 +116,15 @@ const UserData = () => {
           />
         </div>
 
-        <button className='data__save'>Zapisz</button>
-
+        <button
+          className='btn' 
+          style={isLoading ? {background: 'gray'} : null}
+          type='submit' 
+          disabled={isLoading} 
+          className='data__save'
+        >
+          {isLoading ? 'Loading' : 'Save'}
+        </button>
       </div>
     </form>
   )
