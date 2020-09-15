@@ -1,0 +1,36 @@
+.console__content {
+  background: var(--bg-color);
+
+  .base-container {
+    margin-left: 5rem;
+    background-color: var(--bg-color);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+
+  .console__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    
+    .base-container {
+      overflow-y: auto;
+      width: 100%;
+      flex: 1 1 auto;
+      height: auto;
+      margin: 0;
+      position: relative;
+      
+    }
+  }
+}

@@ -80,8 +80,6 @@ const ChangePassword = () => {
   return (
 
     <form className="options__change-password" onSubmit={onPassChange}>
-
-
       <div className="cln-1">
         <div className="data-wrapper">
               <label>Nowe Hasło</label>

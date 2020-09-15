@@ -115,8 +115,9 @@ const UserData = () => {
             }
           />
         </div>
+      </div>
 
-        <button
+      <button
           className='btn' 
           style={isLoading ? {background: 'gray'} : null}
           type='submit' 
@@ -125,7 +126,6 @@ const UserData = () => {
         >
           {isLoading ? 'Loading' : 'Save'}
         </button>
-      </div>
     </form>
   )
 }
