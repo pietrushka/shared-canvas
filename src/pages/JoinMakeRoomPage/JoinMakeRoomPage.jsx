@@ -1,17 +1,13 @@
-import React, {useState, useContext} from 'react'
-import pressPlayImg from "../../assets/press_play_icon.svg";
+import React, { useState } from 'react'
+import pressPlayImg from '../../assets/press_play_icon.svg'
 
-import { UserContext } from '../../App'
 import JoinRoom from '../../components/JoinRoom/JoinRoom'
 import CreateRoom from '../../components/CreateRoom/CreateRoom'
 
 import './JoinMakeRoomPage.scss'
 
-
-const JoinMakeRoomPage = () => {  
+const JoinMakeRoomPage = () => {
   const [currentTab, setCurrentTab] = useState('Join')
-  const {user, setUser} = useContext(UserContext)
-  console.log(user)
 
   const handleToggle = () => {
     if (currentTab === 'Join') {
@@ -19,7 +15,7 @@ const JoinMakeRoomPage = () => {
     } else {
       setCurrentTab('Join')
     }
-  } 
+  }
 
   return (
     <>
@@ -30,11 +26,11 @@ const JoinMakeRoomPage = () => {
             {currentTab}
           </button>
 
-          <div className="image">
-            <img src={pressPlayImg} />
+          <div className='image'>
+            <img alt='join room illustration' src={pressPlayImg} />
           </div>
 
-          {currentTab === 'Join' ? <JoinRoom/> : <CreateRoom/>}
+          {currentTab === 'Join' ? <JoinRoom /> : <CreateRoom />}
         </div>
       </div>
     </>

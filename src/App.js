@@ -1,5 +1,5 @@
-import React, {createContext, useMemo, useState} from 'react'
-import {Route, Switch} from 'react-router-dom'
+import React, { createContext, useMemo, useState } from 'react'
+import { Route, Switch } from 'react-router-dom'
 
 import ConsoleRouter from './ConsoleRouter'
 import PublicRoute from './components/PublicRoute/PublicRoute'
@@ -9,51 +9,49 @@ import RegisterPage from './pages/RegisterPage/RegisterPage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import RoomPage from './pages/RoomPage/RoomPage'
 
-
 export const UserContext = createContext()
 
-function App() {
+function App () {
   const [user, setUser] = useState(null)
 
-  const providerValue = useMemo(() => ({user, setUser}), [user,setUser])
+  const providerValue = useMemo(() => ({ user, setUser }), [user, setUser])
 
   return (
-        <UserContext.Provider value={providerValue}>
-          <Switch>
+    <UserContext.Provider value={providerValue}>
+      <Switch>
 
-          <Route 
-            path='/' 
-            component={LandingPage} 
-            exact 
-            /> 
+        <Route
+          path='/'
+          component={LandingPage}
+          exact
+        />
 
-          <PublicRoute 
-            path='/login' 
-            component={LoginPage} 
-            exact 
-            />
+        <PublicRoute
+          path='/login'
+          component={LoginPage}
+          exact
+        />
 
-          <PublicRoute
-            path='/register' 
-            component={RegisterPage} 
-            exact 
-            />
+        <PublicRoute
+          path='/register'
+          component={RegisterPage}
+          exact
+        />
 
-          <PrivateRoute 
-            path='/console' 
-            component={ConsoleRouter}
-          />
+        <PrivateRoute
+          path='/console'
+          component={ConsoleRouter}
+        />
 
-          <PrivateRoute 
-            path='/room/:roomId' 
-            component={RoomPage} 
-            exact 
-            /> 
-    </Switch>
+        <PrivateRoute
+          path='/room/:roomId'
+          component={RoomPage}
+          exact
+        />
+      </Switch>
 
-    </UserContext.Provider> 
+    </UserContext.Provider>
   )
 }
 
-
-export default App;
+export default App

@@ -1,85 +1,85 @@
-import axios from "axios";
+import axios from 'axios'
 
-import API_URL from './api-route'
+const SERVER_ENDPOINT = `${process.env.REACT_APP_SERVER_ENDPOINT}/api`
+console.log(SERVER_ENDPOINT)
 
 export const register = (registerData) => {
   return axios({
-    method: "POST",
+    method: 'POST',
     data: registerData,
-    url: `${API_URL}/auth/register`
+    url: `${SERVER_ENDPOINT}/auth/register`
   }).catch((err) => {
     if (err.response) {
-      throw new Error(err.response.data.message);
+      throw new Error(err.response.data.message)
     }
-    throw err;
+    throw err
   })
 }
 
 export const login = (email, password) => {
+  console.log(SERVER_ENDPOINT)
   return axios
-    .post(API_URL + "/auth/login", {
+    .post(SERVER_ENDPOINT + '/auth/login', {
       email,
-      password,
+      password
     })
     .then((response) => {
-      localStorage.setItem("token", response.data.token)
+      window.localStorage.setItem('token', response.data.token)
       return response.data
     }).catch((err) => {
       if (err.response.status === 401) {
-        throw new Error('Incorrect username or password');
+        throw new Error('Incorrect username or password')
       }
-      throw err;
+      throw err
     })
 }
 
 export const logout = () => {
-  localStorage.removeItem("user");
+  window.localStorage.removeItem('user')
 }
 
 export const changePassReq = (changePassData) => {
-
   const token = localStorage.getItem('token')
-    
+
   if (token === null) return false
 
   const authHeader = { Authorization: 'Bearer ' + token }
 
   return axios({
-      method: "PATCH",
-      url: `${API_URL}/auth/updateMyPassword`,
-      headers: authHeader,
-      data: changePassData
-    })
+    method: 'PATCH',
+    url: `${SERVER_ENDPOINT}/auth/updateMyPassword`,
+    headers: authHeader,
+    data: changePassData
+  })
     .then((response) => {
       return response
     }).catch((err) => {
       if (err.response.status === 401) {
-        throw new Error('Incorrect password');
+        throw new Error('Incorrect password')
       }
-      throw err;
+      throw err
     })
 }
 
 export const changeUserDataReq = (data) => {
-  const token = localStorage.getItem('token')
-    
+  const token = window.localStorage.getItem('token')
+
   if (token === null) return false
 
   const authHeader = { Authorization: 'Bearer ' + token }
 
   return axios({
-      method: "PATCH",
-      url: `${API_URL}/user/updateMyData`,
-      headers: authHeader,
-      data
-    })
+    method: 'PATCH',
+    url: `${SERVER_ENDPOINT}/user/updateMyData`,
+    headers: authHeader,
+    data
+  })
     .then((response) => {
       return response
     }).catch((err) => {
       if (err.response.status === 401) {
-        throw new Error('UnAuthorized');
+        throw new Error('UnAuthorized')
       }
-      throw err;
+      throw err
     })
 }
-
