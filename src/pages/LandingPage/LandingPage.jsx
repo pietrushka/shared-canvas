@@ -215,16 +215,16 @@ const LandingPage2 = () => {
           <div className='links__media'>
             <h3>Join us!</h3>
             <div className='icons__container'>
-              <a href='#'>
+              <a href='/'>
                 <FaFacebook size='2em' />
               </a>
-              <a href='#'>
+              <a href='/'>
                 <FaTwitter size='2em' />
               </a>
-              <a href='#'>
+              <a href='/'>
                 <FaInstagram size='2em' />
               </a>
-              <a href='#'>
+              <a href='/'>
                 <FaYoutube size='2em' />
               </a>
             </div>
