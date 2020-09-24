@@ -89,7 +89,7 @@ const LandingPage2 = () => {
                 ? (
                   <>
                     <li><button onClick={logout} to='/logout' className='option--bold'>Logout</button></li>
-                    <li><Link to='/console/join-make-room' className='option--btn'>Otwórz konsole</Link></li>
+                    <li><Link to='/console/join-room' className='option--btn'>Otwórz konsole</Link></li>
                   </>
                 )
                 : (
