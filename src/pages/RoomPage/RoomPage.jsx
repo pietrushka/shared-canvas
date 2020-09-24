@@ -23,7 +23,7 @@ const RoomPage = ({ match }) => {
         window.alert(error)
       }
     })
-  }, [SERVER_ENDPOINT, user, roomId])
+  }, [SERVER_ENDPOINT, user])
 
   // --- DEALING WITH DRAWING
   const canvasRef = useRef(null)
