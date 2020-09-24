@@ -3,8 +3,7 @@ import { Route, Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 import { UserContext } from '../../App'
-const SERVER_ENDPOINT = `${process.env.REACT_APP_SERVER_ENDPOINT}/api`
-console.log(SERVER_ENDPOINT)
+const SERVER_ENDPOINT = `${process.env.REACT_APP_SERVER_ENDPOINT}/api/auth`
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { user, setUser } = useContext(UserContext)
@@ -30,6 +29,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     }).then(() => {
       return true
     }).catch(err => {
+      console.log(err)
       return false
     })
     return isAuth

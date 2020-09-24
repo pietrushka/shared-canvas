@@ -39,7 +39,7 @@ export const logout = () => {
 }
 
 export const changePassReq = (changePassData) => {
-  const token = localStorage.getItem('token')
+  const token = window.localStorage.getItem('token')
 
   if (token === null) return false
 
