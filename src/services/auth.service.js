@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 const SERVER_ENDPOINT = `${process.env.REACT_APP_SERVER_ENDPOINT}/api`
-console.log(SERVER_ENDPOINT)
 
 export const register = (registerData) => {
   return axios({
@@ -17,7 +16,6 @@ export const register = (registerData) => {
 }
 
 export const login = (email, password) => {
-  console.log(SERVER_ENDPOINT)
   return axios
     .post(SERVER_ENDPOINT + '/auth/login', {
       email,

@@ -104,8 +104,8 @@ const LoginPage = ({ history }) => {
           </div>
 
           <div className='form-group'>
-              <label>Password</label>
-              <input
+            <label>Password</label>
+            <input
               required
               type='password'
               placeholder='Password'
@@ -117,16 +117,16 @@ const LoginPage = ({ history }) => {
                   value: event.currentTarget.value
                 })}
             />
-            </div>
+          </div>
 
           <button
-              className='btn'
-              style={isLoading ? { background: 'gray' } : null}
-              type='submit'
-              disabled={isLoading}
-            >
-              {isLoading ? 'Loading' : 'Login'}
-            </button>
+            className='btn'
+            style={isLoading ? { background: 'gray' } : null}
+            type='submit'
+            disabled={isLoading}
+          >
+            {isLoading ? 'Loading' : 'Login'}
+          </button>
 
         </form>
       </div>

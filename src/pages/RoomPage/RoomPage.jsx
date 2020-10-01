@@ -8,7 +8,6 @@ import './RoomPage.scss'
 
 const RoomPage = ({ match }) => {
   const { user } = useContext(UserContext)
-  console.log('user from room page', user)
   const { roomId } = match.params
 
   const socketRef = useRef()
