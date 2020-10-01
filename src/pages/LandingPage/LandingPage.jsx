@@ -41,8 +41,7 @@ const LandingPage2 = () => {
 
     const fontSize = setFontSizes()
 
-    // laptop Vara
-    new Vara('.laptop__screen', 'https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json', [{
+    const laptopVara = new Vara('.laptop__screen', 'https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json', [{
       text: 'f(x) = ax + b',
       textAlign: 'left',
       fontSize: fontSize.laptop,
@@ -51,7 +50,7 @@ const LandingPage2 = () => {
     }])
 
     // phone Vara
-    new Vara('.phone__screen', 'https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json', [{
+    const phoneVara = new Vara('.phone__screen', 'https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json', [{
       text: 'f(x) = ax + b',
       textAlign: 'left',
       fontSize: fontSize.phone,
@@ -60,7 +59,7 @@ const LandingPage2 = () => {
     }])
 
     // tablet Vara
-    new Vara('.tablet__screen', 'https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json', [{
+    const tabletVara = new Vara('.tablet__screen', 'https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json', [{
       text: 'f(x) = ax + b',
       textAlign: 'left',
       fontSize: fontSize.tablet,
@@ -82,19 +81,19 @@ const LandingPage2 = () => {
           </button>
 
           <ul className='nav__menu' id='nav__menu'>
-            <li><Link className='option--regular' to='/about'>About</Link></li>
-            <li><Link className='option--regular' to='/contact'>Contact</Link></li>
+            <li><Link className='option--regular horizontal' to='/about'>About</Link></li>
+            <li><Link className='option--regular horizontal' to='/contact'>Contact</Link></li>
             {
               isLogged
                 ? (
                   <>
-                    <li><button onClick={logout} to='/logout' className='option--bold'>Logout</button></li>
+                    <li><button onClick={logout} to='/logout' className='option--bold horizontal'>Logout</button></li>
                     <li><Link to='/console/join-room' className='option--btn'>Otwórz konsole</Link></li>
                   </>
                 )
                 : (
                   <>
-                    <li><Link to='/register' className='option--bold'>Register</Link></li>
+                    <li><Link to='/register' className='option--bold horizontal'>Register</Link></li>
                     <li><Link to='/login' className='option--btn'>Login</Link></li>
                   </>
                 )
@@ -137,7 +136,7 @@ const LandingPage2 = () => {
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur aliquam voluptates ipsum iusto consequuntur quae odit eaque molestias maxime quis assumenda tempore placeat in, quas ea quod eos, earum fugit.</p>
 
             <div className='btn-container'>
-              <button className='join-button'>Learn more</button>
+              <button className='join-button'>Find out more</button>
             </div>
           </div>
 
@@ -180,14 +179,6 @@ const LandingPage2 = () => {
               <input type='text' className='form__input' placeholder='Twoje imię' />
               <input type='email' className='form__input' placeholder='Twój adress e-mail' />
             </div>
-
-            {/* <div className="form-group-permision">
-              <input type="checkbox" id='permission-checkbox' />
-              <label className='permission-label' htmlFor="permission-checkbox">
-                Wyrażam zgodę na przetwarzanie przez <span className='wideboard__inline'>wideboard.</span> moich danych osobowych w postaci imienia, adresu e-mail w celu przesyłania mi informacji marketingowych dotyczących produktów i usług oferowanych przez <span className='wideboard__inline'>wideboard.</span> za pomocą wiadomości elektronicznych.
-              </label>
-            </div> */}
-
             <button type='submit' className='form__btn' value='submit'>Join Now !</button>
           </form>
         </div>
