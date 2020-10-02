@@ -125,6 +125,10 @@ header {
     .text__column {
       width: 40%;
 
+      .text-content-line {
+        overflow: hidden;
+      }
+
       h1 {
         font-weight: 700;
         font-size: calc(4 * var(--landing-fs));

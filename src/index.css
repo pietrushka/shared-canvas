@@ -1,5 +1,5 @@
 :root {
-  font-family: 'Montserrat', 'Open Sans';
+  font-family: 'Ubuntu', sans-serif;
   --text-primary: #b6b6b6;
   --text-secondary: #ececec;
   --icon-color: #6c63ff;
@@ -15,7 +15,6 @@
 }
 
 html {
-  
   -ms-overflow-style: none;
 }
 
@@ -29,7 +28,6 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Ubuntu', sans-serif;
   background: var(--bg-grey); 
 }
 

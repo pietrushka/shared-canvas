@@ -1,13 +1,32 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useRef } from 'react'
 import Vara from 'vara'
 import { Link } from 'react-router-dom'
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
+import { TimelineLite, TweenMax, Power3 } from 'gsap'
 
 import { UserContext } from '../../App'
 import './LandingPage.scss'
 
 const LandingPage2 = () => {
   const { setUser } = useContext(UserContext)
+  const contentRef = useRef(null)
+  const tl = new TimelineLite({ delay: 0.8 })
+
+  useEffect(() => {
+    // Conttent variables
+    const headlineFirst = contentRef.current.children[0].children[0]
+    const headlineSecond = headlineFirst.nextSibling
+    const paragraph = contentRef.current.children[1]
+    const button = contentRef.current.children[2]
+
+    // Content Animation
+    tl.staggerFrom([headlineFirst.children, headlineSecond.children], 1, {
+      y: 44,
+      ease: Power3.easeOut
+    }, 0.15, 'Start')
+      .from(paragraph, 1, { y: 20, opacity: 0, ease: Power3.easeOut }, 1.4)
+      .from(button, 1, { y: 20, opacity: 0, ease: Power3.easeOut }, 1.6)
+  }, [tl])
 
   const logout = () => {
     window.localStorage.removeItem('token')
@@ -46,7 +65,7 @@ const LandingPage2 = () => {
       textAlign: 'left',
       fontSize: fontSize.laptop,
       strokeWidth: 2,
-      delay: 500
+      delay: 2700
     }])
 
     // phone Vara
@@ -55,7 +74,7 @@ const LandingPage2 = () => {
       textAlign: 'left',
       fontSize: fontSize.phone,
       strokeWidth: 2,
-      delay: 1000
+      delay: 3000
     }])
 
     // tablet Vara
@@ -64,7 +83,7 @@ const LandingPage2 = () => {
       textAlign: 'left',
       fontSize: fontSize.tablet,
       strokeWidth: 2,
-      delay: 1000
+      delay: 3000
     }])
   }, [])
 
@@ -127,10 +146,14 @@ const LandingPage2 = () => {
 
       <main className='hero'>
         <div className='hero__container'>
-          <div className='text__column'>
+          <div className='text__column' ref={contentRef}>
             <h1>
-              <div className='text-content__line'>We help</div>
-              <div className='text-content__line'>transfer knowledge</div>
+              <div className='text-content-line'>
+                <div className='text-content__line-inner'>We help</div>
+              </div>
+              <div className='text-content-line'>
+                <div className='text-content__line-inner'>transfer knowledge</div>
+              </div>
             </h1>
 
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur aliquam voluptates ipsum iusto consequuntur quae odit eaque molestias maxime quis assumenda tempore placeat in, quas ea quod eos, earum fugit.</p>
