@@ -9,15 +9,12 @@ import {
   Navbar, NavbarInner, NavbarLogo, Hamburger, HamburgerInner, Menu, MenuOptionBasic, MenuOptionBold, MenuOptionBtn,
   Footer, CurvedSVG, LinkGroup, FooterLink, FooterHeading, LinksMedia, IconsContainer, ExternalLink, CopyrightsPanel, CopyrightsText, Newsletter, NewsletterHeading, NewsletterParagraph, NewletterForm, NewletterInput, NewletterBtn, Hero, Text, HeroHeading, TextLine, TextInner, HeroParagraph, FindOutBtn, Images, ImagesContainer, ImagesInner, TabletImage, TabletScreen, PhoneImage, PhoneScreen, LaptopImage, LaptopTopEl, LaptopScreen, LaptopBottomEl, OverlayMenu
 } from './LandingPage.styles'
-import './LandingPage.scss'
 
 const LandingPage2 = () => {
-  const { setUser } = useContext(UserContext)
+  const { setUser, isLoggedIn } = useContext(UserContext)
   const [open, setOpen] = useState(false)
   const contentRef = useRef(null)
   const tl = new TimelineLite({ delay: 0.8 })
-
-  let isLogged = !!window.localStorage.getItem('token')
 
   useEffect(() => {
     // Conttent variables
@@ -37,14 +34,12 @@ const LandingPage2 = () => {
 
   const logout = () => {
     window.localStorage.removeItem('token')
-    isLogged = false
     setUser(null)
     window.location.reload()
   }
 
   const hamburgerHandler = () => {
     setOpen(!open)
-    console.log('ham ham ham')
   }
 
   // handwriting using vara.js. To get responsive size reload the page
@@ -56,7 +51,7 @@ const LandingPage2 = () => {
       if (window.screen.width < 768) return { laptop: 11, tablet: 9, phone: 4 }
       if (window.screen.width < 972) return { laptop: 13, tablet: 10, phone: 5 }
       if (window.screen.width < 1100) return { laptop: 16, tablet: 12, phone: 6 }
-      if (window.screen.width < 1400) return { laptop: 17, tablet: 14, phone: 7 }
+      if (window.screen.width < 1400) return { laptop: 17, tablet: 13, phone: 7 }
       if (window.screen.width < 1600) return { laptop: 22, tablet: 17, phone: 9 }
       if (window.screen.width < 1642) return { laptop: 25, tablet: 20, phone: 11 }
 
@@ -102,13 +97,13 @@ const LandingPage2 = () => {
           </Hamburger>
           <Menu horizontal>
             <li>
-              <MenuOptionBasic to='/about'>About</MenuOptionBasic>
+              <MenuOptionBasic onClick={() => window.alert('work in progress')} to='#'>About</MenuOptionBasic>
             </li>
             <li>
-              <MenuOptionBasic to='/contact'>Contact</MenuOptionBasic>
+              <MenuOptionBasic onClick={() => window.alert('work in progress')} to='#'>Contact</MenuOptionBasic>
             </li>
             {
-              isLogged
+              isLoggedIn
                 ? (
                   <>
                     <li>
@@ -136,13 +131,13 @@ const LandingPage2 = () => {
       <OverlayMenu open={open && true}>
         <Menu>
           <li>
-            <MenuOptionBasic to='/about'>About</MenuOptionBasic>
+            <MenuOptionBasic onClick={() => window.alert('work in progress')} to='#'>About</MenuOptionBasic>
           </li>
           <li>
-            <MenuOptionBasic to='/contact'>Contact</MenuOptionBasic>
+            <MenuOptionBasic onClick={() => window.alert('work in progress')} to='#'>Contact</MenuOptionBasic>
           </li>
           {
-            isLogged
+            isLoggedIn
               ? (
                 <>
                   <li>
@@ -177,7 +172,7 @@ const LandingPage2 = () => {
             </TextLine>
           </HeroHeading>
 
-          <HeroParagraph>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur aliquam voluptates ipsum iusto consequuntur quae odit eaque molestias maxime quis assumenda tempore placeat in, quas ea quod eos, earum fugit.</HeroParagraph>
+          <HeroParagraph>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur aliquam voluptates ipsum iusto .</HeroParagraph>
           <FindOutBtn>Find out more</FindOutBtn>
         </Text>
 

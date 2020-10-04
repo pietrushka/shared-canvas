@@ -14,6 +14,10 @@ const RoomPage = ({ match }) => {
   const SERVER_ENDPOINT = process.env.REACT_APP_SERVER_ENDPOINT
   socketRef.current = io.connect(SERVER_ENDPOINT)
 
+  const showRoomIdPrompt = () => {
+    window.prompt('Copy to clipboard: Ctrl+C, Enter', roomId)
+  }
+
   useEffect(() => {
     // emits 2 join with user: null and user: id
     // without first join live drawing doesnt work
@@ -163,10 +167,16 @@ const RoomPage = ({ match }) => {
     <>
       <div className='room__content'>
 
-        <div className='exit'>
-          <Link className='exit-link' to='/console/join-room'>
-            Exit
-          </Link>
+        <div className='left-panel'>
+          <div className='exit'>
+            <Link className='exit-link' to='/console/join-room'>
+              Exit
+            </Link>
+          </div>
+
+          <div onClic className='roomId-box'>
+            <button onClick={showRoomIdPrompt}>Get room ID</button>
+          </div>
         </div>
 
         <div className='toolbox'>

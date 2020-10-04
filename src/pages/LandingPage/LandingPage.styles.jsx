@@ -34,6 +34,10 @@ export const NavbarLogo = styled.div`
   font-weight: 700;
   letter-spacing: 1px;
   color: var(--black);
+
+  @media (min-width: 1200px) {
+    font-size: 2.25rem;
+  }
 `
 
 export const Hamburger = styled.button`
@@ -236,8 +240,8 @@ export const Hero = styled.div`
 `
 
 export const Text = styled.div`
-  padding-top: 1em;
   font-size: 1rem;
+  padding-top: 1em;
   height: 40%;
   display: flex;
   flex-direction: column;
@@ -262,7 +266,7 @@ export const Text = styled.div`
   }
 
   @media (min-width: 1200px) {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 `
 
@@ -274,6 +278,7 @@ export const HeroHeading = styled.h1`
   text-align: center;
    @media (min-width: 768px) {
     text-align: left;
+    margin-bottom: 1em;
    }
 `
 

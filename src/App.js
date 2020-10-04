@@ -14,7 +14,7 @@ export const UserContext = createContext()
 function App () {
   const [user, setUser] = useState(null)
 
-  const providerValue = useMemo(() => ({ user, setUser }), [user, setUser])
+  const providerValue = useMemo(() => ({ user, setUser, isLoggedIn: !!user }), [user, setUser])
 
   return (
     <UserContext.Provider value={providerValue}>
