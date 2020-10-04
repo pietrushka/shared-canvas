@@ -1,16 +1,23 @@
 import React, { useEffect, useState, useContext, useRef } from 'react'
 import Vara from 'vara'
-import { Link } from 'react-router-dom'
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
-import { TimelineLite, TweenMax, Power3 } from 'gsap'
+import { TimelineLite, Power3 } from 'gsap'
 
 import { UserContext } from '../../App'
+
+import {
+  Navbar, NavbarInner, NavbarLogo, Hamburger, HamburgerInner, Menu, MenuOptionBasic, MenuOptionBold, MenuOptionBtn,
+  Footer, CurvedSVG, LinkGroup, FooterLink, FooterHeading, LinksMedia, IconsContainer, ExternalLink, CopyrightsPanel, CopyrightsText, Newsletter, NewsletterHeading, NewsletterParagraph, NewletterForm, NewletterInput, NewletterBtn, Hero, Text, HeroHeading, TextLine, TextInner, HeroParagraph, FindOutBtn, Images, ImagesContainer, ImagesInner, TabletImage, TabletScreen, PhoneImage, PhoneScreen, LaptopImage, LaptopTopEl, LaptopScreen, LaptopBottomEl, OverlayMenu
+} from './LandingPage.styles'
 import './LandingPage.scss'
 
 const LandingPage2 = () => {
   const { setUser } = useContext(UserContext)
+  const [open, setOpen] = useState(false)
   const contentRef = useRef(null)
   const tl = new TimelineLite({ delay: 0.8 })
+
+  let isLogged = !!window.localStorage.getItem('token')
 
   useEffect(() => {
     // Conttent variables
@@ -26,7 +33,7 @@ const LandingPage2 = () => {
     }, 0.15, 'Start')
       .from(paragraph, 1, { y: 20, opacity: 0, ease: Power3.easeOut }, 1.4)
       .from(button, 1, { y: 20, opacity: 0, ease: Power3.easeOut }, 1.6)
-  }, [tl])
+  }, [])
 
   const logout = () => {
     window.localStorage.removeItem('token')
@@ -35,11 +42,9 @@ const LandingPage2 = () => {
     window.location.reload()
   }
 
-  const [open, setOpen] = useState(false)
-  let isLogged = !!window.localStorage.getItem('token')
-
   const hamburgerHandler = () => {
     setOpen(!open)
+    console.log('ham ham ham')
   }
 
   // handwriting using vara.js. To get responsive size reload the page
@@ -60,7 +65,7 @@ const LandingPage2 = () => {
 
     const fontSize = setFontSizes()
 
-    const laptopVara = new Vara('.laptop__screen', 'https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json', [{
+    const laptopVara = new Vara('#laptop-screen', 'https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json', [{
       text: 'f(x) = ax + b',
       textAlign: 'left',
       fontSize: fontSize.laptop,
@@ -69,7 +74,7 @@ const LandingPage2 = () => {
     }])
 
     // phone Vara
-    const phoneVara = new Vara('.phone__screen', 'https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json', [{
+    const phoneVara = new Vara('#phone-screen', 'https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json', [{
       text: 'f(x) = ax + b',
       textAlign: 'left',
       fontSize: fontSize.phone,
@@ -78,7 +83,7 @@ const LandingPage2 = () => {
     }])
 
     // tablet Vara
-    const tabletVara = new Vara('.tablet__screen', 'https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json', [{
+    const tabletVara = new Vara('#tablet-screen', 'https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Shadows-Into-Light/shadows-into-light.json', [{
       text: 'f(x) = ax + b',
       textAlign: 'left',
       fontSize: fontSize.tablet,
@@ -89,167 +94,178 @@ const LandingPage2 = () => {
 
   return (
     <>
-      <header className='header'>
-        <div className='nav'>
-          <div className='nav__logo'>
-            <Link to='#' className='nav__brand'>wideboard.</Link>
-          </div>
-
-          <button onClick={hamburgerHandler} className={`hamburger ${open ? 'open' : null}`}>
-            <div className='hamburger__inner' />
-          </button>
-
-          <ul className='nav__menu' id='nav__menu'>
-            <li><Link className='option--regular horizontal' to='/about'>About</Link></li>
-            <li><Link className='option--regular horizontal' to='/contact'>Contact</Link></li>
+      <Navbar open={open && true}>
+        <NavbarInner>
+          <NavbarLogo>wideboared.</NavbarLogo>
+          <Hamburger onClick={hamburgerHandler}>
+            <HamburgerInner open={open && true} />
+          </Hamburger>
+          <Menu horizontal>
+            <li>
+              <MenuOptionBasic to='/about'>About</MenuOptionBasic>
+            </li>
+            <li>
+              <MenuOptionBasic to='/contact'>Contact</MenuOptionBasic>
+            </li>
             {
               isLogged
                 ? (
                   <>
-                    <li><button onClick={logout} to='/logout' className='option--bold horizontal'>Logout</button></li>
-                    <li><Link to='/console/join-room' className='option--btn'>Otwórz konsole</Link></li>
+                    <li>
+                      <MenuOptionBold to='/' onClick={logout}>Logout</MenuOptionBold>
+                    </li>
+                    <li>
+                      <MenuOptionBtn to='/console/join-room'>Open Console</MenuOptionBtn>
+                    </li>
                   </>
-                )
-                : (
+                ) : (
                   <>
-                    <li><Link to='/register' className='option--bold horizontal'>Register</Link></li>
-                    <li><Link to='/login' className='option--btn'>Login</Link></li>
+                    <li>
+                      <MenuOptionBold to='/login'>Login</MenuOptionBold>
+                    </li>
+                    <li>
+                      <MenuOptionBtn to='/register'>Register</MenuOptionBtn>
+                    </li>
                   </>
                 )
             }
-          </ul>
+          </Menu>
+        </NavbarInner>
+      </Navbar>
 
-        </div>
-      </header>
-
-      <div id='menu-overlay' className={open ? 'open' : null}>
-        <ul>
-          <li><Link className='option--regular' to='/about'>About</Link></li>
-          <li><Link className='option--regular' to='/contact'>Contact</Link></li>
+      <OverlayMenu open={open && true}>
+        <Menu>
+          <li>
+            <MenuOptionBasic to='/about'>About</MenuOptionBasic>
+          </li>
+          <li>
+            <MenuOptionBasic to='/contact'>Contact</MenuOptionBasic>
+          </li>
           {
             isLogged
               ? (
                 <>
-                  <li><Link to='/logout' className='option--bold'>Logout</Link></li>
-                  <li><Link to='/console/join-room' className='option--btn'>Open console</Link></li>
+                  <li>
+                    <MenuOptionBold to='/' onClick={logout}>Logout</MenuOptionBold>
+                  </li>
+                  <li>
+                    <MenuOptionBtn to='/console/join-room'>Open Console</MenuOptionBtn>
+                  </li>
                 </>
-              )
-              : (
+              ) : (
                 <>
-                  <li><Link to='/register' className='option--bold'>Rejestracja</Link></li>
-                  <li><Link to='/login' className='option--btn'>Logowanie</Link></li>
+                  <li>
+                    <MenuOptionBold to='/login'>Login</MenuOptionBold>
+                  </li>
+                  <li>
+                    <MenuOptionBtn to='/register'>Register</MenuOptionBtn>
+                  </li>
                 </>
               )
           }
-        </ul>
-      </div>
+        </Menu>
+      </OverlayMenu>
 
-      <main className='hero'>
-        <div className='hero__container'>
-          <div className='text__column' ref={contentRef}>
-            <h1>
-              <div className='text-content-line'>
-                <div className='text-content__line-inner'>We help</div>
-              </div>
-              <div className='text-content-line'>
-                <div className='text-content__line-inner'>transfer knowledge</div>
-              </div>
-            </h1>
+      <Hero>
+        <Text ref={contentRef}>
+          <HeroHeading>
+            <TextLine>
+              <TextInner>We help</TextInner>
+            </TextLine>
+            <TextLine>
+              <TextInner>transfer knowledge</TextInner>
+            </TextLine>
+          </HeroHeading>
 
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur aliquam voluptates ipsum iusto consequuntur quae odit eaque molestias maxime quis assumenda tempore placeat in, quas ea quod eos, earum fugit.</p>
+          <HeroParagraph>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur aliquam voluptates ipsum iusto consequuntur quae odit eaque molestias maxime quis assumenda tempore placeat in, quas ea quod eos, earum fugit.</HeroParagraph>
+          <FindOutBtn>Find out more</FindOutBtn>
+        </Text>
 
-            <div className='btn-container'>
-              <button className='join-button'>Find out more</button>
-            </div>
-          </div>
+        <Images>
+          <ImagesContainer>
+            <ImagesInner>
+              <TabletImage>
+                <TabletScreen id='tablet-screen' />
+              </TabletImage>
 
-          <div className='graphics__column'>
+              <PhoneImage>
+                <PhoneScreen id='phone-screen' />
+              </PhoneImage>
 
-            <div className='graphics__wrapper'>
-              <div className='graphics__container'>
-                <div className='hero-image tablet'>
-                  <div className='tablet__screen' />
-                </div>
-                <div className='hero-image phone'>
-                  <div className='phone__screen' />
-                </div>
-                <div className='hero-image laptop'>
-                  <div className='top-element'>
-                    <div className='laptop__screen' />
-                  </div>
-                  <div className='bottom-element' />
-                </div>
-              </div>
-            </div>
+              <LaptopImage>
+                <LaptopTopEl>
+                  <LaptopScreen id='laptop-screen' />
+                </LaptopTopEl>
+                <LaptopBottomEl />
+              </LaptopImage>
 
-          </div>
-        </div>
+            </ImagesInner>
+          </ImagesContainer>
+        </Images>
 
-      </main>
+      </Hero>
 
-      <div className='wave-container'>
-        <svg className='curved-svg--up' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 199'>
-          <path fill='#0099ff' fillOpacity='1' d='M0,160L60,138.7C120,117,240,75,360,80C480,85,600,139,720,160C840,181,960,171,1080,154.7C1200,139,1320,117,1380,106.7L1440,96L1440,200L1380,200C1320,200,1200,200,1080,200C960,200,840,200,720,200C600,200,480,200,360,200C240,200,120,200,60,200L0,200Z' />
-        </svg>
-      </div>
+      <CurvedSVG className='curved-svg--up' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 199'>
+        <path fill='#0099ff' fillOpacity='1' d='M0,160L60,138.7C120,117,240,75,360,80C480,85,600,139,720,160C840,181,960,171,1080,154.7C1200,139,1320,117,1380,106.7L1440,96L1440,200L1380,200C1320,200,1200,200,1080,200C960,200,840,200,720,200C600,200,480,200,360,200C240,200,120,200,60,200L0,200Z' />
+      </CurvedSVG>
 
-      <section className='newsletter'>
-        <div className='newsletter-wrapper'>
-          <h2 className='newsletter__heading'>Sign up to newsletter</h2>
-          <p>Don't miss new <span>wideboard.</span> features</p>
-          <form action='' className='newsletter__form'>
-            <div className='form-group'>
-              <input type='text' className='form__input' placeholder='Twoje imię' />
-              <input type='email' className='form__input' placeholder='Twój adress e-mail' />
-            </div>
-            <button type='submit' className='form__btn' value='submit'>Join Now !</button>
-          </form>
-        </div>
-      </section>
+      <Newsletter>
+        <NewsletterHeading>Sign up to newsletter</NewsletterHeading>
+        <NewsletterParagraph>
+          Don't miss new <span>wideboard.</span> features
+        </NewsletterParagraph>
+        <NewletterForm>
+          <NewletterInput
+            placeholder='Your name'
+          />
+          <NewletterInput
+            placeholder='Your e-mail'
+          />
+          <NewletterBtn>Join now!</NewletterBtn>
+        </NewletterForm>
+      </Newsletter>
 
-      <footer>
+      <CurvedSVG
+        xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'
+      >
+        <path fill='#0099ff' fillOpacity='1' d='M0,128L48,138.7C96,149,192,171,288,154.7C384,139,480,85,576,96C672,107,768,181,864,202.7C960,224,1056,192,1152,181.3C1248,171,1344,181,1392,186.7L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z' />
+      </CurvedSVG>
+      <Footer>
 
-        <svg className='curved-svg--down' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'>
-          <path fill='#0099ff' fillOpacity='1' d='M0,128L48,138.7C96,149,192,171,288,154.7C384,139,480,85,576,96C672,107,768,181,864,202.7C960,224,1056,192,1152,181.3C1248,171,1344,181,1392,186.7L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z' />
-        </svg>
+        <LinkGroup>
+          <FooterHeading>wideboard.</FooterHeading>
+          <FooterLink to='/about'>About</FooterLink>
+          <FooterLink to='/contact'>Contact</FooterLink>
+        </LinkGroup>
+        <LinkGroup>
+          <FooterHeading>Informations</FooterHeading>
+          <FooterLink to='/conditions'>Terms & Conditions</FooterLink>
+          <FooterLink to='/privacy'>Privacy Policy</FooterLink>
+        </LinkGroup>
 
-        <div className='links'>
+        <LinksMedia>
+          <FooterHeading>Join us!</FooterHeading>
+          <IconsContainer>
+            <ExternalLink href='/'>
+              <FaFacebook size='2em' />
+            </ExternalLink>
+            <ExternalLink href='/'>
+              <FaTwitter size='2em' />
+            </ExternalLink>
+            <ExternalLink href='/'>
+              <FaInstagram size='2em' />
+            </ExternalLink>
+            <ExternalLink href='/'>
+              <FaYoutube size='2em' />
+            </ExternalLink>
+          </IconsContainer>
+        </LinksMedia>
 
-          <div className='links__group'>
-            <h3 className='footer__brand'>wideboard.</h3>
-            <Link to='/about'>About</Link>
-            <Link to='/contact'>Contact</Link>
-          </div>
-          <div className='links__group'>
-            <h3>Informacje</h3>
-            <Link to='/conditions'>Terms & Conditions</Link>
-            <Link to='/privacy'>Privacy Policy</Link>
-          </div>
+      </Footer>
 
-          <div className='links__media'>
-            <h3>Join us!</h3>
-            <div className='icons__container'>
-              <a href='/'>
-                <FaFacebook size='2em' />
-              </a>
-              <a href='/'>
-                <FaTwitter size='2em' />
-              </a>
-              <a href='/'>
-                <FaInstagram size='2em' />
-              </a>
-              <a href='/'>
-                <FaYoutube size='2em' />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className='copyrights'>
-          <p className='copyrights__text'>© 2020 Created By Piotr Wiśniewski.</p>
-        </div>
-
-      </footer>
+      <CopyrightsPanel className='copyrights'>
+        <CopyrightsText className='copyrights__text'>© 2020 Created By Piotr Wiśniewski.</CopyrightsText>
+      </CopyrightsPanel>
     </>
   )
 }
