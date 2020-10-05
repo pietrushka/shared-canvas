@@ -1,13 +1,13 @@
 import React, { createContext, useMemo, useState } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import ConsoleRouter from './ConsoleRouter'
-import PublicRoute from './components/PublicRoute/PublicRoute'
-import PrivateRoute from './components/PrivateRoute/PrivateRoute'
-import LandingPage from './pages/LandingPage/LandingPage'
-import RegisterPage from './pages/RegisterPage/RegisterPage'
-import LoginPage from './pages/LoginPage/LoginPage'
-import RoomPage from './pages/RoomPage/RoomPage'
+import ConsoleRouter from './ConsoleRouter/ConsoleRouter'
+import PublicRoute from './PublicRoute'
+import PrivateRoute from './PrivateRoute'
+import Landing from './Landing/Landing'
+import Register from './Register/Register'
+import Login from './Login/Login'
+import Room from './Room/Room'
 
 export const UserContext = createContext()
 
@@ -22,19 +22,19 @@ function App () {
 
         <Route
           path='/'
-          component={LandingPage}
+          component={Landing}
           exact
         />
 
         <PublicRoute
           path='/login'
-          component={LoginPage}
+          component={Login}
           exact
         />
 
         <PublicRoute
           path='/register'
-          component={RegisterPage}
+          component={Register}
           exact
         />
 
@@ -45,7 +45,7 @@ function App () {
 
         <PrivateRoute
           path='/room/:roomId'
-          component={RoomPage}
+          component={Room}
           exact
         />
       </Switch>
