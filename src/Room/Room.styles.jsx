@@ -40,6 +40,7 @@ export const RoomIdBox = styled.div`
   margin-left: 1rem;
   padding: .2em;
   border-bottom-right-radius: .5rem;
+  border-bottom-left-radius: .5rem;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 
   5px 0px;
   display: flex;
@@ -69,6 +70,8 @@ export const Toolbox = styled.div`
   left: 50%;
   padding: .2em;
   transform: translateX(-50%);
+  border-bottom-right-radius: .5rem;
+  border-bottom-left-radius: .5rem;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 5px 
   0px;
 `

@@ -34,23 +34,11 @@ const LandingPage2 = () => {
     }, 0.15, 'Start')
       .from(paragraph, 1, { y: 20, opacity: 0, ease: Power3.easeOut }, 1.4)
       .from(button, 1, { y: 20, opacity: 0, ease: Power3.easeOut }, 1.6)
-  }, [])
 
-  const logout = () => {
-    window.localStorage.removeItem('wideboardToken')
-    setUser(null)
-    setIsLoggedIn(false)
-  }
-
-  const hamburgerHandler = () => {
-    setOpen(!open)
-  }
-
-  // handwriting using vara.js. To get responsive size reload the page
-  useEffect(() => {
+    // handwriting using vara.js. To get responsive size reload the page
     const setFontSizes = () => {
       if (window.screen.width < 390) return { laptop: 7, tablet: 5, phone: 2 }
-      if (window.screen.width < 630) return { laptop: 9, tablet: 7, phone: 3 }
+      if (window.screen.width < 630) return { laptop: 9, tablet: 7, phone: 4 }
       if (window.screen.width < 691) return { laptop: 15, tablet: 12, phone: 6 }
       if (window.screen.width < 768) return { laptop: 11, tablet: 9, phone: 4 }
       if (window.screen.width < 972) return { laptop: 13, tablet: 10, phone: 5 }
@@ -90,6 +78,16 @@ const LandingPage2 = () => {
       delay: 3000
     }])
   }, [])
+
+  const logout = () => {
+    window.localStorage.removeItem('wideboardToken')
+    setUser(null)
+    setIsLoggedIn(false)
+  }
+
+  const hamburgerHandler = () => {
+    setOpen(!open)
+  }
 
   return (
     <>

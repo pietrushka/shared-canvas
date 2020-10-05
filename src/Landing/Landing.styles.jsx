@@ -474,7 +474,8 @@ export const LaptopBottomEl = styled.div`
 `
 
 export const CurvedSVG = styled.svg`
-  margin-top: -10px;
+  margin-top: -1px;
+  margin-bottom: -1px;
 
 background: var(--bg-grey);
   path{
