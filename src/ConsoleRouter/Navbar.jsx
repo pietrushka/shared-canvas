@@ -18,7 +18,7 @@ const Navbar = ({ currentPage }) => {
 
   const logout = () => {
     setUser(null)
-    window.localStorage.removeItem('token')
+    window.localStorage.removeItem('wideboardToken')
   }
 
   return (
@@ -33,7 +33,7 @@ const Navbar = ({ currentPage }) => {
           </li>
 
           <li className='nav-item'>
-            <Link to='/console/join-room' className={`nav-link ${currentPage === 'join-room' && 'currentPage'}`}>
+            <Link to='/console/create-join-room' className={`nav-link ${currentPage === 'create-join-room' && 'currentPage'}`}>
               <BiPlusCircle className='nav-icon' />
               <span className='link-text'>Room</span>
             </Link>

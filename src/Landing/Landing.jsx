@@ -11,19 +11,23 @@ import {
 } from './Landing.styles'
 
 const LandingPage2 = () => {
-  const { setUser, isLoggedIn } = useContext(UserContext)
+  const { setUser } = useContext(UserContext)
   const [open, setOpen] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const contentRef = useRef(null)
   const tl = new TimelineLite({ delay: 0.8 })
 
   useEffect(() => {
-    // Conttent variables
+    // Check is user logged in
+    const token = window.localStorage.getItem('wideboardToken')
+    token ? setIsLoggedIn(true) : setIsLoggedIn(false)
+
+    // Animation
     const headlineFirst = contentRef.current.children[0].children[0]
     const headlineSecond = headlineFirst.nextSibling
     const paragraph = contentRef.current.children[1]
     const button = contentRef.current.children[2]
 
-    // Content Animation
     tl.staggerFrom([headlineFirst.children, headlineSecond.children], 1, {
       y: 44,
       ease: Power3.easeOut
@@ -33,9 +37,9 @@ const LandingPage2 = () => {
   }, [])
 
   const logout = () => {
-    window.localStorage.removeItem('token')
+    window.localStorage.removeItem('wideboardToken')
     setUser(null)
-    window.location.reload()
+    setIsLoggedIn(false)
   }
 
   const hamburgerHandler = () => {
@@ -110,7 +114,7 @@ const LandingPage2 = () => {
                       <MenuOptionBold to='/' onClick={logout}>Logout</MenuOptionBold>
                     </li>
                     <li>
-                      <MenuOptionBtn to='/console/join-room'>Open Console</MenuOptionBtn>
+                      <MenuOptionBtn to='/console/create-join-room'>Open Console</MenuOptionBtn>
                     </li>
                   </>
                 ) : (
@@ -144,7 +148,7 @@ const LandingPage2 = () => {
                     <MenuOptionBold to='/' onClick={logout}>Logout</MenuOptionBold>
                   </li>
                   <li>
-                    <MenuOptionBtn to='/console/join-room'>Open Console</MenuOptionBtn>
+                    <MenuOptionBtn to='/console/create-join-room'>Open Console</MenuOptionBtn>
                   </li>
                 </>
               ) : (

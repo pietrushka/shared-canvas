@@ -14,7 +14,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       }
     }
 
-    const token = window.localStorage.getItem('token')
+    const token = window.localStorage.getItem('wideboardToken')
 
     if (token === null) return false
 

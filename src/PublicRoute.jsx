@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom'
 
 const PublicRoute = ({ component: Component, ...props }) => {
   const isLoggedIn = () => {
-    const token = localStorage.getItem('token')
+    const token = window.localStorage.getItem('wideboardToken')
 
     if (token) return true
 

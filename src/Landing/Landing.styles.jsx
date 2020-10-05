@@ -279,7 +279,7 @@ export const HeroHeading = styled.h1`
   text-align: center;
    @media (min-width: 768px) {
     text-align: left;
-    margin-bottom: 1em;
+    margin-bottom: 0;
    }
 `
 
@@ -293,20 +293,20 @@ export const TextInner = styled.div`
 
 export const HeroParagraph = styled.p`
   font-size: .8em;
-  margin: 3em 0;
-  margin: 0 auto;
+  margin: 1em 0;
   width: 80%;
   text-align: center;
 
   @media (min-width: 768px) {
     text-align: left;
+    margin: 1.2em 0;
     width: 100%;
   }
 `
 
 export const FindOutBtn = styled.button`
   cursor: pointer;
-  font-size: 1em;
+  font-size: 1rem;
   border-radius: .7em;
   padding: .5em .8em;
   background: var(--violet-light);
@@ -323,7 +323,8 @@ export const FindOutBtn = styled.button`
   }
   
   @media (min-width: 768px) {
-    width: 60%;
+    font-size: 1rem;
+    margin-top: 0;
   }
 `
 

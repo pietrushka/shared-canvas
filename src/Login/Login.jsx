@@ -71,7 +71,7 @@ const LoginPage = ({ history }) => {
       const { id, username } = loginData
       setUser({ id, username })
       dispatch({ type: 'success' })
-      history.push('/console/join-room')
+      history.push('/console/create-join-room')
     } catch (error) {
       dispatch({ type: 'error' })
     }

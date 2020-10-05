@@ -22,7 +22,7 @@ export const login = (email, password) => {
       password
     })
     .then((response) => {
-      window.localStorage.setItem('token', response.data.token)
+      window.localStorage.setItem('wideboardToken', response.data.token)
       return response.data
     }).catch((err) => {
       if (err.response.status === 401) {
@@ -37,7 +37,7 @@ export const logout = () => {
 }
 
 export const changePassReq = (changePassData) => {
-  const token = window.localStorage.getItem('token')
+  const token = window.localStorage.getItem('wideboardToken')
 
   if (token === null) return false
 
@@ -60,7 +60,7 @@ export const changePassReq = (changePassData) => {
 }
 
 export const changeUserDataReq = (data) => {
-  const token = window.localStorage.getItem('token')
+  const token = window.localStorage.getItem('wideboardToken')
 
   if (token === null) return false
 
