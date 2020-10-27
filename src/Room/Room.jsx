@@ -1,11 +1,9 @@
 import React, { useRef, useEffect, useContext } from 'react'
+import { Link } from 'react-router-dom'
 import io from 'socket.io-client'
 
 import { UserContext } from '../App'
-
-import {
-  RoomContainer, LeftPanel, ExitBox, ExitLink, RoomIdBox, RoomIdBtn, Toolbox, Pen, ColorsList, ColorBtn, Eraser, WhiteBoard
-} from './Room.styles'
+import './Room.scss'
 
 const RoomPage = ({ match }) => {
   const { user } = useContext(UserContext)
@@ -166,42 +164,44 @@ const RoomPage = ({ match }) => {
 
   return (
     <>
-      <RoomContainer>
-
-        <LeftPanel>
-          <ExitBox>
-            <ExitLink to='/console/create-join-room'>
+      <div className='room-container'>
+        <div className="left-panel">
+          <div className='exit'>
+            <Link to='/console/create-join-room' className='exit-link'>
               Exit
-            </ExitLink>
-          </ExitBox>
+            </Link>
+          </div>
 
-          <RoomIdBox>
-            <RoomIdBtn onClick={showRoomIdPrompt}>Get room ID</RoomIdBtn>
-          </RoomIdBox>
-        </LeftPanel>
+          <div className='roomId'>
+            <button className='roomId-btn' onClick={showRoomIdPrompt}>Get room ID</button>
+          </div>
+        </div>
 
-        <Toolbox>
+        <div className='toolbox'>
 
-          <Pen>
+          <details className='tool tool__pen'>
             <summary>Pen</summary>
-            <ColorsList ref={colorsRef}>
-              <ColorBtn className='black' />
-              <ColorBtn className='red' />
-              <ColorBtn className='green' />
-              <ColorBtn className='blue' />
-              <ColorBtn className='yellow' />
-            </ColorsList>
-          </Pen>
+            <ul className='colors' ref={colorsRef}>
+              <div className='color black' />
+              <div className='color red' />
+              <div className='color green' />
+              <div className='color blue' />
+              <div className='color yellow' />
+            </ul>
+          </details>
 
-          <Eraser ref={eraserRef} id='eraser'>
+          <div 
+            className='tool tool__eraser' 
+            ref={eraserRef} 
+            id='eraser'
+          >
             Eraser
-          </Eraser>
+          </div>
+        </div>
 
-        </Toolbox>
+        <canvas className='whiteboard' ref={canvasRef} />
 
-        <WhiteBoard ref={canvasRef} />
-
-      </RoomContainer>
+      </div>
     </>
   )
 }

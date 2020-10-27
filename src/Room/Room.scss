@@ -1,4 +1,4 @@
-.room__content {
+.room-container {
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -29,17 +29,19 @@
         }
       }
   
-      .roomId-box {
+      .roomId {
         position: relative;
         margin-left: 1rem;
         padding: .2em;
         border-bottom-right-radius: .5rem;
-        box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 5px 0px;
+        border-bottom-left-radius: .5rem;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 
+        5px 0px;
         display: flex;
         text-decoration: none;
         outline: none;
 
-        button {
+        &-btn {
           display: flex;
           font-size: .8rem;
           padding: 0 .5em;
@@ -64,6 +66,8 @@
       left: 50%;
       padding: .2em;
       transform: translateX(-50%);
+      border-bottom-right-radius: .5rem;
+      border-bottom-left-radius: .5rem;
       box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 5px 0px;
     }
 
@@ -74,14 +78,6 @@
       height: 2.5rem;
       border-radius: .5rem;
       cursor: pointer;
-    }
-
-    .tool__eraser {
-      margin: 0 .5em;
-      outline: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
     .tool__pen {
@@ -133,10 +129,18 @@
       }
     }  
 
-  .canvas-container {
-    .whiteboard {
-      height: 100%;
-      width: 100%;
+    .tool__eraser {
+      margin: 0 .5em;
+      outline: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
+
+
+  .whiteboard {
+    height: 100%;
+    width: 100%;
   }
+
 }

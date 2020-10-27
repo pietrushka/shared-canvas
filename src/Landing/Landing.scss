@@ -1,0 +1,23 @@
+.curved-svg {
+  display: block;
+  margin-top: -1px;
+  margin-bottom: -1px;
+  background: var(--bg-grey);
+  path {
+    fill: var(--icon-color);
+  } 
+}
+
+.copyrights {
+  font-size: .8rem;
+  color: var(--grey);
+  bottom: 0;
+  width: 100%;
+  height: 1.2em;
+  background-color: var(--violet-dark);
+
+  &-text {
+    text-align: center;
+    margin: 0;
+  }
+}

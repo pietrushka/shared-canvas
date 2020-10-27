@@ -1,0 +1,82 @@
+.newsletter {
+  font-size: 1rem;
+  background: var(--icon-color);
+  padding-top: 4em;
+  padding-bottom: 4em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: 1200px) {
+    font-size: 1.2rem;
+  }
+
+  &-heading {
+    color: var(--bg-grey);
+    font-size: 2em;
+    margin-bottom: 1em;
+    text-align: center;
+  }
+
+  &-paragraph {
+    color: var(--bg-grey);
+    margin: 0 0 1em 0;
+    font-size: 1.1em;
+
+    span {
+      color: var(--black);
+      font-weight: 700;
+    }
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    width: 60%;
+
+    @media (min-width: 992px) {
+      width: 30%;
+    }
+
+    .newsletter-input {
+      display: block;
+      font-size: 1.25rem;
+      width: 100%;
+      margin: .5em;
+      height: 2em;
+      padding-left: .5em;
+      background-color: #f3f3f3;
+      max-width: 450px;
+
+      border-radius: .3em;
+      transition: all 250ms ease-in-out;
+      
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .newsletter-btn {
+      margin-top: 1em; 
+      display: block;
+      font-size: 1.5rem;
+      cursor: pointer;
+      border-radius: .7em;
+      padding: .5em 1em;
+      border: none;
+      background:  var(--bg-grey);
+      color: var(--violet-light);
+      font-weight: 700;
+
+      border: 5px solid var(--bg-grey);
+      transition: all .3s;
+
+      &:hover {
+        background: var(--violet-light);
+        color: var(--bg-grey);
+      }
+    }
+  }
+}
