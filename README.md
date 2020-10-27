@@ -12,7 +12,7 @@
 
 ### Built With
 * [React](https://reactjs.org/)
-* [Emotion](https://emotion.sh/docs/introduction)
+* [SASS](https://sass-lang.com/)
 * [Socket.io](https://socket.io/)
 * [Jest](https://jestjs.io/)
 * [React Testing Library](https://testing-library.com/)
