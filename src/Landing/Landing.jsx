@@ -37,17 +37,14 @@ const LandingPage2 = () => {
 
     // handwriting using vara.js. To get responsive size reload the page
     const setFontSizes = () => {
-      if (window.screen.width < 390) return { laptop: 7, tablet: 5, phone: 2 }
-      if (window.screen.width < 630) return { laptop: 9, tablet: 7, phone: 4 }
-      if (window.screen.width < 691) return { laptop: 15, tablet: 12, phone: 6 }
-      if (window.screen.width < 768) return { laptop: 11, tablet: 9, phone: 4 }
-      if (window.screen.width < 972) return { laptop: 13, tablet: 10, phone: 5 }
-      if (window.screen.width < 1100) return { laptop: 16, tablet: 12, phone: 6 }
-      if (window.screen.width < 1400) return { laptop: 17, tablet: 13, phone: 7 }
-      if (window.screen.width < 1600) return { laptop: 22, tablet: 17, phone: 9 }
-      if (window.screen.width < 1642) return { laptop: 25, tablet: 20, phone: 11 }
-
-      return { laptop: 26, tablet: 21, phone: 11 }
+      if (window.screen.width < 350) return { laptop: 8, tablet: 6, phone: 3 }
+      if (window.screen.width < 390) return { laptop: 9, tablet: 7, phone: 4 }
+      if (window.screen.width < 630) return { laptop: 11, tablet: 8, phone: 4 }
+      if (window.screen.width < 691) return { laptop: 17, tablet: 12, phone: 6 }
+      if (window.screen.width < 768) return { laptop: 18, tablet: 13, phone: 7 }
+      if (window.screen.width < 972) return { laptop: 11, tablet: 7, phone: 4 }
+      if (window.screen.width < 1186) return { laptop: 14, tablet: 11, phone: 6 }
+      return { laptop: 17, tablet: 13, phone: 7 }
     }
 
     const fontSize = setFontSizes()
