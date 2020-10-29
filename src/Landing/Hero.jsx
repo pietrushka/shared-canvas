@@ -1,27 +1,31 @@
 import React, { useEffect, useRef } from 'react'
 import Vara from 'vara'
-import { TimelineLite, Power3 } from 'gsap'
+import {gsap, TimelineLite, Power3} from 'gsap';
 
 import './Hero.scss'
 
 export default function Hero() {
-    const contentRef = useRef(null)
+  const contentRef = useRef(null)
   const tl = new TimelineLite({ delay: 0.8 })
-
+  
   useEffect(() => {
     // Animation
     const headlineFirst = contentRef.current.children[0].children[0]
     const headlineSecond = headlineFirst.nextSibling
-    const paragraph = contentRef.current.children[1]
+    const paragraph = contentRef.current.children[1].children[0]
     const button = contentRef.current.children[2]
-
+    debugger
+    //Remove initial flash
+    gsap.to(contentRef.current, 1, {css: {visibility: 'visible'}})
     tl.staggerFrom([headlineFirst.children, headlineSecond.children], 1, {
-      y: 44,
+      y: 40,
       ease: Power3.easeOut
     }, 0.15, 'Start')
-      .from(paragraph, 1, { y: 20, opacity: 0, ease: Power3.easeOut }, 1.4)
-      .from(button, 1, { y: 20, opacity: 0, ease: Power3.easeOut }, 1.6)
+      .from(paragraph, 1, { y: 20, opacity: 0, ease: Power3.easeOut }, 0)
+      .from(button, 1, { y: 10, opacity: 0, ease: Power3.easeOut }, 0)
 
+
+    
     // handwriting using vara.js. To get responsive size reload the page
     const setFontSizes = () => {
       if (window.screen.width < 350) return { laptop: 8, tablet: 6, phone: 3 }
@@ -41,7 +45,7 @@ export default function Hero() {
       textAlign: 'left',
       fontSize: fontSize.laptop,
       strokeWidth: 2,
-      delay: 2700
+      delay: 2000
     }])
 
     // phone Vara
@@ -50,7 +54,7 @@ export default function Hero() {
       textAlign: 'left',
       fontSize: fontSize.phone,
       strokeWidth: 2,
-      delay: 3000
+      delay: 2300
     }])
 
     // tablet Vara
@@ -59,9 +63,9 @@ export default function Hero() {
       textAlign: 'left',
       fontSize: fontSize.tablet,
       strokeWidth: 2,
-      delay: 3000
+      delay: 2300
     }])
-  }, [])
+  }, [tl])
 
   return (
     <div className='hero'>
@@ -76,7 +80,12 @@ export default function Hero() {
         </h1>
 
         <p className='hero-paragraph'>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur aliquam voluptates ipsum iusto .
+          <div className="paragraph-wall">
+            <div>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur aliquam voluptates ipsum iusto.
+            </div>
+          </div>
+          
         </p>
 
         <button className='hero-btn'>

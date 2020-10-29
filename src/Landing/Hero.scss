@@ -25,6 +25,7 @@
   }
 
   .hero-text {
+    visibility: hidden;
     font-size: 1rem;
     padding-top: 1em;
     height: 40%;
@@ -67,6 +68,7 @@
 
       .text-line {
         overflow: hidden;
+        margin: 0;
       }
     }
 
@@ -75,6 +77,12 @@
       margin: 1em 0;
       width: 80%;
       text-align: center;
+      overflow: hidden;
+
+      .paragraph-wall {
+        overflow: hidden;
+        margin: 0;
+      }
 
       @media (min-width: 768px) {
         text-align: left;
@@ -88,13 +96,13 @@
       font-size: 1rem;
       border-radius: .7em;
       padding: .5em .8em;
-      background: var(--violet-light);
       color: var(--bg-grey);
       font-weight: 700;
       outline: none;
       transition: all .3s;
-      border: 2px solid var(--violet-light);
       margin-top: 2em;
+      border: 2px solid var(--violet-light);
+      background: var(--violet-light);
       
       &:hover {
         background: var(--bg-grey);
