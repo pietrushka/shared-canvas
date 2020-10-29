@@ -5,16 +5,17 @@ import ChangePassword from './ChangePassword'
 import PageTheme from './PageTheme'
 
 import './Settings.scss'
+import ConsoleLayout from '../shared/ConsoleLayout'
 
 const SettingsPage = () => {
   return (
-    <div className='base-container'>
+    <ConsoleLayout>
       <div className='options'>
         <UserData />
         <ChangePassword />
         <PageTheme />
       </div>
-    </div>
+    </ConsoleLayout>
   )
 }
 

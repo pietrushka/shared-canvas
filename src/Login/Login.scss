@@ -1,5 +1,4 @@
 .base-container--login {
-  font-size: var(--login-register-fs);
   background-color: var(--bg-color);
   height: 100vh;
   display: flex;
@@ -64,14 +63,6 @@
     &:focus {
       outline: none;
     }
-  }
-}
-
-
-
-@media only screen and (min-width: 768px) {
-  .base-container--login {
-    --login-register-fs: 12px;
   }
 }
 

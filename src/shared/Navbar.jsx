@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {Link} from 'react-router-dom'
 
 import Menu from './Menu'
 import './Navbar.scss'
@@ -13,7 +14,7 @@ export default function Navbar() {
     <>
       <nav className='landing-navbar'>
         <div className='navbar-inner'>
-          <div className='navbar-logo'>wideboared.</div>
+          <Link to='/' className='navbar-logo'>wideboared.</Link>
           <button className='hamburger' onClick={hamburgerHandler}>
             <div className='hamburger-inner' open={open && true} />
           </button>

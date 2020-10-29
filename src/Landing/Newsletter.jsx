@@ -1,10 +1,13 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 
 import './Newsletter.scss'
 
 export default function Newsletter() {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [isLoading, setLoading] = useState(false)
   let contentRef = useRef(null)
   gsap.registerPlugin(ScrollTrigger)
 
@@ -13,7 +16,27 @@ export default function Newsletter() {
       trigger: contentRef,
       start: 'top 50%',
     }})
-  });  
+  }, []);  
+
+   // simulate call to function
+  const signToNewsletter = () => {
+    return new Promise(function (resolve) {
+      setTimeout(() => resolve(window.alert(`name: ${name}, email: ${email}`)), 1000)
+    })
+  }
+
+  const onSubmit = async (event) => {
+    event.preventDefault()
+    try {
+      setLoading(true)
+      await signToNewsletter()
+      setLoading(false)
+      setName('')
+      setEmail('')
+    } catch (error) {
+      window.alert(error)
+    }
+  }
 
   return (
     <section className='newsletter' ref={el => contentRef = el}>
@@ -22,10 +45,24 @@ export default function Newsletter() {
         Don't miss new <span>wideboard.</span> features
       </p>
 
-      <form className='newsletter-form'>
-        <input className='newsletter-input' placeholder='Your name' />
-        <input className='newsletter-input' placeholder='Your e-mail' />
-        <button className='newsletter-btn'>Join now!</button>
+      <form onSubmit={onSubmit} className='newsletter-form'>
+        <input 
+          type='text'
+          className='newsletter-input' 
+          placeholder='Your name'
+          value={name}
+          onChange={event => setName(event.target.value)}
+          required
+        />
+        <input 
+          type='email'
+          className='newsletter-input' 
+          value={email}
+          placeholder='Your e-mail' 
+          onChange={event => setEmail(event.target.value)}
+          required
+        />
+        <button type='submit' className='newsletter-btn'>Join now!</button>
       </form>
     </section>
   )

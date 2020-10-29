@@ -1,20 +1,21 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { IconContext } from 'react-icons'
-// import { FaBookmark } from 'react-icons/fa'
 import { BiPlusCircle } from 'react-icons/bi'
-// import { RiContactsBookFill } from 'react-icons/ri'
 import { ImCross } from 'react-icons/im'
 import { BsFillGearFill } from 'react-icons/bs'
 
 import { UserContext } from '../App'
-
 import LogoContainer from './Logo'
 
-import './Navbar.scss'
+import './ConsoleNavbar.scss'
 
-const Navbar = ({ currentPage }) => {
+const ConsoleNavbar = () => {
   const { setUser } = useContext(UserContext)
+  const location = useLocation()
+
+  const pathName = location.pathname
+  const currentPage = pathName.slice(9)
 
   const logout = () => {
     setUser(null)
@@ -39,20 +40,6 @@ const Navbar = ({ currentPage }) => {
             </Link>
           </li>
 
-          {/* <li className="nav-item">
-            <Link to="/console/contacts" className={`nav-link ${currentPage === 'contacts' && 'currentPage'}`}>
-              <RiContactsBookFill className='nav-icon' />
-              <span className="link-text">Contacts</span>
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to="/console/saved" className={`nav-link ${currentPage === 'saved' && 'currentPage'}`}>
-              <FaBookmark className='nav-icon' />
-              <span className="link-text">Saved</span>
-            </Link>
-          </li> */}
-
           <li className='nav-item'>
             <Link to='/console/settings' className={`nav-link ${currentPage === 'settings' && 'currentPage'}`}>
               <BsFillGearFill className='nav-icon' />
@@ -74,4 +61,4 @@ const Navbar = ({ currentPage }) => {
   )
 }
 
-export default Navbar
+export default ConsoleNavbar
