@@ -21,16 +21,16 @@ export default function Footer() {
       <div className="links-media">
         <h3 className='footer-heading'>Join us!</h3>
         <div className="icons-container">
-          <a href="/" className="external-link">
+          <a href="https://www.facebook.com" className="external-link">
             <FaFacebook size='2em' />
           </a>
-          <a href="/" className="external-link">
+          <a href="https://twitter.com" className="external-link">
             <FaTwitter size='2em' />
           </a>
-          <a href="/" className="external-link">
+          <a href="https://www.instagram.com" className="external-link">
             <FaInstagram size='2em' />
           </a>
-          <a href="/" className="external-link">
+          <a href="https://www.youtube.com/" className="external-link">
             <FaYoutube size='2em' />
           </a>
         </div>

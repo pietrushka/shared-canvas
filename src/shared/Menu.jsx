@@ -22,10 +22,10 @@ export default function Menu ({orientation}) {
   return (
     <ul className={`menu ${orientation}`}>
       <li>
-        <div className='menu-option-basic' onClick={() => window.alert('work in progress')} to='#'>About</div>
+        <Link className='menu-option-basic' to='/about'>About</Link>
       </li>
       <li>
-        <div className='menu-option-basic' onClick={() => window.alert('work in progress')} to='#'>Contact</div>
+        <Link className='menu-option-basic' to='/contact'>Contact</Link>
       </li>
       {
         isLoggedIn ? (

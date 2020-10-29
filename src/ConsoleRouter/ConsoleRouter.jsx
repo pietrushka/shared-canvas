@@ -17,8 +17,6 @@ const ConsoleRouter = ({ location }) => {
       <Navbar currentPage={currentPage} />
 
       <Route path='/console/create-join-room' exact component={CreateJoinRoom} />
-      {/* <Route path='/console/contact' exact component={ContactPage} />
-          <Route path='/console/saved' exact component={NotDoneYet} /> */}
       <Route path='/console/settings' exact component={Settings} />
 
     </div>

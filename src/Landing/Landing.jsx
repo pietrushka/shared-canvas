@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Navbar from './Navbar'
+import Navbar from '../shared/Navbar'
 import Hero from './Hero'
 import Newsletter from './Newsletter'
-import Footer from './Footer'
+import Footer from '../shared/Footer'
 import './Landing.scss'
 
 

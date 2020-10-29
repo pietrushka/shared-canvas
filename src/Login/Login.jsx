@@ -3,6 +3,8 @@ import React, { useReducer, useContext } from 'react'
 import { UserContext } from '../App'
 import { login } from '../utils/auth.service'
 
+import FormGroup from '../shared/FormGroup'
+import SubmitButton from '../shared/SubmitButton'
 import loginImg from '../assets/login_icon.svg'
 import './Login.scss'
 
@@ -77,6 +79,8 @@ const LoginPage = ({ history }) => {
     }
   }
 
+  console.log(email, password)
+
   return (
     <div className='base-container--login'>
       <div className='form__container--login'>
@@ -87,47 +91,28 @@ const LoginPage = ({ history }) => {
         <form className='form--login' onSubmit={onSubmit}>
           {error && <p className='error-message'>{error}</p>}
 
-          <div className='form-group'>
-            <label>Email</label>
-            <input
-              required
-              type='email'
-              placeholder='Email'
-              value={email}
-              onChange={event =>
-                dispatch({
-                  type: 'field',
-                  field: 'email',
-                  value: event.currentTarget.value
-                })}
-            />
-          </div>
+          <FormGroup 
+            label='Email'
+            type='email'
+            field='email'
+            value={email}
+            handler={dispatch}
+            isRequired={true}
+          />
 
-          <div className='form-group'>
-            <label>Password</label>
-            <input
-              required
-              type='password'
-              placeholder='Password'
-              value={password}
-              onChange={event =>
-                dispatch({
-                  type: 'field',
-                  field: 'password',
-                  value: event.currentTarget.value
-                })}
-            />
-          </div>
+          <FormGroup 
+            label='Password'
+            type='password'
+            field='password'
+            value={password}
+            handler={dispatch}
+            isRequired={true}
+          />
 
-          <button
-            className='btn'
-            style={isLoading ? { background: 'gray' } : null}
-            type='submit'
-            disabled={isLoading}
-          >
-            {isLoading ? 'Loading' : 'Login'}
-          </button>
-
+          <SubmitButton
+            text='Login' 
+            isLoading={isLoading}
+          />
         </form>
       </div>
     </div>

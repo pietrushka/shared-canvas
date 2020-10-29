@@ -1,0 +1,26 @@
+.submit-btn {
+  margin: 1em 0;
+  font-size: 21px;
+  padding: 7px 25px;
+  border: 0;
+  background-color: var(--icon-color);
+  color: #fff;
+  border-radius: 4px;
+  transition: all 250ms ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--text-primary);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+  @media only screen and (max-width: 768px) {
+    .submit-btn {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+  }

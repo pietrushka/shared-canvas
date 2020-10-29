@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
 
   .form__container--register {
     margin: 1em 0;
@@ -39,72 +40,12 @@
       align-items: center;
       width: 80%;
 
-    .error-message {
-      margin-top: 0.5em;
-      font-size: 1em;
-      color: red;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      width: fit-content;
-      padding-top: 1em;
-      width: 70%;
-      
-      label {
-        color: var(--text-primary);
-        font-size: 1.5em;
-      }
-
-      input {
-          margin-top: 6px;
-          width: 100%;
-          height: 1.8em;
-          padding: 0px 10px;
-          font-size: 1.8em;
-          font-family: "Open Sans", sans-serif;
-          background-color: #f3f3f3;
-          border: 0;
-          border-radius: 4px;
-          transition: all 250ms ease-in-out;
-    
-          &:focus {
-            outline: none;
-            box-shadow: 0px 0px 12px 0.8px var(--icon-color);
-          }
+      .error-message {
+        margin-top: 0.5em;
+        font-size: 1em;
+        color: red;
       }
     }
-  }
-}
-
-
-
-  //Button
-  .btn {
-    margin: 1em 0;
-    font-size: 21px;
-    padding: 7px 25px;
-    border: 0;
-    background-color: var(--icon-color);
-    color: #fff;
-    border-radius: 4px;
-    transition: all 250ms ease-in-out;
-    cursor: pointer;
-    &:hover {
-      background-color: var(--text-primary);
-    }
-    &:focus {
-      outline: none;
-    }
-  }
-}
-
-
-@media only screen and (min-width: 768px) {
-  .base-container--register {
-    --login-register-fs: 12px;
   }
 }
 
@@ -127,41 +68,8 @@
 
       .form--register {
         margin-top: 1em;
-        
-        .form-group {
-          margin-top: em;
-          width: 100%;
-
-          input {
-            height: 1.8em;
-          }
-        }
-
-        button {
-          margin-top: 1em;
-          margin-bottom: 1em;
-        }
       }
     }
-  }
-  
+  }  
 }
 
-@media only screen and (max-width: 768px) {
-  .base-container--register {
-    --login-register-fs: 10px;
-  }
-}
-
-@media only screen and (max-width: 426px) {
-  .base-container--register {
-    --login-register-fs: 11px;
-  }
-}
-
-
-@media only screen and (max-width: 350px) {
-  .base-container--register {
-    --login-register-fs: 10px;
-  }
-}

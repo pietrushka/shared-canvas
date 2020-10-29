@@ -4,6 +4,8 @@ import { register } from '../utils/auth.service'
 
 import registerImg from '../assets/register_icon.svg'
 import './Register.scss'
+import FormGroup from '../shared/FormGroup'
+import SubmitButton from '../shared/SubmitButton'
 
 const registerReducer = (state, action) => {
   switch (action.type) {
@@ -95,73 +97,45 @@ const RegisterPage = ({ history }) => {
         <form className='form--register' onSubmit={onSubmit}>
           {error && <p className='error-message'>{error}</p>}
 
-          <div className='form-group'>
-            <label>Username</label>
-            <input
-              type='text'
-              placeholder='Username'
-              value={username}
-              required
-              onChange={event =>
-                dispatch({
-                  type: 'field',
-                  field: 'username',
-                  value: event.currentTarget.value
-                })}
-            />
-          </div>
+          <FormGroup 
+            label='Username'
+            type='text'
+            field='username'
+            value={username}
+            handler={dispatch}
+            isRequired={true}
+          />
 
-          <div className='form-group'>
-            <label>Email</label>
-            <input
-              type='email'
-              placeholder='Email'
-              value={email}
-              required
-              onChange={event =>
-                dispatch({
-                  type: 'field',
-                  field: 'email',
-                  value: event.currentTarget.value
-                })}
-            />
-          </div>
+          <FormGroup 
+            label='Email'
+            type='email'
+            field='email'
+            value={email}
+            handler={dispatch}
+            isRequired={true}
+          />
 
-          <div className='form-group'>
-            <label>Password</label>
-            <input
-              type='password'
-              placeholder='Password'
-              value={password}
-              required
-              onChange={event =>
-                dispatch({
-                  type: 'field',
-                  field: 'password',
-                  value: event.currentTarget.value
-                })}
-            />
-          </div>
+          <FormGroup 
+            label='Password'
+            type='password'
+            field='password'
+            value={password}
+            handler={dispatch}
+            isRequired={true}
+          />
+          <FormGroup 
+            label='Confirm Password'
+            type='password'
+            field='confirmPassword'
+            value={confirmPassword}
+            handler={dispatch}
+            isRequired={true}
+          />
 
-          <div className='form-group'>
-            <label>Confirm Password</label>
-            <input
-              type='password'
-              placeholder='Confirm Password'
-              value={confirmPassword}
-              required
-              onChange={event =>
-                dispatch({
-                  type: 'field',
-                  field: 'confirmPassword',
-                  value: event.currentTarget.value
-                })}
-            />
-          </div>
-
-          <button className='btn' style={isLoading ? { background: 'gray' } : null} type='submit' disabled={isLoading}>
-            {isLoading ? 'Loading' : 'Register'}
-          </button>
+          <SubmitButton
+            text='Register' 
+            isLoading={isLoading}
+          />
 
         </form>
       </div>
