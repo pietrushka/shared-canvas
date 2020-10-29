@@ -14,7 +14,7 @@ export default function Hero() {
     const headlineSecond = headlineFirst.nextSibling
     const paragraph = contentRef.current.children[1].children[0]
     const button = contentRef.current.children[2]
-    debugger
+
     //Remove initial flash
     gsap.to(contentRef.current, 1, {css: {visibility: 'visible'}})
     tl.staggerFrom([headlineFirst.children, headlineSecond.children], 1, {

@@ -7,16 +7,24 @@ import './Footer.scss'
 export default function Footer() {
   return (
     <footer className='footer'>
-      <div className="links-group">
+      <ul className="links-group">
         <h3 className='footer-heading'>wideboard.</h3>
-        <Link className='footer-link' to='/about'>About</Link>
-        <Link className='footer-link' to='/contact'>Contact</Link>
-      </div>
-      <div className="links-group">
+        <li>
+          <Link className='footer-link' to='/about'>About</Link>
+        </li>
+        <li>
+          <Link className='footer-link' to='/contact'>Contact</Link>
+        </li>
+      </ul>
+      <ul className="links-group">
         <h3 className='footer-heading'>Informations</h3>
-        <Link className='footer-link' to='/conditions'>Terms & Conditions</Link>
-        <Link className='footer-link' to='/privacy'>Privacy Policy</Link>
-      </div>
+        <li>
+          <Link className='footer-link' to='/conditions'>Terms & Conditions</Link>
+        </li>
+        <li>
+          <Link className='footer-link' to='/privacy'>Privacy Policy</Link>
+        </li>
+      </ul>
 
       <div className="links-media">
         <h3 className='footer-heading'>Join us!</h3>
