@@ -6,12 +6,8 @@
   padding-bottom: 3em;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-   max-width: 1300px;
-
-  @media (min-width: 768px) {
-    flex-wrap: nowrap;
-  }
+  flex-wrap: nowrap;
+  max-width: 1300px;
 
   .footer-heading {
     text-align: center;
@@ -29,6 +25,7 @@
     margin: 2em 0 0 0;
     text-align: center;
     list-style: none;
+    padding: 0;
 
     .footer-link {
       font-size: 1.5rem; 
@@ -81,5 +78,11 @@
         }
       }
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-wrap: wrap;
   }
 }

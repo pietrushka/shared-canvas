@@ -79,8 +79,6 @@ const LoginPage = ({ history }) => {
     }
   }
 
-  console.log(email, password)
-
   return (
     <div className='base-container--login'>
       <div className='form__container--login'>
