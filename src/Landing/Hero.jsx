@@ -3,6 +3,7 @@ import Vara from 'vara'
 import {gsap, TimelineLite, Power3} from 'gsap';
 
 import './Hero.scss'
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
   const contentRef = useRef(null)
@@ -88,9 +89,9 @@ export default function Hero() {
           
         </p>
 
-        <button className='hero-btn'>
+        <Link to='/about' className='hero-btn'>
           Find out more
-        </button>
+        </Link>
 
       </div>
     

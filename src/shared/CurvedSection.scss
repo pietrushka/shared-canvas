@@ -1,0 +1,10 @@
+.curved-svg {
+  display: block;
+  background: var(--bg-grey);
+  padding: 0;
+  margin: 0;
+  
+  path {
+    fill: var(--violet-light);
+  } 
+}

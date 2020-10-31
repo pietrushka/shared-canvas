@@ -1,0 +1,21 @@
+.about-section {
+  background-color: var(--violet-light);
+  display: flex;
+
+  .text-cln {
+    width: 60%;
+    color: var(--bg-grey);
+  }
+
+  .image-cln {
+    width: 40%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 80%;
+      background-color: #f3f3f3;
+      border-radius: 4px;
+    }
+  }
+}

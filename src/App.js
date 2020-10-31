@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 import PublicRoute from './PublicRoute'
 import PrivateRoute from './PrivateRoute'
 import Landing from './Landing/Landing'
+import About from './About/About'
 import Contact from './Contact/Contact'
 import Register from './Register/Register'
 import Login from './Login/Login'
@@ -31,6 +32,12 @@ function App () {
         <Route
           path='/contact'
           component={Contact}
+          exact
+        />
+
+        <Route
+          path='/about'
+          component={About}
           exact
         />
 

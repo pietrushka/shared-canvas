@@ -14,6 +14,7 @@
 * [React](https://reactjs.org/)
 * [SASS](https://sass-lang.com/)
 * [Socket.io](https://socket.io/)
+* [GSAP](https://greensock.com/gsap/)
 * [Jest](https://jestjs.io/)
 * [React Testing Library](https://testing-library.com/)
 
