@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react'
+import React, { useReducer, useContext, useEffect } from 'react'
 
 import { UserContext } from '../App'
 import { login } from '../utils/auth.service'
@@ -78,6 +78,10 @@ const LoginPage = ({ history }) => {
       dispatch({ type: 'error' })
     }
   }
+
+  useEffect(() => {
+    window.alert('Test credentials\nEmail: test@test.com\nPassword: password')
+  }, [])
 
   return (
     <div className='base-container--login'>
