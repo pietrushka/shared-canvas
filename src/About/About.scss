@@ -1,21 +1,31 @@
 .about-section {
   background-color: var(--violet-light);
   display: flex;
+  justify-content: center;
+  align-items: center;
 
-  .text-cln {
-    width: 60%;
-    color: var(--bg-grey);
-  }
-
-  .image-cln {
-    width: 40%;
-    overflow: hidden;
+  .about-wrapper {
+    width: 90%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    img {
+    align-items: center;
+    .image-container {
+      width: 30%;
+      img {
+        width: 100%;
+        background-color: #f3f3f3;
+        border-radius: 4px;
+      }
+    }
+    .text-container {
+      color: var(--bg-grey);
       width: 80%;
-      background-color: #f3f3f3;
-      border-radius: 4px;
+      .about-paragraph {
+        text-align: center;
+        line-height: 1.2em;
+        
+      }
     }
   }
 }

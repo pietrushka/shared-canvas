@@ -13,19 +13,17 @@ const About = () => {
       <Navbar />
       <CurvedSection>
         <div className="about-section">
-          <div className="image-cln">
-            <img alt='about illustration' src={aboutImg} />
-          </div>
-          <div className="text-cln">
-            <p className="about-paragraph">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt nostrum similique facere repellendus doloremque nam, ratione laudantium iusto porro cumque? Inventore commodi eligendi nam. Officia perspiciatis laborum delectus voluptatum assumenda.
-            </p>
-            <p className="about-paragraph">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt nostrum similique facere repellendus doloremque nam, ratione laudantium iusto porro cumque? Inventore commodi eligendi nam. Officia perspiciatis laborum delectus voluptatum assumenda.
-            </p>
-            <p className="about-paragraph">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt nostrum similique facere repellendus doloremque nam, ratione laudantium iusto porro cumque? Inventore commodi eligendi nam. Officia perspiciatis laborum delectus voluptatum assumenda.
-            </p>
+          <div className="about-wrapper">
+            <div className="image-container">
+              <img alt='about illustration' src={aboutImg} />
+            </div>
+            <div className="text-container">
+              <p className="about-paragraph">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt nostrum similique facere repellendus doloremque nam, ratione laudantium iusto porro cumque? Inventore commodi eligendi nam. Officia perspiciatis laborum delectus voluptatum assumenda.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt nostrum similique facere repellendus doloremque nam, ratione laudantium iusto porro cumque? Inventore commodi eligendi nam. Officia perspiciatis laborum delectus voluptatum assumenda.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt nostrum similique facere repellendus doloremque nam, ratione laudantium iusto porro cumque? Inventore commodi eligendi nam. Officia perspiciatis laborum delectus voluptatum assumenda.
+              </p>
+            </div>
           </div>
         </div>
       </CurvedSection>
