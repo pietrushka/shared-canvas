@@ -1,0 +1,52 @@
+.messages-panel-container {
+  padding: 0 .25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+
+  .message-display {
+    .message-container {
+      max-width: 60%;
+      border-radius: .5rem;
+      background: rgb(233, 236, 239);
+      padding: .25rem;
+      .message-text {
+        margin: 0;
+      }
+    }
+  }
+
+  .message-input-group {
+    width: 100%;
+    padding: .75rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .message-input {
+      padding: .25rem;
+      border-bottom-left-radius: .5rem;
+      border-top-left-radius: .5rem;
+      border-right: 2px solid black;
+      width: 85%;
+      background: rgb(233, 236, 239);
+      font-size: 1.25rem;
+    }
+
+    .send-message-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 15%;
+      background: rgb(233, 236, 239);
+      border-bottom-right-radius: .5rem;
+      border-top-right-radius: .5rem;
+      svg {
+        width: 90%;
+        height: 90%;
+      }
+    }
+  }
+}

@@ -64,7 +64,7 @@ function App () {
           exact
         />
 
-        <PrivateRoute
+        <Route
           path='/room/:roomId'
           component={Room}
           exact

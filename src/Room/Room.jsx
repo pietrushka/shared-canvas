@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import io from 'socket.io-client'
 
 import { UserContext } from '../App'
+import RightPanel from './RightPanel'
 import './Room.scss'
 
 const RoomPage = ({ match }) => {
@@ -198,6 +199,8 @@ const RoomPage = ({ match }) => {
             Eraser
           </div>
         </div>
+
+        <RightPanel />
 
         <canvas className='whiteboard' ref={canvasRef} />
 
