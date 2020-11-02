@@ -7,10 +7,9 @@ import './RightPanel.scss'
 import CallPanel from './CallPanel'
 import MessagesPanel from './MessagesPanel'
 
-const RightPanel = () => {
+const RightPanel = ({messages, sendMessage}) => {
   const [isOpen, setIsOpen] = useState(true)
   const [openedPanel, setOpenedPanel] = useState('message')
-
 
   return (
     <div className="right-panel" open={isOpen && true}>
@@ -46,7 +45,7 @@ const RightPanel = () => {
       >
         {openedPanel === 'call' 
           ? <CallPanel />
-          : <MessagesPanel />
+          : <MessagesPanel messages={messages} sendMessage={sendMessage} />
         }
       </div>
     </div>

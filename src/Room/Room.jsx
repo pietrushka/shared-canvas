@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useContext } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import io from 'socket.io-client'
 
@@ -7,18 +7,23 @@ import RightPanel from './RightPanel'
 import './Room.scss'
 
 const RoomPage = ({ match }) => {
+  const [messages, setMessages] = useState([]);
   const { user } = useContext(UserContext)
   const { roomId } = match.params
-
   const socketRef = useRef()
-  const SERVER_ENDPOINT = process.env.REACT_APP_SERVER_ENDPOINT
-  socketRef.current = io.connect(SERVER_ENDPOINT)
+  const canvasRef = useRef(null)
+  const colorsRef = useRef(null)
+  const eraserRef = useRef(null)
 
+  const SERVER_ENDPOINT = process.env.REACT_APP_SERVER_ENDPOINT
+  
   const showRoomIdPrompt = () => {
     window.prompt('Copy to clipboard: Ctrl+C, Enter', roomId)
   }
-
+  
   useEffect(() => {
+    socketRef.current = io.connect(SERVER_ENDPOINT)
+
     // emits 2 join with user: null and user: id
     // without first join live drawing doesnt work
     socketRef.current.emit('join', { user, roomId }, (error) => {
@@ -26,21 +31,12 @@ const RoomPage = ({ match }) => {
         window.alert(error)
       }
     })
-  }, [SERVER_ENDPOINT, user, roomId])
 
-  // --- DEALING WITH DRAWING
-  const canvasRef = useRef(null)
-  const colorsRef = useRef(null)
-  const eraserRef = useRef(null)
-
-  useEffect(() => {
     // --------------- getContext() method returns a drawing context on the canvas-----
-
     const canvas = canvasRef.current
     const context = canvas.getContext('2d')
 
     // ----------------------- Colors --------------------------------------------------
-
     const eraser = document.getElementById('eraser')
     const colors = document.getElementsByClassName('color')
 
@@ -161,8 +157,18 @@ const RoomPage = ({ match }) => {
     }
 
     socketRef.current.on('drawing', onDrawingEvent)
+
+    //handle new messages 
+    const handleNewMessage = (message) => {
+      setMessages(messages => [ ...messages, message ])
+    }
+    socketRef.current.on('message', handleNewMessage)
   }, [])
 
+  const sendMessage = (message) => {
+    socketRef.current.emit('message', message)
+  }
+  
   return (
     <>
       <div className='room-container'>
@@ -200,7 +206,7 @@ const RoomPage = ({ match }) => {
           </div>
         </div>
 
-        <RightPanel />
+        <RightPanel messages={messages} sendMessage={sendMessage} />
 
         <canvas className='whiteboard' ref={canvasRef} />
 
