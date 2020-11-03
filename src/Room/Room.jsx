@@ -7,25 +7,21 @@ import RightPanel from './RightPanel'
 import './Room.scss'
 
 const RoomPage = ({ match }) => {
-  const [messages, setMessages] = useState([]);
   const { user } = useContext(UserContext)
+  const [messages, setMessages] = useState([]);
   const { roomId } = match.params
   const socketRef = useRef()
   const canvasRef = useRef(null)
   const colorsRef = useRef(null)
   const eraserRef = useRef(null)
-
+  
   const SERVER_ENDPOINT = process.env.REACT_APP_SERVER_ENDPOINT
   
-  const showRoomIdPrompt = () => {
-    window.prompt('Copy to clipboard: Ctrl+C, Enter', roomId)
-  }
-  
   useEffect(() => {
+    if (!user) return
+    
     socketRef.current = io.connect(SERVER_ENDPOINT)
 
-    // emits 2 join with user: null and user: id
-    // without first join live drawing doesnt work
     socketRef.current.emit('join', { user, roomId }, (error) => {
       if (error) {
         window.alert(error)
@@ -163,10 +159,18 @@ const RoomPage = ({ match }) => {
       setMessages(messages => [ ...messages, message ])
     }
     socketRef.current.on('message', handleNewMessage)
-  }, [])
+
+    return () => socketRef.current.disconnect()
+
+  }, [SERVER_ENDPOINT, user, roomId])
+
+  const showRoomIdPrompt = () => {
+    window.prompt('Copy to clipboard: Ctrl+C, Enter', roomId)
+  }
 
   const sendMessage = (message) => {
     socketRef.current.emit('message', message)
+    setMessages(messages => [ ...messages, {author: user.username, content: message} ])
   }
   
   return (

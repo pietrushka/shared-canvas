@@ -1,5 +1,6 @@
 import React, {useState, useContext} from 'react'
 import {MdSend} from 'react-icons/md'
+import ScrollToBottom from 'react-scroll-to-bottom';
 
 import { UserContext } from '../App'
 
@@ -16,28 +17,37 @@ const MessagesPanel = ({messages, sendMessage}) => {
     setMessage('')
   }
 
+
   return (
-    <div className="messages-panel-container">
-      <div className="message-display">
-        {
-          messages.map((message, idx) => {
-            if(message.author === user.username) {
-              return (
-                <div key={idx} className='message-container blue'>
-                  <p className="message-text">{message.content}</p>
-                </div>
-              )
-            } else {
-              return (
-                <div key={idx} className='message-container'>
-                  <p className="message-text">{message.content}</p>
-                </div>
-              )
-            }
-          })
-        }
-        
-      </div>
+    <div className="messages-panel">
+      <ScrollToBottom className="message-display">
+      {
+        user && (
+          <>
+          {
+            messages.map((message, idx) => 
+              message.author === user.username 
+                ? (
+                  <div key={idx} className="message-container align-end">
+                    <div className='message-text-container blue'>
+                      <p className="message-text">{message.content}</p>
+                    </div>
+                  </div>
+                )
+                : (
+                  <div key={idx} className="message-container align-start">
+                    <p className="message-author">{message.author}</p>
+                    <div className='message-text-container gray'>
+                      <p className="message-text">{message.content}</p>
+                    </div>
+                  </div>
+                )
+            )
+          }
+          </>
+        )
+      }
+      </ScrollToBottom>
       <form 
         onSubmit={handleMessage} 
         className="message-input-group"
