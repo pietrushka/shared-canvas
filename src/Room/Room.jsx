@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
+import React, { useState, useRef, useEffect, useContext, createContext } from 'react'
 import { Link } from 'react-router-dom'
 import io from 'socket.io-client'
 
@@ -7,54 +7,64 @@ import RightPanel from './RightPanel'
 import './Room.scss'
 import Whiteboard from './Whiteboard'
 
+const SocketContext = createContext()
+
+
 const RoomPage = ({ match }) => {
   const { user } = useContext(UserContext)
   const [messages, setMessages] = useState([]);
-  const socketRef = useRef()
+  const [socket, setSocket] = useState(null)
   const whiteboardRef = useRef()
   const { roomId } = match.params
   const SERVER_ENDPOINT = process.env.REACT_APP_SERVER_ENDPOINT
-  
-  useEffect(() => {
-    if (!user) return
-    
-    socketRef.current = io.connect(SERVER_ENDPOINT)
 
-    socketRef.current.emit('join', { user, roomId }, (error) => {
-      if (error) {
-        window.alert(error)
-      }
-    })
-
-    socketRef.current.on('drawing', whiteboardRef.current.onDrawingEvent)
-    
-    //handle new messages 
-    const handleNewMessage = (message) => {
-      setMessages(messages => [ ...messages, message ])
-    }
-    socketRef.current.on('message', handleNewMessage)
-    return () => socketRef.current.disconnect()
-    
-  }, [SERVER_ENDPOINT, user, roomId])
-
-
-
-  
-  const emitDrawing = (data) => {
-    socketRef.current.emit('drawing', data)
+  const connectSocket = () => {
+    setSocket(
+        io.connect(SERVER_ENDPOINT, {
+          transports: ['websocket'],
+          reconnectionAttempts: 15
+        })
+      )
   }
+
+  useEffect(() => {
+    if (user && !socket) connectSocket()
+      
+    if (!!socket) {
+      socket.emit('join', { user, roomId }, (error) => {
+        if (error) {
+          window.alert(error)
+        }
+      })
+
+      //handle new messages 
+      const handleNewMessage = (message) => {
+        setMessages(messages => [ ...messages, message ])
+      }
+      socket.on('message', handleNewMessage)
+    }
+    
+    return () => {
+      if (!!socket) socket.disconnect()
+    }
+  }, [user, socket])
+
 
   const showRoomIdPrompt = () => {
     window.prompt('Copy to clipboard: Ctrl+C, Enter', roomId)
   }
 
   const sendMessage = (message) => {
-    socketRef.current.emit('message', message)
+    socket.emit('message', message)
     setMessages(messages => [ ...messages, {author: user.username, content: message} ])
   }
   
   return (
-    <>
+      <SocketContext.Provider
+      value={{
+        socket: socket
+      }}
+    >
       <div className='room-container'>
         <div className="left-panel">
           <div className='exit'>
@@ -68,14 +78,15 @@ const RoomPage = ({ match }) => {
           </div>
         </div>
 
-        <Whiteboard ref={whiteboardRef} emitDrawing={emitDrawing} />
+        <Whiteboard  />
 
         <RightPanel messages={messages} sendMessage={sendMessage} />
 
-
       </div>
-    </>
+    </SocketContext.Provider>
   )
 }
 
 export default RoomPage
+
+export const useSocket = () => useContext(SocketContext)

@@ -1,11 +1,14 @@
-import React, { useEffect, useRef, useImperativeHandle, forwardRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
-const Whiteboard = forwardRef((props, ref) => {
+import {useSocket} from './Room'
 
+const Whiteboard = (props, ref) => {
+  const {socket} = useSocket() 
   const canvasRef = useRef(null)
   const contextRef = useRef(null)
   const colorsRef = useRef(null)
   const eraserRef = useRef(null)
+
   
   useEffect(() => {
     // --------------- getContext() method returns a drawing context on the canvas-----
@@ -38,6 +41,35 @@ const Whiteboard = forwardRef((props, ref) => {
     }
     let drawing = false
 
+    // -------------- drawing function --------------
+    const drawLine = (x0, y0, x1, y1, color, emit) => {
+    if (color === 'eraser') {
+      contextRef.current.clearRect(x0, y0, 10, 10)
+    } else {
+      contextRef.current.beginPath()
+      contextRef.current.moveTo(x0, y0)
+      contextRef.current.lineTo(x1, y1)
+      contextRef.current.strokeStyle = color
+      contextRef.current.lineWidth = 2
+      contextRef.current.stroke()
+      contextRef.current.closePath()
+    }
+
+    if (!emit) { return }
+
+    const w = canvasRef.current.width
+    const h = canvasRef.current.height
+
+
+    if(!!socket) socket.emit('drawing', {
+      x0: x0 / w,
+      y0: y0 / h,
+      x1: x1 / w,
+      y1: y1 / h,
+      color
+    })
+    }
+
     // ---------------- mouse movement --------------------------------------
 
     const onMouseDown = (e) => {
@@ -60,7 +92,6 @@ const Whiteboard = forwardRef((props, ref) => {
     }
 
     // ----------- limit the number of events per second -----------------------
-
     const throttle = (callback, delay) => {
       let previousCall = new Date().getTime()
       return function () {
@@ -74,7 +105,6 @@ const Whiteboard = forwardRef((props, ref) => {
     }
 
     // -----------------add event listeners to our canvas ----------------------
-
     canvas.addEventListener('mousedown', onMouseDown, false)
     canvas.addEventListener('mouseup', onMouseUp, false)
     canvas.addEventListener('mouseout', onMouseUp, false)
@@ -87,7 +117,6 @@ const Whiteboard = forwardRef((props, ref) => {
     canvas.addEventListener('touchmove', throttle(onMouseMove, 10), false)
 
     // -------------- make the canvas fill its parent component -----------------
-
     const onResize = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
@@ -96,43 +125,17 @@ const Whiteboard = forwardRef((props, ref) => {
     window.addEventListener('resize', onResize, false)
     onResize()
 
-    
-  }, [])
-  
-  const drawLine = (x0, y0, x1, y1, color, emit) => {
-    if (color === 'eraser') {
-      contextRef.current.clearRect(x0, y0, 10, 10)
-    } else {
-      contextRef.current.beginPath()
-      contextRef.current.moveTo(x0, y0)
-      contextRef.current.lineTo(x1, y1)
-      contextRef.current.strokeStyle = color
-      contextRef.current.lineWidth = 2
-      contextRef.current.stroke()
-      contextRef.current.closePath()
-    }
-
-    if (!emit) { return }
-
-    const w = canvasRef.current.width
-    const h = canvasRef.current.height
-
-    props.emitDrawing({
-      x0: x0 / w,
-      y0: y0 / h,
-      x1: x1 / w,
-      y1: y1 / h,
-      color
-    })
-  }
-
-  useImperativeHandle(ref, () => ({
-    onDrawingEvent (data) {
+    // -------------- handle socket events --------------
+    const onDrawingEvent = (data) => {
       const w = canvasRef.current.width
       const h = canvasRef.current.height
       drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color)
     }
-  }));
+
+    if (!!socket) socket.on('drawing', onDrawingEvent)
+    
+  }, [socket])
+
   
 
   return (
@@ -163,6 +166,6 @@ const Whiteboard = forwardRef((props, ref) => {
       <canvas className='whiteboard' ref={canvasRef} />
     </>
   )
-})
+}
 
 export default Whiteboard
