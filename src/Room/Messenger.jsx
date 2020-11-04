@@ -1,22 +1,44 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import {MdSend} from 'react-icons/md'
 import ScrollToBottom from 'react-scroll-to-bottom';
 
 import { UserContext } from '../App'
+import {useSocket} from './Room'
 
-import './MessagesPanel.scss'
+import './Messenger.scss'
 
-const MessagesPanel = ({messages, sendMessage}) => {
+const Messenger = () => {
   const [message, setMessage] = useState('')
+  const [messages, setMessages] = useState([]);
   const { user } = useContext(UserContext)
+  const {socket} = useSocket()
+
+  useEffect(() => {
+    //handle new messages 
+    const handleNewMessage = (message) => {
+      setMessages(messages => [ ...messages, message ])
+    }
+    if (!!socket) socket.on('message', handleNewMessage)
+  }, [socket])
+
+  const sendMessage = (message) => {
+    if (!!socket) {
+      socket.emit('message', message)
+      setMessages(messages => [ ...messages, {author: user.username, content: message} ])
+      setMessage('')
+    } else {
+      window.alert("Message failed to send. Please try again later")
+    }
+
+
+  }
 
   const handleMessage = event => {
     event.preventDefault()
     const trimmedMessage = message.trim()
     if (trimmedMessage.length > 0) sendMessage(message)
-    setMessage('')
+    
   }
-
 
   return (
     <div className="messages-panel">
@@ -71,4 +93,4 @@ const MessagesPanel = ({messages, sendMessage}) => {
 }
 
 
-export default MessagesPanel
+export default Messenger

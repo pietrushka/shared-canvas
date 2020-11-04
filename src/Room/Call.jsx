@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import {BsFillMicFill, BsCameraVideoFill} from 'react-icons/bs'
-import './CallPanel.scss'
+import './Call.scss'
 
-const CallPanel = () => {
+const Call = () => {
   return (
     <div className="call-panel-container">
       <div className="call-control-panel">
@@ -25,4 +25,4 @@ const CallPanel = () => {
   )
 }
 
-export default CallPanel
+export default Call

@@ -2,18 +2,16 @@ import React, { useEffect, useRef } from 'react'
 
 import {useSocket} from './Room'
 
-const Whiteboard = (props, ref) => {
+const Whiteboard = () => {
   const {socket} = useSocket() 
   const canvasRef = useRef(null)
-  const contextRef = useRef(null)
   const colorsRef = useRef(null)
   const eraserRef = useRef(null)
-
   
   useEffect(() => {
     // --------------- getContext() method returns a drawing context on the canvas-----
     const canvas = canvasRef.current
-    contextRef.current = canvas.getContext('2d')
+    const context = canvas.getContext('2d')
 
     // ----------------------- Colors --------------------------------------------------
     const eraser = document.getElementById('eraser')
@@ -44,15 +42,15 @@ const Whiteboard = (props, ref) => {
     // -------------- drawing function --------------
     const drawLine = (x0, y0, x1, y1, color, emit) => {
     if (color === 'eraser') {
-      contextRef.current.clearRect(x0, y0, 10, 10)
+      context.clearRect(x0, y0, 10, 10)
     } else {
-      contextRef.current.beginPath()
-      contextRef.current.moveTo(x0, y0)
-      contextRef.current.lineTo(x1, y1)
-      contextRef.current.strokeStyle = color
-      contextRef.current.lineWidth = 2
-      contextRef.current.stroke()
-      contextRef.current.closePath()
+      context.beginPath()
+      context.moveTo(x0, y0)
+      context.lineTo(x1, y1)
+      context.strokeStyle = color
+      context.lineWidth = 2
+      context.stroke()
+      context.closePath()
     }
 
     if (!emit) { return }
@@ -61,7 +59,7 @@ const Whiteboard = (props, ref) => {
     const h = canvasRef.current.height
 
 
-    if(!!socket) socket.emit('drawing', {
+    if (!!socket) socket.emit('drawing', {
       x0: x0 / w,
       y0: y0 / h,
       x1: x1 / w,
@@ -135,8 +133,6 @@ const Whiteboard = (props, ref) => {
     if (!!socket) socket.on('drawing', onDrawingEvent)
     
   }, [socket])
-
-  
 
   return (
     <>

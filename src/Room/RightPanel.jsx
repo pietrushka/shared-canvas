@@ -4,10 +4,10 @@ import {MdCall} from 'react-icons/md'
 import {ImCross} from 'react-icons/im'
 
 import './RightPanel.scss'
-import CallPanel from './CallPanel'
-import MessagesPanel from './MessagesPanel'
+import Call from './Call'
+import Messenger from './Messenger'
 
-const RightPanel = ({messages, sendMessage}) => {
+const RightPanel = () => {
   const [isOpen, setIsOpen] = useState(true)
   const [openedPanel, setOpenedPanel] = useState('message')
 
@@ -44,8 +44,8 @@ const RightPanel = ({messages, sendMessage}) => {
         className="lower-panel" 
       >
         {openedPanel === 'call' 
-          ? <CallPanel />
-          : <MessagesPanel messages={messages} sendMessage={sendMessage} />
+          ? <Call />
+          : <Messenger />
         }
       </div>
     </div>

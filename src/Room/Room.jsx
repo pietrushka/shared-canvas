@@ -9,12 +9,9 @@ import Whiteboard from './Whiteboard'
 
 const SocketContext = createContext()
 
-
 const RoomPage = ({ match }) => {
   const { user } = useContext(UserContext)
-  const [messages, setMessages] = useState([]);
   const [socket, setSocket] = useState(null)
-  const whiteboardRef = useRef()
   const { roomId } = match.params
   const SERVER_ENDPOINT = process.env.REACT_APP_SERVER_ENDPOINT
 
@@ -36,12 +33,6 @@ const RoomPage = ({ match }) => {
           window.alert(error)
         }
       })
-
-      //handle new messages 
-      const handleNewMessage = (message) => {
-        setMessages(messages => [ ...messages, message ])
-      }
-      socket.on('message', handleNewMessage)
     }
     
     return () => {
@@ -52,11 +43,6 @@ const RoomPage = ({ match }) => {
 
   const showRoomIdPrompt = () => {
     window.prompt('Copy to clipboard: Ctrl+C, Enter', roomId)
-  }
-
-  const sendMessage = (message) => {
-    socket.emit('message', message)
-    setMessages(messages => [ ...messages, {author: user.username, content: message} ])
   }
   
   return (
@@ -78,9 +64,9 @@ const RoomPage = ({ match }) => {
           </div>
         </div>
 
-        <Whiteboard  />
+        <Whiteboard />
 
-        <RightPanel messages={messages} sendMessage={sendMessage} />
+        <RightPanel />
 
       </div>
     </SocketContext.Provider>
