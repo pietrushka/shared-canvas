@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react'
 
 import {useSocket} from './Room'
 
+import './Whiteboard.scss'
+
 const Whiteboard = () => {
   const {socket} = useSocket() 
   const canvasRef = useRef(null)

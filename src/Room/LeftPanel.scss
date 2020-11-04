@@ -1,0 +1,52 @@
+.left-panel {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+
+  .exit {
+    padding: .2em;
+    border-bottom-right-radius: .5rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 5px 0px;
+  
+    .exit-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 .5em;
+      color: black;
+      font-size: .8rem;
+      background: rgb(233, 236, 239);
+      height: 2.5rem;
+      border-radius: .5rem;
+    }
+  }
+  
+  .roomId {
+    position: relative;
+    margin-left: 1rem;
+    padding: .2em;
+    border-bottom-right-radius: .5rem;
+    border-bottom-left-radius: .5rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 
+    5px 0px;
+    display: flex;
+    text-decoration: none;
+    outline: none;
+
+  &-btn {
+    display: flex;
+    font-size: .8rem;
+    padding: 0 .5em;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-decoration: none;
+    outline: none;
+    cursor: pointer;
+    background: rgb(233, 236, 239);
+    border-radius: .5rem;
+  }
+  }
+}

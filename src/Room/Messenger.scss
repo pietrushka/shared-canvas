@@ -1,15 +1,14 @@
-.messages-panel {
+.messages {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   height: 100%;
   
-  .message-display {
+  &-display {
     flex: auto;
     overflow-y: auto;
     
-
-    .message-container {
+    .messages-container {
       display: flex;
       flex-direction: column;
       margin: .5rem .5rem;
@@ -54,7 +53,7 @@
     }
   }
 
-  .message-input-group {
+  &-input-group {
     width: 100%;
     box-sizing: border-box;
     padding: .75rem .5rem;

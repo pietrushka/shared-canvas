@@ -1,0 +1,83 @@
+.toolbox {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0;
+  left: 50%;
+  padding: .2em;
+  transform: translateX(-50%);
+  border-bottom-right-radius: .5rem;
+  border-bottom-left-radius: .5rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 5px 0px;
+  
+  .tool {
+    font-size: .8rem;
+    background: rgb(233, 236, 239);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: .5rem;
+    cursor: pointer;
+  }
+
+  .tool__pen {
+    margin: 0 .5em;
+    outline: none;
+
+    &[open] {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    
+    summary {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      outline: none;
+
+      
+      &::-webkit-details-marker {
+        display: none;
+      }
+    }
+
+    .colors {
+      background: rgb(216, 216, 216);
+      list-style: none;
+      padding: .5rem 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      border-bottom-left-radius: .5rem;
+      border-bottom-right-radius: .5rem;
+
+      .color {
+        height: 2rem;
+        width: 2rem;
+      }
+
+      .black { background-color: black; }
+      .red { background-color: red; }
+      .green { background-color: green; }
+      .blue { background-color: blue; }
+      .yellow { background-color: yellow; }
+    }
+  }  
+
+  .tool__eraser {
+    margin: 0 .5em;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.whiteboard {
+  height: 100%;
+  width: 100%;
+}

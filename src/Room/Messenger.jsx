@@ -29,8 +29,6 @@ const Messenger = () => {
     } else {
       window.alert("Message failed to send. Please try again later")
     }
-
-
   }
 
   const handleMessage = event => {
@@ -41,8 +39,8 @@ const Messenger = () => {
   }
 
   return (
-    <div className="messages-panel">
-      <ScrollToBottom className="message-display">
+    <div className="messages">
+      <ScrollToBottom className="messages-display">
       {
         user && (
           <>
@@ -50,14 +48,14 @@ const Messenger = () => {
             messages.map((message, idx) => 
               message.author === user.username 
                 ? (
-                  <div key={idx} className="message-container align-end">
+                  <div key={idx} className="messages-container align-end">
                     <div className='message-text-container blue'>
                       <p className="message-text">{message.content}</p>
                     </div>
                   </div>
                 )
                 : (
-                  <div key={idx} className="message-container align-start">
+                  <div key={idx} className="messages-container align-start">
                     <p className="message-author">{message.author}</p>
                     <div className='message-text-container gray'>
                       <p className="message-text">{message.content}</p>
@@ -70,10 +68,8 @@ const Messenger = () => {
         )
       }
       </ScrollToBottom>
-      <form 
-        onSubmit={handleMessage} 
-        className="message-input-group"
-      >
+      
+      <form onSubmit={handleMessage} className="messages-input-group">
         <input 
           type='text'
           value={message}
@@ -81,10 +77,7 @@ const Messenger = () => {
           placeholder='Write message'
           className='message-input'
         />
-        <button
-          type='submit'
-          className='send-message-btn'
-        >
+        <button type='submit' className='send-message-btn'>
           <MdSend />
         </button>
       </form>
