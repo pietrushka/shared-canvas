@@ -9,7 +9,7 @@ import Messenger from './Messenger'
 
 const RightPanel = () => {
   const [isOpen, setIsOpen] = useState(true)
-  const [openedPanel, setOpenedPanel] = useState('message')
+  const [openedPanel, setOpenedPanel] = useState('call')
 
   return (
     <div className="right-panel" open={isOpen && true}>
@@ -39,14 +39,14 @@ const RightPanel = () => {
           <ImCross />
         </button>
       </div>
-      <div 
-        open={isOpen && true}
-        className="lower-panel" 
-      >
-        {openedPanel === 'call' 
-          ? <Call />
-          : <Messenger />
-        }
+      <div open={isOpen && true} className="lower-panel">
+        <div open={openedPanel === 'call' && true }  className="panel-container">
+          <Call />
+        </div>
+        <div open={openedPanel === 'message' && true } className="panel-container">
+          <Messenger />
+        </div>
+        
       </div>
     </div>
   )

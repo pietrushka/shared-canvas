@@ -44,6 +44,7 @@
   }
       
   .lower-panel {
+    position: relative;
     height: calc(100vh - 3rem);
     width: 21vw;
     position: absolute;
@@ -52,9 +53,21 @@
     transition: all .3s ease-out;
     border-bottom-left-radius: .5rem;
         
-  &[open] {
-    transform: translateX(0);
-  }
+    &[open] {
+      transform: translateX(0);
+    }
+
+    .panel-container {
+      top: 0;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform: translateX(100%);
+
+      &[open] {
+        transform: translateX(0);
+      }
+    }
       
   }
 }

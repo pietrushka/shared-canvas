@@ -133,6 +133,23 @@ const Whiteboard = () => {
     }
 
     if (!!socket) socket.on('drawing', onDrawingEvent)
+
+    return () => {
+      // remove event listeners on unmount
+      eraser.removeEventListener('click', getEraser, false)
+      for (let i = 0; i < colors.length; i++) {
+        colors[i].removeEventListener('click', onColorUpdate, false)
+      }
+      canvas.removeEventListener('mousedown', onMouseDown, false)
+      canvas.removeEventListener('mouseup', onMouseUp, false)
+      canvas.removeEventListener('mouseout', onMouseUp, false)
+      canvas.removeEventListener('mousemove', throttle(onMouseMove, 10), false)
+      canvas.removeEventListener('touchstart', onMouseDown, false)
+      canvas.removeEventListener('touchend', onMouseUp, false)
+      canvas.removeEventListener('touchcancel', onMouseUp, false)
+      canvas.removeEventListener('touchmove', throttle(onMouseMove, 10), false)
+      window.removeEventListener('resize', onResize, false)
+    }
     
   }, [socket])
 
