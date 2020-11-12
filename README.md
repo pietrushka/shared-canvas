@@ -3,7 +3,7 @@
   <h3 align="center">Wideboard.</h3>
 
   <p align="center">
-    Wideboard allows users to work on the same canvas
+    Wideboard allows users to work on the same canvas and comunicate via video and text chat
     <br />
     <br />
     <a href="https://wideboard.netlify.app/">View Demo</a>
@@ -14,6 +14,7 @@
 * [React](https://reactjs.org/)
 * [SASS](https://sass-lang.com/)
 * [Socket.io](https://socket.io/)
+* [simple-peer](https://github.com/feross/simple-peer)
 * [GSAP](https://greensock.com/gsap/)
 * [Jest](https://jestjs.io/)
 * [React Testing Library](https://testing-library.com/)
