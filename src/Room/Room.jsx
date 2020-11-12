@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useContext, createContext } from 'react'
 import io from 'socket.io-client'
+import { useHistory } from "react-router-dom";
 
 import { UserContext } from '../App'
 import LeftPanel from './LeftPanel'
@@ -18,6 +19,7 @@ const RoomPage = ({match}) => {
   const [socket, setSocket] = useState(null)
   const SERVER_ENDPOINT = process.env.REACT_APP_SERVER_ENDPOINT
   const { roomId } = match.params
+  let history = useHistory();
 
   useEffect(() => {
     // connect socket
@@ -34,7 +36,14 @@ const RoomPage = ({match}) => {
       socket.emit('join', { user, roomId }, (error) => {
         if (error) {
           window.alert(error)
+          history.push("/console/create-join-room")
         }
+      })
+
+      socket.on('room-full', () => {
+        socket.disconnect()
+        history.push("/console/create-join-room")
+        window.alert(`Room ${roomId} is full`)
       })
     }
     

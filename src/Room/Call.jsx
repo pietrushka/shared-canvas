@@ -22,52 +22,66 @@ const Video = ({peer}) => {
 
 const Call = () => {
   const {socket} = useSocket() 
-  const [peers, setPeers] = useState([]);
+  const [partnerPeer, setPartnerPeer] = useState(null);
   const userVideo = useRef();
-  const peersRef = useRef([]);
+  const partnerPeerRef = useRef(null);
+
 
   useEffect(() => {
-    if (!!socket) {
-      navigator.mediaDevices.getUserMedia({ audio: true })
-        .then(stream => {
-          userVideo.current.srcObject = stream;
-        })
-          
-      socket.on('users-in-the-room', (users) => {
-        const peers = [];
-        users.forEach(({socketId}) => {
-            const peer = createPeer(socketId, socket.id, userVideo.current.srcObject);
-            peersRef.current.push({
-                peerID: socketId,
-                peer,
-            })
-            peers.push(peer);
-        })
-        setPeers(peers);
+    if (!socket) return
+
+    socket.on('partner-in-room-id', ({socketId: partnerID}) => {
+      navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+        userVideo.current.srcObject = stream;
+        
+        const peer = initiatorPeer(partnerID, socket.id, stream)
+        
+        partnerPeerRef.current = {
+          peerID: partnerID,
+          peer,
+        }
+
+        setPartnerPeer(peer)
+
+        // peer.on("close", () => {
+        //   console.log(peer)
+        //   partnerPeerRef.current = null
+        //   setPartnerPeer(null)
+        // })
+      })
+    })
+
+    socket.on('incomming-call', ({signal, callerID}) => {
+      navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+        userVideo.current.srcObject = stream;
+        const peer = successorPeer(signal, callerID, stream)
+        
+        partnerPeerRef.current = {
+          peerID: callerID,
+          peer
+        }
+        
+        setPartnerPeer(peer)
+
+        // peer.on("close", () => {
+        //   console.log(peer)
+        //   partnerPeerRef.current = null
+        //   setPartnerPeer(null)
+        // })
+      })
       })
   
-      socket.on("user-joined", payload => {
-        const peer = addPeer(payload.signal, payload.callerID, userVideo.current.srcObject);
-        peersRef.current.push({
-            peerID: payload.callerID,
-            peer,
-        })
-  
-        setPeers(users => [...users, peer]);
-      });
-  
-      socket.on("receiving-returned-signal", payload => {
-        const item = peersRef.current.find(p => p.peerID === payload.id);
-        item.peer.signal(payload.signal);
-      });
+    socket.on("receiving-returned-signal", ({signal}) => {
+      partnerPeerRef.current.peer.signal(signal);
+    });
 
-      
-    }
-
+    socket.on("user-left", (leftPartnerID) => {
+      setPartnerPeer(null)
+      partnerPeerRef.current.peer.destroy()
+    })
   }, [socket]);
 
-
-  const createPeer = (userToSignal, callerID, stream) => {
+  const initiatorPeer = (partnerID, callerID, stream) => {
     const peer = new Peer({
         initiator: true,
         trickle: false,
@@ -75,13 +89,14 @@ const Call = () => {
     });
 
     peer.on("signal", signal => {
-        socket.emit("sending-signal", { userToSignal, callerID, signal })
+      socket.emit('call-partner', { partnerID, signal, callerID})
     })
 
     return peer;
   }
 
-  const addPeer = (incomingSignal, callerID, stream) => {
+
+  const successorPeer = (incomingSignal, callerID, stream) => {
     const peer = new Peer({
         initiator: false,
         trickle: false,
@@ -92,9 +107,11 @@ const Call = () => {
       socket.emit("returning-signal", { signal, callerID })
     })
 
+
     peer.signal(incomingSignal);
 
     return peer;
+
   }
 
   return (
@@ -113,13 +130,12 @@ const Call = () => {
       </div>
 
       {
-        peers.map((peer, index) => (
-          <div key={index} className="participant-cam">
-            <Video  peer={peer} />
+        partnerPeer && (
+          <div className="participant-cam">
+            <Video peer={partnerPeer} />
           </div>
-        ))
+        )
       }
-
     </div>
   )
 }
