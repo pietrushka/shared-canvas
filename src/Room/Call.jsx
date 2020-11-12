@@ -3,73 +3,47 @@ import Peer from "simple-peer";
 import {BsFillMicFill, BsCameraVideoFill} from 'react-icons/bs'
 
 import {useSocket} from './Room'
+import Video from './Video'
 
 import './Call.scss'
-
-const Video = ({peer}) => {
-  const ref = useRef();
-
-  useEffect(() => {
-    peer.on("stream", stream => {
-        ref.current.srcObject = stream;
-    })
-  }, []);
-
-  return (
-      <video playsInline autoPlay ref={ref} />
-  );
-}
 
 const Call = () => {
   const {socket} = useSocket() 
   const [partnerPeer, setPartnerPeer] = useState(null);
   const userVideo = useRef();
   const partnerPeerRef = useRef(null);
-
+  const [isMicActive, setIsMicActive] = useState(false);
+  const [isCamActive, setIsCamActive] = useState(false);
 
   useEffect(() => {
     if (!socket) return
 
-    socket.on('partner-in-room-id', ({socketId: partnerID}) => {
-      navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
-        userVideo.current.srcObject = stream;
+    getUserMedia()
+    
+    socket.on('partner-in-room-id', async ({socketId: partnerID}) => {
+      const stream = await getUserMedia()
         
-        const peer = initiatorPeer(partnerID, socket.id, stream)
+      const peer = initiatorPeer(partnerID, socket.id, stream)
         
-        partnerPeerRef.current = {
-          peerID: partnerID,
-          peer,
-        }
+      partnerPeerRef.current = {
+        peerID: partnerID,
+        peer,
+      }
 
         setPartnerPeer(peer)
-
-        // peer.on("close", () => {
-        //   console.log(peer)
-        //   partnerPeerRef.current = null
-        //   setPartnerPeer(null)
-        // })
-      })
     })
 
-    socket.on('incomming-call', ({signal, callerID}) => {
-      navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
-        userVideo.current.srcObject = stream;
-        const peer = successorPeer(signal, callerID, stream)
-        
-        partnerPeerRef.current = {
-          peerID: callerID,
-          peer
-        }
-        
-        setPartnerPeer(peer)
-
-        // peer.on("close", () => {
-        //   console.log(peer)
-        //   partnerPeerRef.current = null
-        //   setPartnerPeer(null)
-        // })
-      })
-      })
+    socket.on('incomming-call', async ({signal, callerID}) => {
+      const stream = await getUserMedia()
+      const peer = successorPeer(signal, callerID, stream)
+      
+      partnerPeerRef.current = {
+        peerID: callerID,
+        peer
+      }
+      
+      setPartnerPeer(peer)
+    })
   
     socket.on("receiving-returned-signal", ({signal}) => {
       partnerPeerRef.current.peer.signal(signal);
@@ -80,6 +54,15 @@ const Call = () => {
       partnerPeerRef.current.peer.destroy()
     })
   }, [socket]);
+
+  const getUserMedia = async () => {
+    const stream =  await navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+    userVideo.current.srcObject = stream;
+    setIsMicActive(true)
+    setIsCamActive(true)
+    return stream
+  }
+
 
   const initiatorPeer = (partnerID, callerID, stream) => {
     const peer = new Peer({
@@ -94,7 +77,6 @@ const Call = () => {
 
     return peer;
   }
-
 
   const successorPeer = (incomingSignal, callerID, stream) => {
     const peer = new Peer({
@@ -114,13 +96,36 @@ const Call = () => {
 
   }
 
+  const toggleCamera = () => {
+    const cameraTrack = userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video')
+    cameraTrack.enabled = !isCamActive
+    setIsCamActive(!isCamActive)
+  }
+
+  const toggleMicrophone = () => {
+    const microphoneTrack = userVideo.current.srcObject.getTracks().find((track) => track.kind === 'audio')
+    microphoneTrack.enabled = !isMicActive
+    setIsMicActive(!isMicActive)
+  }
+  
   return (
     <div className="call-panel-container">
-      <div className="call-control-panel">
-        <button className="mic-btn">
+      <div 
+        className="call-control-panel"
+      >
+        
+        <button 
+          onClick={toggleMicrophone} 
+          className={`control-btn ${!isMicActive && 'btn-inactive'}`} 
+          disabled={!userVideo.current?.srcObject}
+        >
           <BsFillMicFill />
         </button>
-        <button className="cam-btn">
+        <button 
+          onClick={toggleCamera} 
+          className={`control-btn ${!isCamActive && 'btn-inactive'}`}
+          disabled={!userVideo.current?.srcObject}
+        >
           <BsCameraVideoFill />
         </button>
       </div>
